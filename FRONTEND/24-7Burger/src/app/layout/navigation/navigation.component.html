@@ -1,8 +1,14 @@
 <div class="container-fluid">
-    <header class="row">
-        <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-2 my-2 mx-auto text-center">
-            <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
+    <header>
+        <div *ngIf="rutaActiva(); else otroHeader" class="row">
+            <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-2 my-2 mx-auto text-center">
+                <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
+            </div>
         </div>
+        <ng-template #otroHeader class="row">
+            <div class="">
+                <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
+            </div>
+        </ng-template>
     </header>
-
 </div>
