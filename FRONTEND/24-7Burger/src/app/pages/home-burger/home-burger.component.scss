@@ -10,3 +10,30 @@ img{
     border: 2px solid #CEA174;
     border-radius: 10px;
 }
+
+.burger{
+    &-fondo{
+        background-color: #CEA174;
+    }
+    &-text{
+        text-align: justify;
+        font-size: 20px;
+        &-titulo{
+            font-size: 30px;
+            font-weight: bold;
+        }
+    }
+
+    &-img{
+        width: 50% !important;
+    }
+
+}
+h2{
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+}
+h2:hover{
+    color: white;
+    transform: scale(1.02);
+}
