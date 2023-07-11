@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Parallax from 'parallax-js'
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -11,6 +12,7 @@ export class NavigationComponent {
   }
   path:string = '';
   ngOnInit() {
+
     this.route.url.subscribe(segments => {
        this.path = segments.map(segment => segment.path).join('/');
       console.log(this.path);
