@@ -1,0 +1,15 @@
+.burger{
+    &-text{
+        text-align: justify;
+        font-size: 20px;
+        &-titulo{
+            font-size: 30px;
+            font-weight: bold;
+        }
+    }
+
+    &-img{
+        width: 50% !important;
+    }
+
+}

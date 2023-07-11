@@ -1,0 +1,15 @@
+.burger{
+    &-fondo{
+        background-color: #CEA174;
+    }
+}
+
+h2{
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    cursor: pointer;
+}
+h2:hover{
+    color: white;
+    transform: scale(1.02);
+}

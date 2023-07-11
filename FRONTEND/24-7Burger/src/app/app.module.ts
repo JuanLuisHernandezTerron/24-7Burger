@@ -10,6 +10,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { HomeBurgerComponent } from './pages/home-burger/home-burger.component';
 import { BannerHomeComponent } from './components/banner-home/banner-home.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
+import { CarneRecomendacionComponent } from './components/carne-recomendacion/carne-recomendacion.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
     NavigationComponent,
     HomeBurgerComponent,
     BannerHomeComponent,
-    SobreNosotrosComponent
+    SobreNosotrosComponent,
+    CarneRecomendacionComponent
   ],
   imports: [
     BrowserModule,

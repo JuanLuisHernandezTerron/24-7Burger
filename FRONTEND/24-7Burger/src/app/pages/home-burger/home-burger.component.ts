@@ -9,8 +9,9 @@ import Parallax from 'parallax-js';
 export class HomeBurgerComponent {
   ngOnInit() {
     var scene = document.getElementById('scene');
-    var parallaxInstance = new Parallax(scene as HTMLElement);
+    var parallaxInstance1 = new Parallax(scene as HTMLElement);
 
-
+    var scene2 = document.getElementById('scene2');
+    var parallaxInstance2 = new Parallax(scene2 as HTMLElement);
   }
 }
