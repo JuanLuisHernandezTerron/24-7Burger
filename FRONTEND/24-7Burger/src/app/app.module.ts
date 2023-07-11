@@ -8,6 +8,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { HomeBurgerComponent } from './pages/home-burger/home-burger.component';
+import { BannerHomeComponent } from './components/banner-home/banner-home.component';
+import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { HomeBurgerComponent } from './pages/home-burger/home-burger.component';
     FooterComponent,
     SkeletonComponent,
     NavigationComponent,
-    HomeBurgerComponent
+    HomeBurgerComponent,
+    BannerHomeComponent,
+    SobreNosotrosComponent
   ],
   imports: [
     BrowserModule,
