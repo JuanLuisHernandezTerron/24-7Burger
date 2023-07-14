@@ -10,3 +10,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *{
     font-family: "Fuente" !important;
 }
+
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start,
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//   border-color: #9a3737; /* Cambia el color del borde */
+// }
+
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+//   color: #25a830; /* Cambia el color del espacio entre el borde y el input */
+// }
+
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+//   color: #5010ff; /* Cambia el color del texto */
+// }

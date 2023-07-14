@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/assets/estilosGlobales.scss",
               "src/styles.scss",
               "node_modules/bootstrap/scss/bootstrap.scss"
             ],
@@ -97,7 +97,7 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/assets/estilosGlobales.scss",
               "src/styles.scss",
               "node_modules/bootstrap/scss/bootstrap.scss"
             ],

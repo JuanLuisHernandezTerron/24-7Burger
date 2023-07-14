@@ -9,7 +9,10 @@
     }
 
     &-img{
-        width: 50% !important;
+        width: 65%;
+        @media (min-width: 990px){
+            width: 50% !important;
+        }
     }
 
 }
