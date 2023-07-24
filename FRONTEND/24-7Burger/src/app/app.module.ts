@@ -20,7 +20,8 @@ import { ContactoHomeComponent } from './components/contacto-home/contacto-home.
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
-import { FooterAdminComponent } from './layout/footer-admin/footer-admin.component';
+import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { FooterAdminComponent } from './layout/footer-admin/footer-admin.compone
     DashboardAdminComponent,
     LoginAdminComponent,
     SkeletonAdminComponent,
-    FooterAdminComponent
+    SeleccionTipoProductosAdminComponent
   ],
   imports: [
     BrowserModule,

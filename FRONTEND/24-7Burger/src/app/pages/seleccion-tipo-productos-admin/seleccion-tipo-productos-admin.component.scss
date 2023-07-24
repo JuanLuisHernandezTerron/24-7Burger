@@ -18,7 +18,6 @@ img{
 .card{
     border-radius: 10%;
     max-width: 300px;
-    cursor: pointer;
 }
 @media (max-width:1100px) {
     img{
@@ -26,4 +25,13 @@ img{
             width: 70%;
         }
     }
+}
+.volver{
+    cursor: pointer;
+    &:hover{
+        color: white;
+    }
+}
+.div-reducido{
+    max-height: 100px !important;
 }
