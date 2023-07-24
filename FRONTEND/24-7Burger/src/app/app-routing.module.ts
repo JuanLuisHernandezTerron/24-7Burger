@@ -12,15 +12,15 @@ const routes: Routes = [{
   children:[
     {path: '', component: HomeBurgerComponent}
   ]
-},
-{
-  path: 'admin',
-  component:SkeletonAdminComponent,
-  pathMatch:'prefix',
-  children:[
-    {path: '', component: LoginAdminComponent}
-  ]
-}];
+ },
+ {
+   path: 'admin',
+   component:SkeletonAdminComponent,
+   pathMatch:'prefix',
+   children:[
+     {path: '', component: LoginAdminComponent}
+   ]
+ }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

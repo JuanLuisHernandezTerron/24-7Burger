@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +21,6 @@ import { ContactoHomeComponent } from './components/contacto-home/contacto-home.
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
-import { FooterAdminComponent } from './layout/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { FooterAdminComponent } from './layout/footer-admin/footer-admin.compone
     DashboardAdminComponent,
     LoginAdminComponent,
     SkeletonAdminComponent,
-    FooterAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +45,8 @@ import { FooterAdminComponent } from './layout/footer-admin/footer-admin.compone
     MatFormFieldModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
