@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginAdminComponent implements OnInit {
   formGroupLogin !: FormGroup;
+  hide = true;
   public showPassword: boolean = false;
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
