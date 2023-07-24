@@ -17,6 +17,7 @@ import { BannerHomeComponent } from './components/banner-home/banner-home.compon
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { CarneRecomendacionComponent } from './components/carne-recomendacion/carne-recomendacion.component';
 import { ContactoHomeComponent } from './components/contacto-home/contacto-home.component';
+import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ContactoHomeComponent } from './components/contacto-home/contacto-home.
     BannerHomeComponent,
     SobreNosotrosComponent,
     CarneRecomendacionComponent,
-    ContactoHomeComponent
+    ContactoHomeComponent,
+    DashboardAdminComponent
   ],
   imports: [
     BrowserModule,
