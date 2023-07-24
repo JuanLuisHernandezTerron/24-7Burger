@@ -18,6 +18,9 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
 import { CarneRecomendacionComponent } from './components/carne-recomendacion/carne-recomendacion.component';
 import { ContactoHomeComponent } from './components/contacto-home/contacto-home.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
+import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
+import { FooterAdminComponent } from './layout/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin
     SobreNosotrosComponent,
     CarneRecomendacionComponent,
     ContactoHomeComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    LoginAdminComponent,
+    SkeletonAdminComponent,
+    FooterAdminComponent
   ],
   imports: [
     BrowserModule,
