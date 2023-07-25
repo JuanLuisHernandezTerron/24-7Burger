@@ -9,12 +9,15 @@
         border-radius: 15px;
         padding: 60px;
     }
+    &-div{
+        max-width: 500px;
+    }
 }
 
 .mat-mdc-raised-button.mat-primary {
     --mdc-protected-button-container-color: #CEA174 !important;
-    width: 30% !important;
-    height: 40px;
+    width: 50% !important;
+
 }
 
 .mat-mdc-checkbox.mat-accent{
