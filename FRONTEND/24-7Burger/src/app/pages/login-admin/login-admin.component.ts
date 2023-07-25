@@ -26,6 +26,6 @@ export class LoginAdminComponent implements OnInit {
     })
   }
   sendLogin(){
-    alert('Enviado')
+    alert('Enviado');
   }
 }

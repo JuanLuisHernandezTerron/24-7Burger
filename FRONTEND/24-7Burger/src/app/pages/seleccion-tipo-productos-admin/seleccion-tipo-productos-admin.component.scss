@@ -16,6 +16,13 @@ img{
     width: 60%;
 }
 .card{
+    &-hamburguesa,&-bebidas,&-postre{
+        transition: 0.3s ease-in-out;
+       &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+       } 
+    }
     border-radius: 10%;
     max-width: 300px;
 }
