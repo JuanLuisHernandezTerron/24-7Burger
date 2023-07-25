@@ -1,15 +1,15 @@
-<div class="container-fluid login">
-    <div class="row">
+<div class="container-fluid login" >
+    <div class="row pt-5">
         <h1 class="text-center col-12 login-title mt-3 mb-5">Login</h1>
     </div>
-    <div class="row col-4 m-auto">
+    <div class="row col-xl-4 col-lg-6 col-md-8 col-12 m-auto">
         <form [formGroup]="formGroupLogin" class="d-flex flex-column login-formulario" (submit)="sendLogin()">
-            <mat-form-field class="w-50 m-auto">
+            <mat-form-field class="w-75 m-auto">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Introduzca Email" formControlName="email">
                 <mat-error>Email es <strong>REQUERIDO</strong></mat-error>
             </mat-form-field>
-            <mat-form-field class="w-50 m-auto">
+            <mat-form-field class="w-75 m-auto">
                 <mat-label>Contraseña</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" name="password"
                     placeholder="Introduzca Password" formControlName="contrasena">
@@ -19,7 +19,7 @@
                 </button>
                 <mat-error>Contraseña es <strong>REQUERIDO</strong></mat-error>
             </mat-form-field>
-            <button mat-raised-button class="m-auto" color="primary">Iniciar Sesión</button>
+            <button mat-raised-button class="m-auto mt-2" color="primary">Iniciar Sesión</button>
         </form>
     </div>
 </div>
