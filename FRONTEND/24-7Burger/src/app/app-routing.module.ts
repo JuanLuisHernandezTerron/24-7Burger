@@ -6,7 +6,7 @@ import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.c
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
-
+import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 const routes: Routes = [{
   path: '',
   component:SkeletonComponent,
@@ -22,7 +22,8 @@ const routes: Routes = [{
   children:[
     {path: '', component: LoginAdminComponent},
     {path: 'dashboard', component: DashboardAdminComponent},
-    {path: 'dashboard/productos', component: SeleccionTipoProductosAdminComponent}
+    {path: 'dashboard/productos', component: SeleccionTipoProductosAdminComponent},
+    {path: 'dashboard/pedidos', component: PedidosComponent},
   ]
 }];
 

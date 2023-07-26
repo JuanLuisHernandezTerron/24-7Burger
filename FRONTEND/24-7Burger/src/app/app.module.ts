@@ -6,6 +6,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +25,7 @@ import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
 import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
+import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 
 
 @NgModule({
@@ -38,7 +42,8 @@ import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-pro
     DashboardAdminComponent,
     LoginAdminComponent,
     SkeletonAdminComponent,
-    SeleccionTipoProductosAdminComponent
+    SeleccionTipoProductosAdminComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,9 @@ import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-pro
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
