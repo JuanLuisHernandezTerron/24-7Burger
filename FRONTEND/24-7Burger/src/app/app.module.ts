@@ -22,6 +22,9 @@ import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
 import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
+import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admin/lista-hamburguesas-admin.component';
+import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
+import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-pro
     DashboardAdminComponent,
     LoginAdminComponent,
     SkeletonAdminComponent,
-    SeleccionTipoProductosAdminComponent
+    SeleccionTipoProductosAdminComponent,
+    ListaHamburguesasAdminComponent,
+    ListaBebidasAdminComponent,
+    ListaPostresAdminComponent
   ],
   imports: [
     BrowserModule,
