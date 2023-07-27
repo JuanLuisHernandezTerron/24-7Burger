@@ -10,6 +10,17 @@
     &-volverNavigation{
         cursor: pointer;
     }
+    &-margin{
+        @media (max-width: 1200px){
+            margin-bottom: 2%;
+        }
+    }
+
+    &-pendientes:last-child{
+        @media (max-width: 1200px){
+            margin-bottom: 15%;
+        }
+    }
 }
 
 .mdc-card {
