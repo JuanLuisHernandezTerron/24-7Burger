@@ -6,6 +6,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +28,7 @@ import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-pro
 import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admin/lista-hamburguesas-admin.component';
 import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
 import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
+import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 
 
 @NgModule({
@@ -44,7 +48,8 @@ import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-po
     SeleccionTipoProductosAdminComponent,
     ListaHamburguesasAdminComponent,
     ListaBebidasAdminComponent,
-    ListaPostresAdminComponent
+    ListaPostresAdminComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,9 @@ import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-po
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

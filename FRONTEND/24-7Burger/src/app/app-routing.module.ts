@@ -9,6 +9,7 @@ import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-pro
 import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admin/lista-hamburguesas-admin.component';
 import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
 import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
+import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 
 const routes: Routes = [{
   path: '',
@@ -29,6 +30,7 @@ const routes: Routes = [{
     {path: 'dashboard/productos/hamburguesas', component: ListaHamburguesasAdminComponent},
     {path: 'dashboard/productos/bebidas', component: ListaBebidasAdminComponent},
     {path: 'dashboard/productos/postres', component: ListaPostresAdminComponent},
+    {path: 'dashboard/pedidos', component: PedidosComponent},
   ]
 }];
 

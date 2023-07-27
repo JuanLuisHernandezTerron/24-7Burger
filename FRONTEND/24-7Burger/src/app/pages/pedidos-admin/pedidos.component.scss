@@ -1,0 +1,20 @@
+.pedidos{
+    background-color: #CEA174;
+    min-height: 80vh;
+    &-volver{
+        cursor: pointer;
+        &:hover{
+            color: white;
+        }
+    }
+}
+
+.mdc-card {
+    display: flex;
+    flex-direction: row; 
+    box-sizing: border-box;
+}
+
+.mat-mdc-raised-button:not(:disabled){
+    color: #CEA174;
+}
