@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
@@ -14,7 +15,7 @@ export class LoginAdminComponent implements OnInit {
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-  constructor (private fb: FormBuilder,private serviceAuth : AuthServiceService) { }
+  constructor (private fb: FormBuilder,private serviceAuth : AuthServiceService, private route: Router) { }
   ngOnInit(): void {
     this.validacionLogin();
   }
@@ -33,8 +34,10 @@ export class LoginAdminComponent implements OnInit {
     }
     
     this.serviceAuth.signIn(tienda).subscribe((data)=>{
-      console.log(data)
+      if (data) {                        
+        this.route.navigateByUrl('/admin/dashboard');
+         localStorage.setItem('token',data);
+      }
     })
-
   }
 }

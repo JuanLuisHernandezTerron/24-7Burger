@@ -30,7 +30,7 @@ const loginTienda = async function (req, res) {
             const token = jwt.sign({ id: tienda._id }, process.env.JWT_SECRET, {
                 expiresIn: '1d'
               });
-              res.status(200).json({token})
+              res.status(200).json(token)
         }else{
             res.status(401).json({ status: "error", error: "Email incorrecto o contraseña incorrecta" })
         }

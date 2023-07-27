@@ -9,9 +9,9 @@ import { tienda } from 'src/app/models/tienda';
 export class AuthServiceService {
 
   private URL = environment.url;
-  constructor(private route: Router, private http:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   signIn(tienda :tienda){
-    return this.http.post<tienda>(this.URL+'/adminTienda/loginTienda',tienda);
+    return this.http.post<string>(this.URL+'/adminTienda/loginTienda',tienda);
   }
 }
