@@ -6,6 +6,6 @@ const { newTienda, loginTienda } = require('./../controllers/adminTiendaControll
 const validatorToken = require('../../24-7Burger/middleware/tokenValidator')
 
 router.post('/newTienda', newTienda);
-router.post('/loginTienda',validatorToken, loginTienda);
+router.post('/loginTienda', loginTienda);
 
 module.exports = router;

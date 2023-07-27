@@ -21,8 +21,10 @@ const newTienda = async function (req, res) {
 
 const loginTienda = async function (req, res) {
     try{
-        const { email, contrasena } = req.body;
-        let tienda = await adminTienda.findOne({correoElectronico: email}).exec();
+        const { correoElectronico, contrasena } = req.body;
+        console.log(correoElectronico, contrasena);
+        let tienda = await adminTienda.findOne({correoElectronico: correoElectronico}).exec();
+        console.log(tienda);
         const checkContrasena = await bcrypt.compare(contrasena, tienda.contrasena)
         if(checkContrasena && tienda){
             const token = jwt.sign({ id: tienda._id }, process.env.JWT_SECRET, {
