@@ -10,7 +10,7 @@ import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admi
 import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
 import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
 import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
-
+import { GuardsAdminGuard } from './guards/guards-admin.guard';
 const routes: Routes = [{
   path: '',
   component:SkeletonComponent,
@@ -25,12 +25,12 @@ const routes: Routes = [{
   pathMatch:'prefix',
   children:[
     {path: '', component: LoginAdminComponent},
-    {path: 'dashboard', component: DashboardAdminComponent},
-    {path: 'dashboard/productos', component: SeleccionTipoProductosAdminComponent},
-    {path: 'dashboard/productos/hamburguesas', component: ListaHamburguesasAdminComponent},
-    {path: 'dashboard/productos/bebidas', component: ListaBebidasAdminComponent},
-    {path: 'dashboard/productos/postres', component: ListaPostresAdminComponent},
-    {path: 'dashboard/pedidos', component: PedidosComponent},
+    {path: 'dashboard', component: DashboardAdminComponent,canActivate: [GuardsAdminGuard]},
+    {path: 'dashboard/productos', component: SeleccionTipoProductosAdminComponent,canActivate: [GuardsAdminGuard]},
+    {path: 'dashboard/productos/hamburguesas', component: ListaHamburguesasAdminComponent,canActivate: [GuardsAdminGuard]},
+    {path: 'dashboard/productos/bebidas', component: ListaBebidasAdminComponent,canActivate: [GuardsAdminGuard]},
+    {path: 'dashboard/productos/postres', component: ListaPostresAdminComponent,canActivate: [GuardsAdminGuard]},
+    {path: 'dashboard/pedidos', component: PedidosComponent,canActivate: [GuardsAdminGuard]},
   ]
 }];
 

@@ -18,6 +18,10 @@ export class NavigationComponent {
       console.log(this.path);
     });
   }
+
+  loggin(){
+
+  }
   rutaActiva(){
     if(this.path == "" || this.path.includes("admin")){
       return true;
