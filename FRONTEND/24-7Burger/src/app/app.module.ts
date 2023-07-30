@@ -23,7 +23,6 @@ import { CarneRecomendacionComponent } from './components/carne-recomendacion/ca
 import { ContactoHomeComponent } from './components/contacto-home/contacto-home.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
-import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
 import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
 import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admin/lista-hamburguesas-admin.component';
 import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
@@ -44,7 +43,6 @@ import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
     ContactoHomeComponent,
     DashboardAdminComponent,
     LoginAdminComponent,
-    SkeletonAdminComponent,
     SeleccionTipoProductosAdminComponent,
     ListaHamburguesasAdminComponent,
     ListaBebidasAdminComponent,

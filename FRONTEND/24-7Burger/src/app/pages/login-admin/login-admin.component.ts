@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthServiceService } from 'src/app/services/auth/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-admin',
@@ -15,7 +15,7 @@ export class LoginAdminComponent implements OnInit {
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-  constructor (private fb: FormBuilder,private serviceAuth : AuthServiceService, private route: Router) { }
+  constructor (private fb: FormBuilder,private serviceAuth : AuthService, private route: Router) { }
   ngOnInit(): void {
     this.validacionLogin();
     console.log(localStorage.getItem('token'));
@@ -36,9 +36,8 @@ export class LoginAdminComponent implements OnInit {
     }
     
     this.serviceAuth.signIn(tienda).subscribe((data)=>{
-      if (data) {                        
-        this.route.navigateByUrl('/admin/dashboard');
-         localStorage.setItem('token',data);
+      if(data){
+        this.route.navigate(["/admin/dashboard"]);
       }
     })
   }

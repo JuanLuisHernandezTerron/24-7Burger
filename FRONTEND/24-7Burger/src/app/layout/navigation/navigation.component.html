@@ -1,32 +1,35 @@
 <div class="container-fluid">
-    <ng-container *ngIf="loggin();else navigationSeleccion">
+    <ng-container *ngIf="!isLoggedIn;else tiendaLogged">
         <header>
-            <div *ngIf="rutaActiva(); else otroHeader" class="row">
+            <div class="row">
+                <div>
+
+                </div>
                 <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-2 my-2 mx-auto text-center">
                     <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
                 </div>
             </div>
-            <ng-template #otroHeader class="row">
-                <div class="">
-                    <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
-                </div>
-            </ng-template>
+            
         </header>
     </ng-container>
     
-    <ng-template #navigationSeleccion>
+    <ng-template #tiendaLogged>
         <header>
-            <div *ngIf="rutaActiva(); else otroHeader" class="row">
-                <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-2 my-2 mx-auto text-center">
+            <div class="row">
+                <div class="col-2 col-sm-3 col-md-3 col-lg-4 col-xl-2">
+
+                </div>
+                <div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3 col-xxl-2 my-2  mx-auto text-center">
                     <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
+                </div>
+                <div class="col-2 col-sm-3 col-md-3 col-lg-4 col-xl-2 d-flex justify-content-end align-items-center">
+                    <button (click)="logout()" mat-raised-button class=" my-auto cerrar-sesion me-4" color="primary">Cerrar sesión
+                    
+                    </button>
                 </div>
             </div>
-            <ng-template #otroHeader class="row">
-                <div class="">
-                    <img src="../../../assets/imagenes/logoburger.png" alt="logo 24/burger">
-                </div>
-            </ng-template>
         </header>
+        
     </ng-template>
 
 </div>
