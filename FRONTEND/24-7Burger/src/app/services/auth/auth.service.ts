@@ -11,6 +11,7 @@ export class AuthServiceService {
   private URL = environment.url;
   constructor(private http:HttpClient) { }
 
+
   signIn(tienda :tienda){
     return this.http.post<string>(this.URL+'/adminTienda/loginTienda',tienda);
   }

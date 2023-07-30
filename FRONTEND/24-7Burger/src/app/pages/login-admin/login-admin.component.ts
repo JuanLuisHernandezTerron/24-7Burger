@@ -18,6 +18,8 @@ export class LoginAdminComponent implements OnInit {
   constructor (private fb: FormBuilder,private serviceAuth : AuthServiceService, private route: Router) { }
   ngOnInit(): void {
     this.validacionLogin();
+    console.log(localStorage.getItem('token'));
+    
   }
 
   validacionLogin(): void {
