@@ -24,13 +24,17 @@ const loginTienda = async function (req, res) {
         const { correoElectronico, contrasena } = req.body;
         console.log(correoElectronico, contrasena);
         let tienda = await adminTienda.findOne({correoElectronico: correoElectronico}).exec();
-        console.log(tienda);
-        const checkContrasena = await bcrypt.compare(contrasena, tienda.contrasena)
-        if(checkContrasena && tienda){
-            const token = jwt.sign({ id: tienda._id }, process.env.JWT_SECRET, {
-                expiresIn: '1d'
-              });
-              res.status(200).json({token})
+
+        if(tienda && contrasena != null){
+            const checkContrasena = await bcrypt.compare(contrasena, tienda.contrasena)
+            if(checkContrasena){
+                const token = jwt.sign({ id: tienda._id }, process.env.JWT_SECRET, {
+                    expiresIn: '1d'
+                  });
+                  res.status(200).json({token})
+            }else{
+                res.status(401).json({ status: "error", error: "Email incorrecto o contraseña incorrecta" })
+            }
         }else{
             res.status(401).json({ status: "error", error: "Email incorrecto o contraseña incorrecta" })
         }
