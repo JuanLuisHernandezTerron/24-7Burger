@@ -7,7 +7,11 @@ import { Observable } from 'rxjs';
 export class GuardsAdminGuard implements CanActivate {
   constructor (private route:Router) { }
   canActivate():any{
-    (localStorage.getItem('token')) ? "" : this.route.navigateByUrl("/admin");
+    if(localStorage.getItem('token')){
+      return true;
+    }
+    this.route.navigateByUrl("/admin")
+    return false;
   }
   
 }
