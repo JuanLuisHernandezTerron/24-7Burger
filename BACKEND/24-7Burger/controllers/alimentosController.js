@@ -28,6 +28,21 @@ const newAlimento = async function (req,res){
     }
 }
 
+const deleteAlimento = async function (req,res){
+    try{
+        const searchAlimento = await modelAlimento.find({nombre:req.body.nombre}).exec();
+        if (searchAlimento) {
+            await modelAlimento.deleteOne({nombre:req.body.nombre}).exec();
+            res.status(200).json("Alimento Eliminado Correctamente");
+        }else{
+            res.status(401).json("Alimento mal Introducido o ya existente")
+        }
+    }catch(e){
+        console.log(e);
+    }
+}
+
 module.exports = {
-    newAlimento
+    newAlimento,
+    deleteAlimento
 }

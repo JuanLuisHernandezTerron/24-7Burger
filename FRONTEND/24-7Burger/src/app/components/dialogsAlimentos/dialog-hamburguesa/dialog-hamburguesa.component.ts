@@ -6,30 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog-hamburguesa.component.scss'],
 })
 export class DialogHamburguesaComponent implements OnInit {
+  selectedFile: any = null;
   constructor() {}
 
   ngOnInit(): void {
   }
 
-  extras(){
-    const tablaExtra = document.getElementById('extras');
-    const divPrincipal = document.createElement('div');
-    divPrincipal.className = "row";
-    const divColInfo = document.createElement('div');
-    ["col-7","d-flex","justify-content-around"].forEach(a=>divColInfo.classList.add(a))
-    const matNombre = document.createElement('mat-form-field');
-    const matLabelNombre = document.createElement('mat-label');
-    const inputNombre = document.createElement('input');
-    inputNombre.setAttribute('type','text');
-    tablaExtra?.appendChild(divPrincipal)
-    divPrincipal.appendChild(divColInfo)
-    divColInfo.appendChild(matNombre);
-    matNombre.appendChild(matLabelNombre);
-    matNombre.appendChild(inputNombre);
-  }
-
   previewIMG(e:any){
     const img = document.getElementById("img-hamburguesa") ;
+    this.selectedFile = e.target.files[0] ?? null;
+
     try{
       const default_file = "./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png";
       if (e.target.files[0]) {
