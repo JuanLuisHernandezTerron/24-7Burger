@@ -1,0 +1,24 @@
+.dialog{
+    &-hamburguesa{
+        background-color: #DFCAB4;
+    }
+
+    &-imagenLogo{
+        position: absolute;
+        z-index: 1;
+    }
+
+    &-inputIMG{
+        background-color: #DFCAB4;
+    }
+    &-productoPreview{
+        border-radius: 50px;
+    }
+    &-form{
+        position: relative;
+        z-index: 1;
+    }
+    &-textArea{
+        height: 170px !important;
+    }
+}
