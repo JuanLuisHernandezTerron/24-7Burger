@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { HomeBurgerComponent } from './pages/home-burger/home-burger.component';
-import { SkeletonAdminComponent } from './layout/skeleton-admin/skeleton-admin.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { SeleccionTipoProductosAdminComponent } from './pages/seleccion-tipo-productos-admin/seleccion-tipo-productos-admin.component';
@@ -10,7 +9,8 @@ import { ListaHamburguesasAdminComponent } from './pages/lista-hamburguesas-admi
 import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-bebidas-admin.component';
 import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
 import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
-import { GuardsAdminGuard } from './guards/guard-logged/guards-admin.guard';
+import { CheckLoginGuard } from './guards/checkLogin/check-login.guard';
+import { CheckUserTiendaGuard } from './guards/checkUserTienda/check-user-tienda.guard';
 const routes: Routes = [{
   path: '',
   component:SkeletonComponent,
@@ -21,24 +21,27 @@ const routes: Routes = [{
 },
 {
   path: 'admin',
-  component:SkeletonAdminComponent,
+  component:SkeletonComponent,
   pathMatch:'prefix',
   children:[
     {path: '', component: LoginAdminComponent},
-  ]
+  ],
+  canActivate : [CheckLoginGuard]
+  
 },
 {
   path: 'admin/dashboard',
-  component:SkeletonAdminComponent,
+  component:SkeletonComponent,
   pathMatch:'prefix',
-  canActivate: [GuardsAdminGuard],
+  canActivate: [CheckUserTiendaGuard],
+  
   children:[
     {path: '', component: DashboardAdminComponent},
-    {path: 'dashboard/productos', component: SeleccionTipoProductosAdminComponent},
-    {path: 'dashboard/productos/hamburguesas', component: ListaHamburguesasAdminComponent},
-    {path: 'dashboard/productos/bebidas', component: ListaBebidasAdminComponent},
-    {path: 'dashboard/productos/postres', component: ListaPostresAdminComponent},
-    {path: 'dashboard/pedidos', component: PedidosComponent},
+    {path: 'productos', component: SeleccionTipoProductosAdminComponent},
+    {path: 'productos/hamburguesas', component: ListaHamburguesasAdminComponent},
+    {path: 'productos/bebidas', component: ListaBebidasAdminComponent},
+    {path: 'productos/postres', component: ListaPostresAdminComponent},
+    {path: 'pedidos', component: PedidosComponent},
   ]
 }];
 

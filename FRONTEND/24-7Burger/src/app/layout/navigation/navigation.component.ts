@@ -1,32 +1,25 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Parallax from 'parallax-js'
+import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, private authService: AuthService){
 
   }
-  path:string = '';
+  isLoggedIn = false;
+
   ngOnInit() {
-
-    this.route.url.subscribe(segments => {
-       this.path = segments.map(segment => segment.path).join('/');
-      console.log(this.path);
-    });
+    this.authService.isLogged.subscribe(res=>{
+      this.isLoggedIn = res;
+    })
   }
 
-  loggin(){
-
-  }
-  rutaActiva(){
-    if(this.path == "" || this.path.includes("admin")){
-      return true;
-    }else{
-      return false;
-    }
+  logout(){
+    this.authService.logout();
   }
 }
