@@ -33,26 +33,27 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-end">
-                <button mat-raised-button color="primary" (click)="extras()">+ Insertar Extras</button>
+                <button mat-raised-button color="primary" (click)="onAddRow()">+ Insertar Extras</button>
             </div>
             <div id="extras" class="mt-4">
-                <div class="row">
-                    <div class="col-7 d-flex justify-content-around">
+                <div class="row" *ngFor="let extra of productoForm.get('extras')?.controls;let index = index;">
+                    <div class="col-12 col-xxl-10 d-flex justify-content-around mx-auto">
                         <mat-form-field>
                             <mat-label>Nombre</mat-label>
-                            <input type="text" matInput>
+                            <input type="text" matInput [formControl]="extra.get('nombre')">
                             <mat-error>Nombre es <strong>REQUERIDO</strong></mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Precio</mat-label>
-                            <input type="Number" matInput>
+                            <input type="Number" matInput [formControl]="extra.get('precio')">
+                            <span matSuffix>€&nbsp;</span>
                             <mat-error>Precio es <strong>REQUERIDO</strong></mat-error>
                         </mat-form-field>
-                    </div>
-                    <div class="col-5 d-flex justify-content-end">
-                        <mat-icon class="mt-3">
-                            <span class=" text-black">delete</span>
-                        </mat-icon>                    
+                        <div (click)="onRemoveRow(index)">
+                            <mat-icon class="mt-3" >
+                                <span class=" text-black" >delete</span>
+                            </mat-icon>                    
+                        </div>
                     </div>
                 </div>
             </div>

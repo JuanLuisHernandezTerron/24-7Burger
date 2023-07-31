@@ -50,7 +50,8 @@ import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog
     ListaBebidasAdminComponent,
     ListaPostresAdminComponent,
     PedidosComponent,
-    DialogHamburguesaComponent
+    DialogHamburguesaComponent,
+    
   ],
   imports: [
     BrowserModule,
