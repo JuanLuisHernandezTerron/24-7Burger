@@ -21,8 +21,12 @@
                     <mat-error>Precio es <strong>REQUERIDO</strong></mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-12">
-                <input type="file" (change)="previewIMG($event)" class="dialog-inputIMG" color="primary" value="">
+        </div>
+        <div class="row">
+            <div class="col-5 d-flex justify-content-center">
+                <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                <input hidden (change)="previewIMG($event)" #fileInput class="dialog-inputIMG" type="file" id="file">
+                <span class="file-name">{{selectedFile?.name}}</span>
             </div>
         </div>
         <div class="row">

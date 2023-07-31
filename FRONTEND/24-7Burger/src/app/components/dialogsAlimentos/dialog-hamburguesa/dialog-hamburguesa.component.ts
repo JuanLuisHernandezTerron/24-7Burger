@@ -13,6 +13,8 @@ export class DialogHamburguesaComponent implements OnInit {
   }
   productoForm: FormGroup;
   extras: FormArray;
+  selectedFile: any = null;
+
 
   ngOnInit(): void {
     
@@ -48,9 +50,11 @@ export class DialogHamburguesaComponent implements OnInit {
     this.extras = this.fb.array([]);
   }
 
-  previewIMG(e: any) {
-    const img = document.getElementById("img-hamburguesa");
-    try {
+  previewIMG(e:any){
+    const img = document.getElementById("img-hamburguesa") ;
+    this.selectedFile = e.target.files[0] ?? null;
+
+    try{
       const default_file = "./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png";
       if (e.target.files[0]) {
         const reader = new FileReader();
