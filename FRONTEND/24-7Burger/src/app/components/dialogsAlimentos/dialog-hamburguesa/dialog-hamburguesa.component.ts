@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
+import { ProductoService } from 'src/app/services/productos/producto.service';
 @Component({
   selector: 'app-dialog-hamburguesa',
   templateUrl: './dialog-hamburguesa.component.html',
@@ -9,13 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DialogHamburguesaComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder,private serviceProduct:ProductoService,private toastr: ToastrService) {
     this.reactiveForm();
   }
   productoForm: FormGroup;
   extras: FormArray;
   selectedFile: any = null;
-
+  imageneProducto:string;
 
   ngOnInit(): void {
     
@@ -23,12 +24,12 @@ export class DialogHamburguesaComponent implements OnInit {
   }
   
 
-
   reactiveForm() {
     this.productoForm = this.fb.group({
-      nombre: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{1,}$")]),
+      nombre: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
+      alergenos: new FormControl('', [Validators.required]),
       imagen: new FormControl('', [Validators.required]),
     });
 
@@ -66,13 +67,32 @@ export class DialogHamburguesaComponent implements OnInit {
     }
   }
 
+  ingresarHamburguesa(){    
+    let formDataProducto = new FormData();
+    formDataProducto.append('nombre',this.productoForm.get('nombre')?.value);
+    formDataProducto.append('precio',this.productoForm.get('precio')?.value);
+    formDataProducto.append('descripcion',this.productoForm.get('descripcion')?.value);
+    formDataProducto.append('alergenos',this.productoForm.get('alergenos')?.value);
+    formDataProducto.append('tipoAlimento','Hamburguesa');
+    formDataProducto.append('imagen',this.imageneProducto);
+    formDataProducto.append('extras',JSON.stringify(this.productoForm.get('extras')?.value)); 
+    this.serviceProduct.ingresarHamburguesa(formDataProducto).subscribe((data)=>{
+      console.log(data);
+    })
+   }
+
   onAddRow() {
     this.extras.push(this.createItemFormGroup());
-  
   }
   
   onRemoveRow(rowIndex:number){
     this.extras.removeAt(rowIndex);
+  }
+
+  imagenesChange(event){
+    for (let index = 0; index < event.target.files.length; index++) {
+      this.imageneProducto = event.target.files[index];
+    }
   }
 
   createItemFormGroup(): FormGroup {
@@ -81,11 +101,6 @@ export class DialogHamburguesaComponent implements OnInit {
       precio: null
     });
   }
-
-  
-
 }
-function mostrarMensaje() {
-   this.toastr.warning("La imagen es demasiado grande.", "Máximo 1000px");
-}
+
 

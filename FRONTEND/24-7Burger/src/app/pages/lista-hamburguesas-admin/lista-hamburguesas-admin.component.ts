@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { DialogHamburguesaComponent } from 'src/app/components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
+import { DialogHamburguesaComponent } from './../../components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
+import { ProductoService } from 'src/app/services/productos/producto.service';
 
 @Component({
   selector: 'app-lista-hamburguesas-admin',
@@ -14,12 +15,11 @@ export class ListaHamburguesasAdminComponent {
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogHamburguesaComponent, {
-      width: '50%',
+      width: '55%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
   }
-
   public toggleHamburger() {
       this.isActive = !this.isActive;
   }

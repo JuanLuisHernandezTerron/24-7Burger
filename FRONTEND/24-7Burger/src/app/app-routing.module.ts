@@ -32,7 +32,6 @@ const routes: Routes = [{
 {
   path: 'admin/dashboard',
   component:SkeletonComponent,
-  pathMatch:'prefix',
   canActivate: [CheckUserTiendaGuard],
   
   children:[
