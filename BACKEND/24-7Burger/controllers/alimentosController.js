@@ -15,12 +15,15 @@ const getAllAlimentos = async function(req,res){
 }
 
 const newAlimento = async function (req,res){
-    const Extras= JSON.parse(req.body.extras);
-    let arrayExtras = [];
-    for (let i = 0; i < Extras.length; i++) {
-        arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
+    let boolean = false;
+    if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
+        const Extras= JSON.parse(req.body.extras);
+        let arrayExtras = [];
+        for (let i = 0; i < Extras.length; i++) {
+            arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
+            boolean = true;
+        }
     }
-    
     try{
         const alimento = {
             nombre:req.body.nombre,

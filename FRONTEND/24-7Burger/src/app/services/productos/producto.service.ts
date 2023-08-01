@@ -9,27 +9,22 @@ import { BehaviorSubject, Observable, observeOn } from 'rxjs';
 })
 export class ProductoService {
   private URL = environment.url;
-  private _productHamburguesa: BehaviorSubject<alimento[]>;
-  // private productList$!: Observable;
-   constructor(private http:HttpClient) { }
-  //   this.productList$ = this.getAllProduct();
-  //   this._productHamburguesa = new BehaviorSubject<alimento[]>([]);
-  //   this.productList$.suscribe((data)=>{
-  //     this._productHamburguesa.next(data);
-  //   })
-
-  //   this._productHamburguesa.asObservable();
-
-  //   console.log(this._productHamburguesa);
-    
-  // }
+  private arrayProduct = new BehaviorSubject<alimento[]>([]);
   
+  constructor(private http:HttpClient) { 
+    this.getAllProduct();
+  }
+  get getProducts(){
+    return this.arrayProduct.asObservable();
+  }
   ingresarHamburguesa(productHamburguesa:FormData){
     return this.http.post(this.URL+'/alimentos/newAlimento',productHamburguesa);
   }
 
   getAllProduct(){
-    return this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{});
+    this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{}).subscribe(data=>{
+      this.arrayProduct.next(data);
+    });
   }
 
   

@@ -11,12 +11,15 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class ListaHamburguesasAdminComponent implements OnInit{
   public isActive = false;
-
+  arrayProducto = [];
   constructor(public dialog: MatDialog,private productService: ProductoService) { 
   }
   
   ngOnInit(): void {
-    
+    this.productService.getProducts.subscribe((data)=>{
+      console.log(data.filter(e=> e.tipoAlimento == "Hamburguesa"));
+      
+    })
   }
 
   public toggleHamburger() {
