@@ -10,10 +10,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 import { FooterComponent } from './layout/footer/footer.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -66,7 +67,7 @@ import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog
     MatCardModule,
     MatTooltipModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
 

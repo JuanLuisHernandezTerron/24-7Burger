@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { ProductoService } from 'src/app/services/productos/producto.service';
 @Component({
   selector: 'app-dialog-hamburguesa',
   templateUrl: './dialog-hamburguesa.component.html',
@@ -8,42 +8,24 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class DialogHamburguesaComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private serviceProduct:ProductoService) {
     this.reactiveForm();
   }
   productoForm: FormGroup;
   extras: FormArray;
   selectedFile: any = null;
-
+  imageneProducto:string;
 
   ngOnInit(): void {
-    
-    this.productoForm.addControl('extras', this.extras);
+    this.productoForm.addControl('extras', this.extras);        
   }
-
-  anadirExtras() {
-    // const tablaExtra = document.getElementById('extras');
-    // const divPrincipal = document.createElement('div');
-    // divPrincipal.className = "row";
-    // const divColInfo = document.createElement('div');
-    // ["col-7","d-flex","justify-content-around"].forEach(a=>divColInfo.classList.add(a))
-    // const matNombre = document.createElement('mat-form-field');
-    // const matLabelNombre = document.createElement('mat-label');
-    // const inputNombre = document.createElement('input');
-    // inputNombre.setAttribute('type','text');
-    // tablaExtra?.appendChild(divPrincipal)
-    // divPrincipal.appendChild(divColInfo)
-    // divColInfo.appendChild(matNombre);
-    // matNombre.appendChild(matLabelNombre);
-    // matNombre.appendChild(inputNombre);
-  }
-
 
   reactiveForm() {
     this.productoForm = this.fb.group({
-      nombre: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{1,}$")]),
+      nombre: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
+      alergenos: new FormControl('', [Validators.required]),
       imagen: new FormControl('', [Validators.required]),
     });
 
@@ -56,7 +38,7 @@ export class DialogHamburguesaComponent implements OnInit {
 
     try{
       const default_file = "./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png";
-      if (e.target.files[0]) {
+      if (e.target.files[0]) {        
         const reader = new FileReader();
         reader.onload = function (e) {
           document.getElementById('img-hamburguesa')?.setAttribute('src', e.target?.result as string);
@@ -71,13 +53,32 @@ export class DialogHamburguesaComponent implements OnInit {
     }
   }
 
+  ingresarHamburguesa(){    
+    let formDataProducto = new FormData();
+    formDataProducto.append('nombre',this.productoForm.get('nombre')?.value);
+    formDataProducto.append('precio',this.productoForm.get('precio')?.value);
+    formDataProducto.append('descripcion',this.productoForm.get('descripcion')?.value);
+    formDataProducto.append('alergenos',this.productoForm.get('alergenos')?.value);
+    formDataProducto.append('tipoAlimento','Hamburguesa');
+    formDataProducto.append('imagen',this.imageneProducto);
+    formDataProducto.append('extras',JSON.stringify(this.productoForm.get('extras')?.value)); 
+    this.serviceProduct.ingresarHamburguesa(formDataProducto).subscribe((data)=>{
+      console.log(data);
+    })
+   }
+
   onAddRow() {
     this.extras.push(this.createItemFormGroup());
-  
   }
   
   onRemoveRow(rowIndex:number){
     this.extras.removeAt(rowIndex);
+  }
+
+  imagenesChange(event){
+    for (let index = 0; index < event.target.files.length; index++) {
+      this.imageneProducto = event.target.files[index];
+    }
   }
 
   createItemFormGroup(): FormGroup {
@@ -86,7 +87,4 @@ export class DialogHamburguesaComponent implements OnInit {
       precio: null
     });
   }
-
-  
-
 }

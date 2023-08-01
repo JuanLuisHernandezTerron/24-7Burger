@@ -1,8 +1,14 @@
 const modelAlimento = require ('./../models/alimentos');
-const { response } = require('express');
+const { response, json } = require('express');
 
 
 const newAlimento = async function (req,res){
+    const Extras= JSON.parse(req.body.extras);
+    let arrayExtras = [];
+    for (let i = 0; i < Extras.length; i++) {
+        arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
+    }
+    
     try{
         const alimento = {
             nombre:req.body.nombre,
@@ -12,10 +18,8 @@ const newAlimento = async function (req,res){
             tipoAlimento:req.body.tipoAlimento,
             precio:req.body.precio,
             imagen:'http://localhost:3000/uploads/' + req.file.filename,
-            extras:req.body.extras
+            extras:arrayExtras
         };
-        console.log(alimento);
-
         let filterAlimento = await modelAlimento.findOne({nombre:alimento.nombre}).exec();
         if (filterAlimento) {
             res.status(401).json("Alimento mal Introducido o ya existente")
