@@ -13,4 +13,10 @@ export class ProductoService {
   ingresarHamburguesa(productHamburguesa:FormData){
     return this.http.post(this.URL+'/alimentos/newAlimento',productHamburguesa);
   }
+  ingresarBebida(productBebida:FormData){
+    return this.http.post(this.URL+'/alimentos/newAlimento',productBebida);
+  }
+  eliminarProducto(nombre:string){
+    // return this.http.delete(this.URL+'/alimentos/)
+  }
 }

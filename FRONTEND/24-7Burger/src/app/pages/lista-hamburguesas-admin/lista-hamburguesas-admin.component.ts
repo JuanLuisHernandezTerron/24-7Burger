@@ -15,7 +15,7 @@ export class ListaHamburguesasAdminComponent {
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogHamburguesaComponent, {
-      width: '55%',
+      width: '60%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
