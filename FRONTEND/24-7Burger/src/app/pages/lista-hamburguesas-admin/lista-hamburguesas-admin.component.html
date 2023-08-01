@@ -21,9 +21,9 @@
       </div>
    </div>
    <div class="row mt-5 justify-content-center">
-      <div class="col-xl-4 col-lg-5 col-sm-6 col-12 mx-4 hamburguesa-card mb-3 text-center row" *ngFor="">
+      <div class="col-xl-4 col-lg-5 col-sm-6 col-12 mx-4 hamburguesa-card mb-3 text-center row" *ngFor="let hamburguesa of hamburguesas;">
          <div class="col-8 mt-3 ms-auto ">
-            {{producto.nombre}}
+            {{hamburguesa.nombre}}
          </div>
          <div class="col-2 mt-3 p-0">
             <mat-icon class="">
@@ -31,10 +31,10 @@
             </mat-icon>
          </div>
          <div>
-            <img src="{{producto.imagen}}" alt="la 33">
+            <img src="{{hamburguesa.imagen}}" alt="la 33">
          </div>
          <div>
-            <p class="text-white mt-2"> {{producto.descripcion}}</p>
+            <p class="text-white mt-2"> {{hamburguesa.descripcion}}</p>
          </div>
       </div>
    </div>
