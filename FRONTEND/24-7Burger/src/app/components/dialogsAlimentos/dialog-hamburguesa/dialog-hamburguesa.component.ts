@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog-hamburguesa',
@@ -8,7 +9,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class DialogHamburguesaComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {
     this.reactiveForm();
   }
   productoForm: FormGroup;
@@ -20,23 +21,7 @@ export class DialogHamburguesaComponent implements OnInit {
     
     this.productoForm.addControl('extras', this.extras);
   }
-
-  anadirExtras() {
-    // const tablaExtra = document.getElementById('extras');
-    // const divPrincipal = document.createElement('div');
-    // divPrincipal.className = "row";
-    // const divColInfo = document.createElement('div');
-    // ["col-7","d-flex","justify-content-around"].forEach(a=>divColInfo.classList.add(a))
-    // const matNombre = document.createElement('mat-form-field');
-    // const matLabelNombre = document.createElement('mat-label');
-    // const inputNombre = document.createElement('input');
-    // inputNombre.setAttribute('type','text');
-    // tablaExtra?.appendChild(divPrincipal)
-    // divPrincipal.appendChild(divColInfo)
-    // divColInfo.appendChild(matNombre);
-    // matNombre.appendChild(matLabelNombre);
-    // matNombre.appendChild(inputNombre);
-  }
+  
 
 
   reactiveForm() {
@@ -50,24 +35,34 @@ export class DialogHamburguesaComponent implements OnInit {
     this.extras = this.fb.array([]);
   }
 
-  previewIMG(e:any){
-    const img = document.getElementById("img-hamburguesa") ;
-    this.selectedFile = e.target.files[0] ?? null;
+  previewIMG(event: any): void {
+    var booleanAux = false;
+    const input = event.target as HTMLInputElement;
+    const default_file = "./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png";
+    if (input.files && input.files.length) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        var url = e.target.result;
+        img.onload = () => {
+            console.log(img.width);
+            console.log(img.height);
+          if ((img.width < 200)) {
+            document.getElementById('img-hamburguesa')?.setAttribute('src', default_file);
+            this.toastr.warning("La imagen no tiene el tamaño adecuado.", "Debe ser mayor a 200px");
+          }else if( img.height != img.width){
+            this.toastr.warning("La imagen no tiene el tamaño adecuado.", "Debe tener relacion de aspecto 1:1");
+          }
+           else {
+            document.getElementById('img-hamburguesa')?.setAttribute('src', e.target?.result as string);
 
-    try{
-      const default_file = "./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png";
-      if (e.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          document.getElementById('img-hamburguesa')?.setAttribute('src', e.target?.result as string);
-        }
-        reader.readAsDataURL(e.target.files[0]);
-      } else {
-        document.getElementById('img-hamburguesa')?.setAttribute('src', default_file);
-      }
+          }
+        };
+        img.src = e.target.result as string;
 
-    } catch (e) {
-      console.log(e);
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -90,3 +85,7 @@ export class DialogHamburguesaComponent implements OnInit {
   
 
 }
+function mostrarMensaje() {
+   this.toastr.warning("La imagen es demasiado grande.", "Máximo 1000px");
+}
+

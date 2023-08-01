@@ -10,7 +10,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +29,7 @@ import { ListaBebidasAdminComponent } from './pages/lista-bebidas-admin/lista-be
 import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-postres-admin.component';
 import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -66,7 +66,8 @@ import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog
     MatCardModule,
     MatTooltipModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
 

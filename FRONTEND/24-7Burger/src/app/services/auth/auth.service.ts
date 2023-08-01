@@ -49,7 +49,7 @@ export class AuthService {
     const tiendaToken = localStorage.getItem('token');
     const isExpired = helper.isTokenExpired(tiendaToken)
     if(isExpired){
-      this.logout();
+      localStorage.removeItem('token');
     }else{
       this.loggedIn.next(true);
     }
