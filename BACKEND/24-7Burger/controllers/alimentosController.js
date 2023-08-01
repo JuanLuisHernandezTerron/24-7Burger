@@ -1,6 +1,18 @@
 const modelAlimento = require ('./../models/alimentos');
 const { response, json } = require('express');
 
+const getAllAlimentos = async function(req,res){
+    try{
+        const consulta = await modelAlimento.find().exec();
+        if (consulta) {
+            res.status(200).json(consulta);
+        }else{
+            res.status(401).json("Productos No encontrados correctamente");
+        }
+    }catch(e){
+        console.log(e);
+    }
+}
 
 const newAlimento = async function (req,res){
     const Extras= JSON.parse(req.body.extras);
@@ -48,5 +60,6 @@ const deleteAlimento = async function (req,res){
 
 module.exports = {
     newAlimento,
-    deleteAlimento
+    deleteAlimento,
+    getAllAlimentos
 }
