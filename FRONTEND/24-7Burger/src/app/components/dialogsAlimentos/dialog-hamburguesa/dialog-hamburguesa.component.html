@@ -1,70 +1,77 @@
 <mat-dialog-content class="dialog-hamburguesa">
     <div class="row justify-content-end">
-        <img src="./../../../../assets/imagenes/logohamburguesaBlur.png" class="img-fluid w-50 dialog-imagenLogo" alt="logoEmpresa">
+        <img src="./../../../../assets/imagenes/logohamburguesaBlur.png" class="img-fluid col-12 col-md-6 dialog-imagenLogo"
+            alt="logoEmpresa">
     </div>
-    <form class="dialog-form" [formGroup]="productoForm">
-        <div class="row col-12">
-            <mat-form-field class="w-25 ms-5">
-                <mat-label>Nombre</mat-label>
-                <input type="text" class="w-100" matInput formControlName="nombre">
-                <mat-error>Nombre es <strong>REQUERIDO</strong></mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-5 d-flex justify-content-center">
-                <img src="./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png" id="img-hamburguesa" class="img-fluid w-50 dialog-productoPreview" srcset="">
-            </div>
-            <div class="col-3">
-                <mat-form-field class="mt-5">
+    <form class="dialog-form container" [formGroup]="productoForm">
+        <div class="row">
+            <div class="col-12 col-lg-4 d-flex flex-column align-items-center">
+
+                <mat-form-field class="col-12 ">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="nombre" tabindex="0">
+                    <mat-error>Nombre es <strong>REQUERIDO</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-12  ">
                     <mat-label>Precio</mat-label>
                     <input type="Number" matInput formControlName="precio">
                     <mat-error>Precio es <strong>REQUERIDO</strong></mat-error>
                 </mat-form-field>
+                <h3 class="col-12 text-center">Alérgenos</h3>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-5 d-flex justify-content-center">
-                <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose File</button>
-                <input hidden (change)="previewIMG($event)" (change)="imagenesChange($event)" formControlName="imagen" #fileInput class="dialog-inputIMG" type="file" id="file">
-                <span class="file-name">{{selectedFile?.name}}</span>
+            <div class="col-12 col-lg-6 col-xxl-5">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img src="./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png"
+                            id="img-hamburguesa" class="img-fluid  dialog-productoPreview" srcset="">
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose
+                            File</button>
+                        <input hidden (change)="previewIMG($event)" (change)="imagenesChange($event)"
+                            formControlName="imagen" #fileInput class="dialog-inputIMG" type="file" id="file">
+                        <span class="file-name">{{selectedFile?.name}}</span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-                <mat-form-field class="col-12 mt-3">
+            <div class="col-12 row mx-auto ">
+                <mat-form-field class=" mt-3 px-0">
                     <mat-label>Descripción</mat-label>
                     <textarea matInput class="dialog-textArea" formControlName="descripcion"></textarea>
                     <mat-error>Descripción es <strong>REQUERIDO</strong></mat-error>
                 </mat-form-field>
-        </div>
-        <div class="row">
-            <div class="col-12 d-flex justify-content-end">
+            </div>
+            <div class="col-12 px-0 d-flex justify-content-md-end justify-content-center">
                 <button mat-raised-button color="primary" (click)="onAddRow()">+ Insertar Extras</button>
             </div>
-            <div id="extras" class="mt-4">
-                <div class="row" *ngFor="let extra of productoForm.get('extras')?.controls;let index = index;">
-                    <div class="col-12 col-xxl-10 d-flex justify-content-around mx-auto">
-                        <mat-form-field>
+            <div id="extras" class="mt-4 col-12">
+                <div class="row " *ngFor="let extra of productoForm.get('extras')?.controls;let index = index;">
+                    <div class="col-12 row mx-auto mt-4">
+                        <mat-form-field class="col-12 col-md-5  col-xl-4 col-xxl-3">
                             <mat-label>Nombre</mat-label>
                             <input type="text" matInput [formControl]="extra.get('nombre')">
                             <mat-error>Nombre es <strong>REQUERIDO</strong></mat-error>
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field class="col-12 col-md-5  col-xl-4 col-xxl-3">
                             <mat-label>Precio</mat-label>
                             <input type="Number" matInput [formControl]="extra.get('precio')">
                             <span matSuffix>€&nbsp;</span>
                             <mat-error>Precio es <strong>REQUERIDO</strong></mat-error>
                         </mat-form-field>
-                        <div (click)="onRemoveRow(index)">
+                        <div class="col-12 text-center col-md-2  col-lg-1 " (click)="onRemoveRow(index)">
                             <mat-icon class="mt-3" >
                                 <span class=" text-black" >delete</span>
                             </mat-icon>                    
                         </div>
                     </div>
+                    <mat-divider></mat-divider>
                 </div>
             </div>
         </div>
     </form>
+   
 </mat-dialog-content>
 <mat-dialog-actions class="dialog-hamburguesa" align="center">
-  <button mat-button [mat-dialog-close]="true" (click)="ingresarHamburguesa()">Insertar Hamburguesa</button>
+    <button mat-raised-button [mat-dialog-close]="true" [disabled]="!productoForm.valid" (click)="ingresarHamburguesa()"  color="primary"
+        class="confirmarBurger">Insertar Hamburguesa</button>
 </mat-dialog-actions>

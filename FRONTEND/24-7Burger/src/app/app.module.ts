@@ -30,6 +30,9 @@ import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-po
 import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
 import { ToastrModule } from 'ngx-toastr';
+import {MatDividerModule} from '@angular/material/divider';
+import { DialogBebidaComponent } from './components/dialogsAlimentos/dialog-bebida/dialog-bebida.component';
+
 
 
 @NgModule({
@@ -51,6 +54,8 @@ import { ToastrModule } from 'ngx-toastr';
     ListaPostresAdminComponent,
     PedidosComponent,
     DialogHamburguesaComponent,
+    DialogBebidaComponent,
+  
     
   ],
   imports: [
@@ -67,6 +72,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatTooltipModule,
     HttpClientModule,
     MatDialogModule,
+    MatDividerModule,
     ToastrModule.forRoot(),
   ],
   providers: [

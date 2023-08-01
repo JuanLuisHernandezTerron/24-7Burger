@@ -16,6 +16,7 @@ const getAllAlimentos = async function(req,res){
 
 const newAlimento = async function (req,res){
     let boolean = false;
+    let arrayExtras = "";
     if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
         const Extras= JSON.parse(req.body.extras);
         let arrayExtras = [];

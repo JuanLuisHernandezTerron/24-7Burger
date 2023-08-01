@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog
 import {MatButtonModule} from '@angular/material/button';
 import { DialogHamburguesaComponent } from './../../components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
 import { ProductoService } from 'src/app/services/productos/producto.service';
+import { alimento } from 'src/app/models/alimento';
 
 @Component({
   selector: 'app-lista-hamburguesas-admin',
@@ -11,14 +12,16 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class ListaHamburguesasAdminComponent implements OnInit{
   public isActive = false;
-  arrayProducto = [];
+  hamburguesas: alimento[];
+
   constructor(public dialog: MatDialog,private productService: ProductoService) { 
   }
   
   ngOnInit(): void {
-    this.productService.getProducts.subscribe((data)=>{
-      console.log(data.filter(e=> e.tipoAlimento == "Hamburguesa"));
+    this.productService.listaProductos.subscribe(productos=>{
       
+      this.hamburguesas = productos.filter(e=>e.tipoAlimento == "Hamburguesa");
+      console.log(this.hamburguesas);
     })
   }
 
@@ -28,7 +31,7 @@ export class ListaHamburguesasAdminComponent implements OnInit{
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogHamburguesaComponent, {
-      width: '55%',
+      width: '60%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
