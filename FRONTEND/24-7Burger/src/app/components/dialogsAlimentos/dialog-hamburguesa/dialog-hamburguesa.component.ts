@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
 import { ProductoService } from 'src/app/services/productos/producto.service';
 @Component({
   selector: 'app-dialog-hamburguesa',
@@ -9,6 +8,7 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
   styleUrls: ['./dialog-hamburguesa.component.scss'],
 })
 export class DialogHamburguesaComponent implements OnInit {
+
 
   constructor(private fb: FormBuilder,private serviceProduct:ProductoService,private toastr: ToastrService) {
     this.reactiveForm();
@@ -19,7 +19,6 @@ export class DialogHamburguesaComponent implements OnInit {
   imageneProducto:string;
 
   ngOnInit(): void {
-    
     this.productoForm.addControl('extras', this.extras);
   }
   
