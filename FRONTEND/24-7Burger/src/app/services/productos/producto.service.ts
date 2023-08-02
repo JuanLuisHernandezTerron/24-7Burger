@@ -24,15 +24,20 @@ export class ProductoService {
   ingresarBebida(productBebida:FormData){
     return this.http.post(this.URL+'/alimentos/newAlimento',productBebida);
   }
-  eliminarProducto(nombre:string){
-    // return this.http.delete(this.URL+'/alimentos/)
+  eliminarProducto(idBurger:string){
+     return this.http.delete(this.URL+'/alimentos/deleteAlimento/'+ idBurger)
   }
 
   getAllProduct(){
      this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{}).subscribe(responseData => {
-      this._productHamburguesa.next(responseData)
+      this.modificarLista(responseData)
       });
   }
+
+  modificarLista(alimentos){
+    this._productHamburguesa.next(alimentos)
+  }
+
 
   
 }

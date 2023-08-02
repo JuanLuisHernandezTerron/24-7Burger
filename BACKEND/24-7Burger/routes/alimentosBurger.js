@@ -7,7 +7,7 @@ const validatorToken = require ('./../middleware/tokenValidator');
 const mediaMiddleware = require('./../middleware/media');
 
 router.post('/newAlimento',mediaMiddleware.upload,newAlimento);
-router.delete('/deleteAlimento',deleteAlimento);
 router.get('/getAllAlimento',getAllAlimentos);
+router.delete('/deleteAlimento/:id',deleteAlimento);
 
 module.exports = router;

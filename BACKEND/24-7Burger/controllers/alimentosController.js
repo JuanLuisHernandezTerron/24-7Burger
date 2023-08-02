@@ -49,14 +49,26 @@ const newAlimento = async function (req,res){
 }
 
 const deleteAlimento = async function (req,res){
+    console.log(req.params.id);
+
     try{
-        const searchAlimento = await modelAlimento.find({nombre:req.body.nombre}).exec();
-        if (searchAlimento) {
-            await modelAlimento.deleteOne({nombre:req.body.nombre}).exec();
-            res.status(200).json("Alimento Eliminado Correctamente");
+        const borrarAlimento = await modelAlimento.deleteOne({_id:req.params.id}).exec();
+        console.log(borrarAlimento.deletedCount);
+        if(borrarAlimento.deletedCount == 0){
+            res.status(401).json("No existe ningun alimento para borrar")
         }else{
-            res.status(401).json("Alimento mal Introducido o ya existente")
+            let alimentos = await modelAlimento.find().exec();
+            console.log(alimentos);
+            res.status(200).json({status: "Alimento Eliminado Correctamente", alimentos});
         }
+        
+        // const searchAlimento = await modelAlimento.find({nombre:req.body.nombre}).exec();
+        // if (searchAlimento) {
+        //     let alimentos = await modelAlimento.find().exec();
+        //     res.status(200).json({status: "Alimento Eliminado Correctamente", });
+        // }else{
+        //     res.status(401).json("Alimento mal Introducido o ya existente")
+        // }
     }catch(e){
         console.log(e);
     }
