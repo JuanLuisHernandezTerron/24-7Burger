@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, observeOn } from 'rxjs';
 })
 export class ProductoService {
   private URL = environment.url;
-  private _productHamburguesa: BehaviorSubject<alimento[]> = new BehaviorSubject<alimento[]>(null);
+  private _productHamburguesa: BehaviorSubject<alimento[]> = new BehaviorSubject<alimento[]>([]);
 
    constructor(private http:HttpClient) {
     this.getAllProduct();
