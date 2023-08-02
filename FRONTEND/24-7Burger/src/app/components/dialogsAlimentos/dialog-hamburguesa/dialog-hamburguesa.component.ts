@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 @Component({
   selector: 'app-dialog-hamburguesa',
@@ -67,7 +68,6 @@ export class DialogHamburguesaComponent implements OnInit {
   }
 
   ingresarHamburguesa(){    
-
     let formDataProducto = new FormData();
     formDataProducto.append('nombre',this.productoForm.get('nombre')?.value);
     formDataProducto.append('precio',this.productoForm.get('precio')?.value);
@@ -76,10 +76,8 @@ export class DialogHamburguesaComponent implements OnInit {
     formDataProducto.append('tipoAlimento','Hamburguesa');
     formDataProducto.append('imagen',this.imageneProducto);
     formDataProducto.append('extras',JSON.stringify(this.productoForm.get('extras')?.value)); 
-    this.serviceProduct.ingresarHamburguesa(formDataProducto).subscribe((data)=>{
-      console.log(data);
-    })
-   }
+    this.serviceProduct.ingresarHamburguesa(formDataProducto).subscribe(data=>{this.serviceProduct.modificarLista(data)});
+   }  
 
   onAddRow() {
     this.extras.push(this.createItemFormGroup());

@@ -1,38 +1,54 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { alimento } from 'src/app/models/alimento';
 import { environment } from 'src/enviroments/enviroments';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, observeOn } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, observeOn } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductoService {
+export class ProductoService implements OnInit {
   private URL = environment.url;
-  private _productHamburguesa: BehaviorSubject<alimento[]> = new BehaviorSubject<alimento[]>([]);
+  arrayProducto: alimento[] = [];
+  private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
 
-   constructor(private http:HttpClient) {
-    this.getAllProduct();
-   }
-   get listaProductos():Observable<alimento[]> {
-    return this._productHamburguesa.asObservable();
+  constructor(private http: HttpClient) {  
   }
   
-  ingresarHamburguesa(productHamburguesa:FormData){
-    return this.http.post(this.URL+'/alimentos/newAlimento',productHamburguesa);
+  agregarProduct(alimento: alimento){
+    this.arrayProducto.push(alimento);
+    this._productHamburguesa$.next(this.arrayProducto);
   }
-  ingresarBebida(productBebida:FormData){
-    return this.http.post(this.URL+'/alimentos/newAlimento',productBebida);
+  
+  get getProduct$():Observable<alimento[]>{
+    return this._productHamburguesa$.asObservable();
   }
-  eliminarProducto(nombre:string){
+  
+  ngOnInit(): void {
+    this.getAllProduct();
+  }
+  
+  ingresarHamburguesa(productHamburguesa: FormData) {
+    return this.http.post<alimento[]>(this.URL + '/alimentos/newAlimento', productHamburguesa);
+  }
+  
+  ingresarBebida(productBebida: FormData) {
+    return this.http.post(this.URL + '/alimentos/newAlimento', productBebida);
+  }
+  
+  eliminarProducto(nombre: string) {
     // return this.http.delete(this.URL+'/alimentos/)
   }
 
-  getAllProduct(){
-     this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{}).subscribe(responseData => {
-      this._productHamburguesa.next(responseData)
-      });
+  modificarLista(alimentos){
+    this._productHamburguesa$.next(alimentos)
+  }
+  
+  getAllProduct() {
+    this.http.get<any>(this.URL + '/alimentos/getAllAlimento', {}).subscribe(responseData => {
+      this._productHamburguesa$.next(responseData);
+    });
   }
 
-  
+
 }

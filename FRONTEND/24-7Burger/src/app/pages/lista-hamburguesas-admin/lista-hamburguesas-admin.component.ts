@@ -4,6 +4,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { DialogHamburguesaComponent } from './../../components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { alimento } from 'src/app/models/alimento';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-hamburguesas-admin',
@@ -12,17 +13,16 @@ import { alimento } from 'src/app/models/alimento';
 })
 export class ListaHamburguesasAdminComponent implements OnInit{
   public isActive = false;
-  hamburguesas: alimento[];
-
-  constructor(public dialog: MatDialog,private productService: ProductoService) { 
-  }
+  arraProduct: alimento [];
+  constructor(public dialog: MatDialog,private productService: ProductoService) {
+    
+  } 
   
   ngOnInit(): void {
-    this.productService.listaProductos.subscribe(productos=>{
-      
-      this.hamburguesas = productos.filter(e=>e.tipoAlimento == "Hamburguesa");
-      console.log(this.hamburguesas);
+    this.productService.getProduct$.subscribe((data)=>{
+      this.arraProduct = data;
     })
+    this.productService.getAllProduct();    
   }
 
   public toggleHamburger() {
