@@ -31,7 +31,6 @@ export class ProductoService {
   getAllProduct(){
      this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{}).subscribe(responseData => {
       this._productHamburguesa.next(responseData)
-      
       });
   }
 
