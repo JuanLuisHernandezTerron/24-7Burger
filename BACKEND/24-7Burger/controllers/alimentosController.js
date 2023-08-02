@@ -41,7 +41,8 @@ const newAlimento = async function (req,res){
             res.status(401).json("Alimento mal Introducido o ya existente")
         }else{
             await modelAlimento.create(alimento);
-            res.status(200).json("Alimento Creado Correctamente");
+            const products = await modelAlimento.find().exec();
+            res.status(200).json(products);
         }
     }catch(e){
         console.log(e);

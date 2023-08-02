@@ -22,12 +22,10 @@ export class ListaHamburguesasAdminComponent implements OnInit{
   ngOnInit(): void {
     this.productService.getProduct$.subscribe(productos=>{
       console.log(productos);
-      this.arrhamburguesas = productos;
+      this.arrhamburguesas = productos.filter(e=>e.tipoAlimento == "Hamburguesa");
     })
   }
 
-
-  // .filter(e=>e.tipoAlimento == "Hamburguesa");
 
 
   public toggleHamburger() {
