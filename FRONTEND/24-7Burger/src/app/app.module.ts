@@ -32,6 +32,7 @@ import { DialogHamburguesaComponent } from './components/dialogsAlimentos/dialog
 import { ToastrModule } from 'ngx-toastr';
 import {MatDividerModule} from '@angular/material/divider';
 import { DialogBebidaComponent } from './components/dialogsAlimentos/dialog-bebida/dialog-bebida.component';
+import { DialogBorrarHamburguesaComponent } from './components/dialogsAlimentos/dialog-borrar-hamburguesa/dialog-borrar-hamburguesa.component';
 
 
 
@@ -55,6 +56,8 @@ import { DialogBebidaComponent } from './components/dialogsAlimentos/dialog-bebi
     PedidosComponent,
     DialogHamburguesaComponent,
     DialogBebidaComponent,
+    DialogBorrarHamburguesaComponent,
+
   
     
   ],

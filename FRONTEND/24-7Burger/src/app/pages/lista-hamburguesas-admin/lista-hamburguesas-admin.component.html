@@ -11,7 +11,7 @@
 
          </div>
          <div class="col-12 col-sm-6 d-flex justify-content-center justify-content-sm-end">
-            <button mat-raised-button class=" mt-4  " color="primary" (click)="openDialog('0ms', '0ms')">Añadir producto
+            <button mat-raised-button class=" mt-4  " color="primary" (click)="anadirProducto('200ms', '200ms')">Añadir producto
                <mat-icon class="mb-1">
                   <span class="material-symbols-outlined">add</span>
                </mat-icon>
@@ -21,13 +21,13 @@
       </div>
    </div>
    <div class="row mt-5 justify-content-center">
-      <div class="col-xl-4 col-lg-5 col-sm-6 col-12 mx-4 hamburguesa-card mb-3 text-center row" *ngFor="let hamburguesa of arraProduct">
+      <div class="col-xl-4 col-lg-5 col-sm-6 col-12 mx-4 hamburguesa-card mb-3 text-center row" *ngFor="let hamburguesa of arrhamburguesas">
          <div class="col-8 mt-3 ms-auto ">
             {{hamburguesa.nombre}}
          </div>
          <div class="col-2 mt-3 p-0">
-            <mat-icon class="">
-               <span class=" text-white">delete</span>
+            <mat-icon (click)="borrarProducto('200ms', '200ms',$event)" id={{hamburguesa._id}}>
+               <span class=" text-white" id={{hamburguesa._id}}>delete</span>
             </mat-icon>
          </div>
          <div>

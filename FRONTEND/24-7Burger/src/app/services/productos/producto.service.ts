@@ -12,7 +12,8 @@ export class ProductoService implements OnInit {
   arrayProducto: alimento[] = [];
   private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
 
-  constructor(private http: HttpClient) {  
+  constructor(private http: HttpClient) {
+    this.getAllProduct();  
   }
   
   agregarProduct(alimento: alimento){
@@ -36,19 +37,21 @@ export class ProductoService implements OnInit {
     return this.http.post(this.URL + '/alimentos/newAlimento', productBebida);
   }
   
-  eliminarProducto(nombre: string) {
-    // return this.http.delete(this.URL+'/alimentos/)
+
+  eliminarProducto(idBurger:string){
+     return this.http.delete(this.URL+'/alimentos/deleteAlimento/'+ idBurger)
+  }
+
+  getAllProduct(){
+     this.http.get<any>(this.URL+'/alimentos/getAllAlimento',{}).subscribe(responseData => {
+      this.modificarLista(responseData)
+      });
   }
 
   modificarLista(alimentos){
     this._productHamburguesa$.next(alimentos)
   }
+
+
   
-  getAllProduct() {
-    this.http.get<any>(this.URL + '/alimentos/getAllAlimento', {}).subscribe(responseData => {
-      this._productHamburguesa$.next(responseData);
-    });
-  }
-
-
 }
