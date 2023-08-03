@@ -1,5 +1,5 @@
 .dialog{
-    &-hamburguesa{
+    &-bebida{
         background-color: #DFCAB4;
         
     }
@@ -26,15 +26,15 @@
         overflow: hidden !important;
     }
 }
-#img-hamburguesa{
+#img-bebida{
     min-width: 200px !important;
-        max-width: 300px !important;
+    max-width: 300px !important;
 }
 
 .file-name {
     margin-left: 1rem; /* or whatever margin you require */
 }
-.confirmarBurger{
+.confirmarBebida{
     color: #cea174 ;
     font-weight: bold;
     &:disabled{
@@ -47,4 +47,9 @@ mat-icon{
 }
 mat-form-field{
     font-size: 1rem;
+}
+.precio{
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+        display: none;
+    }
 }

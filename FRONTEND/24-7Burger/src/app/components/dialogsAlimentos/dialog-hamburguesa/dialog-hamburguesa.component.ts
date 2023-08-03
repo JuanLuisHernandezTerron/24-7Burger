@@ -11,21 +11,17 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class DialogHamburguesaComponent implements OnInit {
   
-  constructor(private fb: FormBuilder,private toastr: ToastrService, private dialogRef: MatDialogRef<DialogHamburguesaComponent>, private productService: ProductoService) {
+  constructor(private fb: FormBuilder,private toastr: ToastrService, private productService: ProductoService) {
     this.reactiveForm();
   }
   productoForm: FormGroup;
   extras: FormArray;
   selectedFile: any = null;
   imageneProducto:string;
-  hamburguesa: alimento;
-  arrayalimentos:alimento[];
 
   ngOnInit(): void {
     this.productoForm.addControl('extras', this.extras);
-    this.productService.getProduct$.subscribe(productos=>{
-      this.arrayalimentos = productos;
-    })
+  
   }
   
 
@@ -81,7 +77,7 @@ export class DialogHamburguesaComponent implements OnInit {
     formDataProducto.append('tipoAlimento','Hamburguesa');
     formDataProducto.append('imagen',this.imageneProducto);
     formDataProducto.append('extras',JSON.stringify(this.productoForm.get('extras')?.value)); 
-    this.productService.ingresarHamburguesa(formDataProducto).subscribe(data=>{console.log(data),
+    this.productService.ingresarProducto(formDataProducto).subscribe(data=>{console.log(data),
     this.productService.modificarLista(data)});
    }  
 

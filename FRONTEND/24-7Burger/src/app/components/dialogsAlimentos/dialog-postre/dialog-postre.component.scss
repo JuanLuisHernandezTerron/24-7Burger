@@ -1,5 +1,5 @@
 .dialog{
-    &-hamburguesa{
+    &-postre{
         background-color: #DFCAB4;
         
     }
@@ -26,7 +26,7 @@
         overflow: hidden !important;
     }
 }
-#img-hamburguesa{
+#img-postre{
     min-width: 200px !important;
         max-width: 300px !important;
 }
@@ -34,7 +34,7 @@
 .file-name {
     margin-left: 1rem; /* or whatever margin you require */
 }
-.confirmarBurger{
+.confirmarPostre{
     color: #cea174 ;
     font-weight: bold;
     &:disabled{

@@ -3,7 +3,8 @@ import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog
 import { DialogHamburguesaComponent } from './../../components/dialogsAlimentos/dialog-hamburguesa/dialog-hamburguesa.component';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { alimento } from 'src/app/models/alimento';
-import { DialogBorrarHamburguesaComponent } from 'src/app/components/dialogsAlimentos/dialog-borrar-hamburguesa/dialog-borrar-hamburguesa.component';
+import { DialogBorrarAlimentoComponent } from 'src/app/components/dialogsAlimentos/dialog-borrar-alimento/dialog-borrar-alimento.component';
+
 
 @Component({
   selector: 'app-lista-hamburguesas-admin',
@@ -14,7 +15,7 @@ export class ListaHamburguesasAdminComponent implements OnInit{
   public isActive = false;
   arrhamburguesas: alimento[];
   dialogRef: MatDialogRef<DialogHamburguesaComponent>;
-  dialogRefBorrar: MatDialogRef<DialogBorrarHamburguesaComponent>;
+  dialogRefBorrar: MatDialogRef<DialogBorrarAlimentoComponent>;
   constructor(public dialog: MatDialog,private productService: ProductoService) {
     
   } 
@@ -47,8 +48,8 @@ export class ListaHamburguesasAdminComponent implements OnInit{
     console.log(idBurger);
     
 
-    this.dialogRefBorrar = this.dialog.open(DialogBorrarHamburguesaComponent, {
-      width: '20%',
+    this.dialogRefBorrar = this.dialog.open(DialogBorrarAlimentoComponent, {
+      width: 'auto',
       enterAnimationDuration,
       exitAnimationDuration,
     });

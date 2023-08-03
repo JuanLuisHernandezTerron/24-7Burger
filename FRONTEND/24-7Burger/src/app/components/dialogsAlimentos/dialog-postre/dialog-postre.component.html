@@ -1,6 +1,6 @@
-<div class="dialog-hamburguesa text-center">
-    <h1 mat-dialog-title align="center" class="mb-3">Insertar Hamburguesa</h1>
-    <mat-dialog-content class="dialog-hamburguesa">
+<div class="dialog-postre text-center">
+    <h1 mat-dialog-title align="center" class="mb-3">Insertar Postre</h1>
+    <mat-dialog-content class="dialog-postre">
         <div class="row justify-content-end">
             <img src="./../../../../assets/imagenes/logohamburguesaBlur.png"
                 class="img-fluid col-12 col-md-6 dialog-imagenLogo" alt="logoEmpresa">
@@ -26,7 +26,7 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-12 d-flex justify-content-center">
                             <img src="./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png"
-                                id="img-hamburguesa" class="img-fluid  dialog-productoPreview" srcset="">
+                                id="img-postre" class="img-fluid  dialog-productoPreview" srcset="">
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose
@@ -74,8 +74,8 @@
         </form>
 
     </mat-dialog-content>
-    <mat-dialog-actions class="dialog-hamburguesa" align="center">
+    <mat-dialog-actions class="dialog-postre" align="center">
         <button mat-raised-button [mat-dialog-close]="true" [disabled]="!productoForm.valid"
-            (click)="ingresarHamburguesa()" color="primary" class="confirmarBurger">Insertar Hamburguesa</button>
+            (click)="ingresarPostre()" color="primary" class="confirmarPostre">Insertar Postre</button>
     </mat-dialog-actions>
 </div>
