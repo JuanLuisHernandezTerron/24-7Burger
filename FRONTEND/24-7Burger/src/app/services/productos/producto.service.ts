@@ -29,13 +29,11 @@ export class ProductoService implements OnInit {
     this.getAllProduct();
   }
   
-  ingresarHamburguesa(productHamburguesa: FormData) {
-    return this.http.post<alimento[]>(this.URL + '/alimentos/newAlimento', productHamburguesa);
+  ingresarProducto(productoAlimento: FormData) {
+    return this.http.post<alimento[]>(this.URL + '/alimentos/newAlimento', productoAlimento);
   }
   
-  ingresarBebida(productBebida: FormData) {
-    return this.http.post(this.URL + '/alimentos/newAlimento', productBebida);
-  }
+  
   
 
   eliminarProducto(idBurger:string){
