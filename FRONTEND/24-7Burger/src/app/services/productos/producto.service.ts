@@ -51,7 +51,4 @@ export class ProductoService implements OnInit {
   modificarLista(alimentos){
     this._productHamburguesa$.next(alimentos)
   }
-
-
-  
 }
