@@ -26,11 +26,11 @@
              </div>
              <div class="col-2 mt-3 p-0">
                <mat-icon (click)="borrarProducto('200ms', '200ms',$event)" id={{bebida._id}}>
-                  <span class=" text-white" id={{bebida._id}}>delete</span>
+                  <span id={{bebida._id}} class=" text-white" >delete</span>
                </mat-icon>
              </div>
-             <div >
-                <img src="../../../assets/imagenes/cola.png" alt="{{bebida.nombre}}">
+             <div (click)="actualizarProducto('200ms', '200ms',$event)">
+                <img id={{bebida._id}} src={{bebida.imagen}} alt="{{bebida.nombre}}">
              </div>
              
         </div>

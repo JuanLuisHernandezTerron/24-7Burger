@@ -44,6 +44,10 @@ export class ProductoService implements OnInit {
       });
   }
 
+  modificarProducto(id:String,productoAlimento: FormData){
+    return this.http.put<any>(this.URL+'/alimentos/updateAlimento/'+id,productoAlimento);
+  }
+
   modificarLista(alimentos){
     this._productHamburguesa$.next(alimentos)
   }

@@ -28,7 +28,6 @@ export class ListaHamburguesasAdminComponent implements OnInit{
     this.productService.getProduct$.subscribe(productos=>{
       this.arrhamburguesas = productos.filter(e=>e.tipoAlimento == "Hamburguesa");
     })
-
   }
 
   public toggleHamburger() {

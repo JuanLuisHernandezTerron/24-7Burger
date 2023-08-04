@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogBorrarAlimentoComponent } from 'src/app/components/dialogsAlimentos/dialog-borrar-alimento/dialog-borrar-alimento.component';
 import { DialogPostreComponent } from 'src/app/components/dialogsAlimentos/dialog-postre/dialog-postre.component';
 import { alimento } from 'src/app/models/alimento';
+import { DialogActualizarProductoComponent } from 'src/app/components/dialogsAlimentos/dialog-actualizar-producto/dialog-actualizar-producto.component';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ListaPostresAdminComponent {
   arrPostres: alimento[];
   dialogRef: MatDialogRef<DialogPostreComponent>;
   dialogRefBorrar: MatDialogRef<DialogBorrarAlimentoComponent>;
+  dialogRefActualizar: MatDialogRef<DialogActualizarProductoComponent>;
   constructor(public dialog: MatDialog,private productService: ProductoService) {
     
   } 
@@ -39,6 +41,18 @@ export class ListaPostresAdminComponent {
       exitAnimationDuration,
     });
 
+  }
+
+  actualizarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
+    this.dialogRefActualizar = this.dialog.open(DialogActualizarProductoComponent, {
+      width: '60%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });    
+    //Envio el evento para que desde el output del service el otro componente pueda recoger el evento enviado desde este propio componente.
+    setTimeout(()=>{
+      this.productService.diparadoActualizarProducto.emit(event);
+    },200);
   }
 
   borrarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event: Event): void {

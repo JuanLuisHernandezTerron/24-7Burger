@@ -5,13 +5,13 @@ import { ToastrService } from 'ngx-toastr';
 import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 
-@Component({
-  selector: 'app-dialog-actualizar-producto',
-  templateUrl: './dialog-actualizar-producto.component.html',
-  styleUrls: ['./dialog-actualizar-producto.component.scss']
-})
-export class DialogActualizarProductoComponent {
 
+@Component({
+  selector: 'app-dialog-actualizar-bebida',
+  templateUrl: './dialog-actualizar-bebida.component.html',
+  styleUrls: ['./dialog-actualizar-bebida.component.scss']
+})
+export class DialogActualizarBebidaComponent implements OnInit{
   constructor(private fb: FormBuilder, private toastr: ToastrService, private productService: ProductoService) {
     this.reactiveForm();
   }
@@ -36,8 +36,6 @@ export class DialogActualizarProductoComponent {
     this.productoForm = this.fb.group({
       nombre: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required]),
-      alergenos: new FormControl(''),
       imagen: new FormControl('', [Validators.required]),
     });
     this.extras = this.fb.array([]);
@@ -60,8 +58,7 @@ export class DialogActualizarProductoComponent {
             this.toastr.warning("La imagen no tiene el tamaño adecuado.", "Debe tener relacion de aspecto 1:1");
           }
           else {
-            document.getElementById('img-hamburguesa')?.setAttribute('src', e.target?.result as string);
-
+            document.getElementById('img-bebida')?.setAttribute('src', e.target?.result as string);
           }
         };
         img.src = e.target.result as string;
@@ -74,15 +71,11 @@ export class DialogActualizarProductoComponent {
     let formDataProducto = new FormData();
     formDataProducto.append('nombre', this.productoForm.get('nombre')?.value);
     formDataProducto.append('precio', this.productoForm.get('precio')?.value);
-    formDataProducto.append('descripcion', this.productoForm.get('descripcion')?.value);
-    formDataProducto.append('alergenos', this.productoForm.get('alergenos')?.value);
     this.productService.getProduct$.subscribe((data) => {
       let tipoAlimento = data.filter(e=>e._id == this.idProducto);
       formDataProducto.append('tipoAlimento', tipoAlimento[0].tipoAlimento as any);
     })
-    formDataProducto.append('imagen', this.imageneProducto);
-    formDataProducto.append('extras', JSON.stringify(this.productoForm.get('extras')?.value));
-    
+    formDataProducto.append('imagen', this.imageneProducto);    
     this.productService.modificarProducto(this.idProducto, formDataProducto).subscribe(data => {
       this.productService.modificarLista(data["alimentos"])
     });
@@ -113,23 +106,10 @@ export class DialogActualizarProductoComponent {
     this.arrAlimentos = [];
     this.productService.getProduct$.subscribe(data => {
       this.arrAlimentos = data.filter(e => e._id == id);
-      this.tipoProducto = this.arrAlimentos[0]?.tipoAlimento;
-      console.log(this.tipoProducto);
-      
+      this.tipoProducto = this.arrAlimentos[0]?.tipoAlimento;      
       this.productoForm.get('nombre').patchValue(this.arrAlimentos[0]?.nombre);
       this.productoForm.get('precio').patchValue(this.arrAlimentos[0]?.precio);
-      this.productoForm.get('descripcion').patchValue(this.arrAlimentos[0]?.descripcion);
-      document.getElementById('img-hamburguesa')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
-      if (this.arrAlimentos[0]?.extras.length > 0) {
-        this.arrAlimentos[0]?.extras.forEach(element => {
-          this.extras.push(
-            this.fb.group({
-              nombre: element.nombre,
-              precio: element.precio
-            })
-          );
-        })
-      }
+      document.getElementById('img-bebida')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
     })
   }
 

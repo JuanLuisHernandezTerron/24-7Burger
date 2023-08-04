@@ -4,10 +4,10 @@ const { response, json } = require('express');
 const updateAlimento = async function (req,res){
     try {
         const searchProduct = await modelAlimento.findById({_id: req.params.id}).exec();
-        let arrayExtras = "";
+        let arrayExtras = [];
         if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
             const Extras= JSON.parse(req.body.extras);
-            let arrayExtras = [];
+                arrayExtras = [];
             for (let i = 0; i < Extras.length; i++) {
                 arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
                 boolean = true;
@@ -25,9 +25,9 @@ const updateAlimento = async function (req,res){
                 imagen:'http://localhost:3000/uploads/' + req.file.filename,
                 extras:arrayExtras
             };
-
             await modelAlimento.findByIdAndUpdate({_id:req.params.id},alimento).exec();
-            res.status(200).json("Actualizado Correctamente");
+            let alimentos = await modelAlimento.find().exec();
+            res.status(200).json({status:"Actualizado Correctamente",alimentos});
         }else{
             res.status(401).json("Producto no encontrado");
         }
@@ -54,7 +54,7 @@ const newAlimento = async function (req,res){
     let arrayExtras = "";
     if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
         const Extras= JSON.parse(req.body.extras);
-        let arrayExtras = [];
+        arrayExtras = [];
         for (let i = 0; i < Extras.length; i++) {
             arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
             boolean = true;

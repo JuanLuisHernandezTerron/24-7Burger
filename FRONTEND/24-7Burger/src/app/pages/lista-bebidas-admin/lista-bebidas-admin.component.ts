@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogActualizarBebidaComponent } from 'src/app/components/dialogsAlimentos/dialog-actualizar-bebida/dialog-actualizar-bebida.component';
 import { DialogBebidaComponent } from 'src/app/components/dialogsAlimentos/dialog-bebida/dialog-bebida.component';
 import { DialogBorrarAlimentoComponent } from 'src/app/components/dialogsAlimentos/dialog-borrar-alimento/dialog-borrar-alimento.component';
 import { alimento } from 'src/app/models/alimento';
@@ -14,6 +15,7 @@ export class ListaBebidasAdminComponent {
   public isActive = false;
   dialogRef: MatDialogRef<DialogBebidaComponent>;
   dialogRefBorrar: MatDialogRef<DialogBorrarAlimentoComponent>;
+  dialogRefActualizar: MatDialogRef<DialogActualizarBebidaComponent>;
   arrBebida: alimento[];
   constructor(public dialog: MatDialog, private productService: ProductoService) { }
 
@@ -54,5 +56,17 @@ export class ListaBebidasAdminComponent {
       })
       }
     });
+  }
+
+  actualizarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
+    this.dialogRefActualizar = this.dialog.open(DialogActualizarBebidaComponent, {
+      width: '60%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });    
+    //Envio el evento para que desde el output del service el otro componente pueda recoger el evento enviado desde este propio componente.
+    setTimeout(()=>{
+      this.productService.diparadoActualizarProducto.emit(event);
+    },200);
   }
 }

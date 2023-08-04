@@ -35,6 +35,7 @@ import { DialogBebidaComponent } from './components/dialogsAlimentos/dialog-bebi
 import { DialogBorrarAlimentoComponent } from './components/dialogsAlimentos/dialog-borrar-alimento/dialog-borrar-alimento.component';
 import { DialogPostreComponent } from './components/dialogsAlimentos/dialog-postre/dialog-postre.component';
 import { DialogActualizarProductoComponent } from './components/dialogsAlimentos/dialog-actualizar-producto/dialog-actualizar-producto.component';
+import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/dialog-actualizar-bebida/dialog-actualizar-bebida.component';
 
 
 
@@ -61,6 +62,7 @@ import { DialogActualizarProductoComponent } from './components/dialogsAlimentos
     DialogBorrarAlimentoComponent,
     DialogPostreComponent,
     DialogActualizarProductoComponent,
+    DialogActualizarBebidaComponent,
 
   
     
