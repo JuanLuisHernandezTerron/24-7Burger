@@ -1,6 +1,41 @@
 const modelAlimento = require ('./../models/alimentos');
 const { response, json } = require('express');
 
+const updateAlimento = async function (req,res){
+    try {
+        const searchProduct = await modelAlimento.findById({_id: req.params.id}).exec();
+        let arrayExtras = "";
+        if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
+            const Extras= JSON.parse(req.body.extras);
+            let arrayExtras = [];
+            for (let i = 0; i < Extras.length; i++) {
+                arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
+                boolean = true;
+            }
+        }
+
+        if (searchProduct){
+            const alimento = {
+                nombre:req.body.nombre,
+                descripcion:req.body.descripcion,
+                ingredientes:req.body.ingredientes,
+                alergenos:req.body.alergenos,
+                tipoAlimento:req.body.tipoAlimento,
+                precio:req.body.precio,
+                imagen:'http://localhost:3000/uploads/' + req.file.filename,
+                extras:arrayExtras
+            };
+
+            await modelAlimento.findByIdAndUpdate({_id:req.params.id},alimento).exec();
+            res.status(200).json("Actualizado Correctamente");
+        }else{
+            res.status(401).json("Producto no encontrado");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const getAllAlimentos = async function(req,res){
     try{
         const consulta = await modelAlimento.find().exec();
@@ -70,5 +105,6 @@ const deleteAlimento = async function (req,res){
 module.exports = {
     newAlimento,
     deleteAlimento,
-    getAllAlimentos
+    getAllAlimentos,
+    updateAlimento
 }

@@ -30,8 +30,8 @@
                <span class=" text-white" id={{hamburguesa._id}}>delete</span>
             </mat-icon>
          </div>
-         <div>
-            <img src="{{hamburguesa.imagen}}" alt="la 33">
+         <div (click)="actualizarProducto('200ms', '200ms',$event)">
+            <img id={{hamburguesa._id}} src="{{hamburguesa.imagen}}" alt="la 33">
          </div>
          <div>
             <p class="text-white mt-2 descripcion" > {{hamburguesa.descripcion}}</p>

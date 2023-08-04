@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { alimento } from 'src/app/models/alimento';
 import { environment } from 'src/enviroments/enviroments';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,7 @@ export class ProductoService implements OnInit {
   private URL = environment.url;
   arrayProducto: alimento[] = [];
   private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
+  @Output() diparadoActualizarProducto = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.getAllProduct();  
@@ -32,9 +33,6 @@ export class ProductoService implements OnInit {
   ingresarProducto(productoAlimento: FormData) {
     return this.http.post<alimento[]>(this.URL + '/alimentos/newAlimento', productoAlimento);
   }
-  
-  
-  
 
   eliminarProducto(idBurger:string){
      return this.http.delete(this.URL+'/alimentos/deleteAlimento/'+ idBurger)

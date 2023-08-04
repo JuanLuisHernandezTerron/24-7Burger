@@ -34,6 +34,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { DialogBebidaComponent } from './components/dialogsAlimentos/dialog-bebida/dialog-bebida.component';
 import { DialogBorrarAlimentoComponent } from './components/dialogsAlimentos/dialog-borrar-alimento/dialog-borrar-alimento.component';
 import { DialogPostreComponent } from './components/dialogsAlimentos/dialog-postre/dialog-postre.component';
+import { DialogActualizarProductoComponent } from './components/dialogsAlimentos/dialog-actualizar-producto/dialog-actualizar-producto.component';
 
 
 
@@ -59,6 +60,7 @@ import { DialogPostreComponent } from './components/dialogsAlimentos/dialog-post
     DialogBebidaComponent,
     DialogBorrarAlimentoComponent,
     DialogPostreComponent,
+    DialogActualizarProductoComponent,
 
   
     
