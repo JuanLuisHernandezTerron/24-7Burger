@@ -37,7 +37,7 @@ export class ListaHamburguesasAdminComponent implements OnInit{
 
   anadirProducto(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialogRef = this.dialog.open(DialogHamburguesaComponent, {
-      width: '60%',
+      width: 'auto',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -46,7 +46,7 @@ export class ListaHamburguesasAdminComponent implements OnInit{
 
   actualizarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
     this.dialogRefActualizar = this.dialog.open(DialogActualizarProductoComponent, {
-      width: '60%',
+      width: 'auto',
       enterAnimationDuration,
       exitAnimationDuration,
     });    
