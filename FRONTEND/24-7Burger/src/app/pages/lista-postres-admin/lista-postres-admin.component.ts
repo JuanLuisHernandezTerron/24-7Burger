@@ -45,7 +45,7 @@ export class ListaPostresAdminComponent {
 
   actualizarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
     this.dialogRefActualizar = this.dialog.open(DialogActualizarProductoComponent, {
-      width: '60%',
+      width: 'auto',
       enterAnimationDuration,
       exitAnimationDuration,
     });    
