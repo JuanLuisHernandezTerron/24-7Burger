@@ -23,7 +23,7 @@ export class DialogActualizarProductoComponent {
   imageneProducto: string;
   arrAlimentos: any[];
   tipoProducto:String;
-
+  imagenCambiada: boolean=false
   ngOnInit(): void {
     this.productoForm.addControl('extras', this.extras);
     this.productService.diparadoActualizarProducto.subscribe(data => {
@@ -128,7 +128,7 @@ export class DialogActualizarProductoComponent {
       this.productoForm.get('descripcion').patchValue(this.arrAlimentos[0]?.descripcion);
       this.productoForm.get('imagen').patchValue(this.arrAlimentos[0]?.imagen);
       document.getElementById('img-hamburguesa')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
-      document.getElementById('file')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
+      
       if (this.arrAlimentos[0]?.extras.length > 0) {
         this.arrAlimentos[0]?.extras.forEach(element => {
           this.extras.push(
