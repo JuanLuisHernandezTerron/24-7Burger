@@ -28,8 +28,6 @@ export class ListaPostresAdminComponent {
     })
   }
 
-
-
   public toggleHamburger() {
     this.isActive = !this.isActive;
   }

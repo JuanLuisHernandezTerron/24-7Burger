@@ -29,7 +29,9 @@ export class DialogActualizarProductoComponent {
     this.productService.diparadoActualizarProducto.subscribe(data => {
       this.idProducto = data.target.id;
       this.recogerInformacion(this.idProducto)
-    });    
+    });
+    
+    console.log(this.productoForm);
   }
 
   reactiveForm() {
@@ -119,6 +121,7 @@ export class DialogActualizarProductoComponent {
       this.productoForm.get('nombre').patchValue(this.arrAlimentos[0]?.nombre);
       this.productoForm.get('precio').patchValue(this.arrAlimentos[0]?.precio);
       this.productoForm.get('descripcion').patchValue(this.arrAlimentos[0]?.descripcion);
+      this.productoForm.get('imagen').patchValue(this.arrAlimentos[0]?.descripcion);
       document.getElementById('img-hamburguesa')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
       if (this.arrAlimentos[0]?.extras.length > 0) {
         this.arrAlimentos[0]?.extras.forEach(element => {

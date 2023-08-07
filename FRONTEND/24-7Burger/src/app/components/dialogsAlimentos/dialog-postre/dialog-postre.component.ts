@@ -21,7 +21,7 @@ export class DialogPostreComponent {
 
   ngOnInit(): void {
     this.productoForm.addControl('extras', this.extras);
-  
+    
   }
   
 

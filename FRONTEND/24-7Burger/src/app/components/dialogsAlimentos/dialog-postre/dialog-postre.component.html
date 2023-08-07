@@ -26,14 +26,13 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-12 d-flex justify-content-center">
                             <img src="./../../../../assets/imagenes/icone-de-nourriture-hamburger-noir.png"
-                                id="img-postre" class="img-fluid  dialog-productoPreview" srcset="">
+                                id="img-postre" class="img-fluid  dialog-productoPreview" formControlName="imagen" srcset="">
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose
                                 File</button>
                             <input hidden (change)="previewIMG($event)" (change)="imagenesChange($event)"
-                                formControlName="imagen" #fileInput class="dialog-inputIMG" type="file" id="file">
-                            <!-- <span class="file-name">{{selectedFile?.name}}</span> -->
+                                 #fileInput class="dialog-inputIMG" type="file" id="file">
                         </div>
                     </div>
                 </div>
