@@ -109,6 +109,7 @@ export class DialogActualizarBebidaComponent implements OnInit{
       this.tipoProducto = this.arrAlimentos[0]?.tipoAlimento;      
       this.productoForm.get('nombre').patchValue(this.arrAlimentos[0]?.nombre);
       this.productoForm.get('precio').patchValue(this.arrAlimentos[0]?.precio);
+      this.productoForm.get('imagen').patchValue(this.arrAlimentos[0]?.imagen);
       document.getElementById('img-bebida')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
     })
   }
