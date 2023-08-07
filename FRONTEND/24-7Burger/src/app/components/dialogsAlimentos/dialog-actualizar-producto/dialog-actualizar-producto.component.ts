@@ -76,6 +76,13 @@ export class DialogActualizarProductoComponent {
     formDataProducto.append('precio', this.productoForm.get('precio')?.value);
     formDataProducto.append('descripcion', this.productoForm.get('descripcion')?.value);
     formDataProducto.append('alergenos', this.productoForm.get('alergenos')?.value);
+  
+    console.log(this.productoForm.get('nombre')?.value);
+    console.log(this.productoForm.get('precio')?.value);
+    console.log(this.productoForm.get('descripcion')?.value);
+    console.log(this.productoForm.get('alergenos')?.value);
+    console.log(this.productoForm.get('imagen')?.value);
+    console.log(this.productoForm.get('extras')?.value);
     this.productService.getProduct$.subscribe((data) => {
       let tipoAlimento = data.filter(e=>e._id == this.idProducto);
       formDataProducto.append('tipoAlimento', tipoAlimento[0].tipoAlimento as any);
@@ -121,6 +128,7 @@ export class DialogActualizarProductoComponent {
       this.productoForm.get('descripcion').patchValue(this.arrAlimentos[0]?.descripcion);
       this.productoForm.get('imagen').patchValue(this.arrAlimentos[0]?.imagen);
       document.getElementById('img-hamburguesa')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
+      document.getElementById('file')?.setAttribute('src', this.arrAlimentos[0]?.imagen as string);
       if (this.arrAlimentos[0]?.extras.length > 0) {
         this.arrAlimentos[0]?.extras.forEach(element => {
           this.extras.push(

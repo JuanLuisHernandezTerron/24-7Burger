@@ -25,13 +25,13 @@
                 <div class="col-12 col-lg-6 col-xxl-5">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-12 d-flex justify-content-center">
-                            <img id="img-hamburguesa" formControlName="imagen" class="img-fluid  dialog-productoPreview" src="">
+                            <img id="img-hamburguesa"  class="img-fluid  dialog-productoPreview" src="">
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button type="button" color="primary" mat-raised-button (click)="fileInput.click()">Choose
                                 File</button>
                             <input hidden (change)="previewIMG($event)" (change)="imagenesChange($event)"
-                                 #fileInput class="dialog-inputIMG" type="file" id="file">
+                             #fileInput class="dialog-inputIMG" type="file" id="file">
                         </div>
                     </div>
                 </div>
