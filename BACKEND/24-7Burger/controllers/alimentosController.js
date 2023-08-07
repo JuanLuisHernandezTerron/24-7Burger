@@ -3,6 +3,7 @@ const { response, json } = require('express');
 
 const updateAlimento = async function (req,res){
     try {
+        var alimento = {};
         const searchProduct = await modelAlimento.findById({_id: req.params.id}).exec();
         let arrayExtras = [];
         if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
@@ -15,16 +16,29 @@ const updateAlimento = async function (req,res){
         }
 
         if (searchProduct){
-            const alimento = {
-                nombre:req.body.nombre,
-                descripcion:req.body.descripcion,
-                ingredientes:req.body.ingredientes,
-                alergenos:req.body.alergenos,
-                tipoAlimento:req.body.tipoAlimento,
-                precio:req.body.precio,
-                imagen:'http://localhost:3000/uploads/' + req.file.filename,
-                extras:arrayExtras
-            };
+            console.log(req.file);
+            if (req.file === undefined) {
+                alimento = {
+                    nombre:req.body.nombre,
+                    descripcion:req.body.descripcion,
+                    ingredientes:req.body.ingredientes,
+                    alergenos:req.body.alergenos,
+                    tipoAlimento:req.body.tipoAlimento,
+                    precio:req.body.precio,
+                    extras:arrayExtras
+                };
+            }else{
+                alimento = {
+                    nombre:req.body.nombre,
+                    descripcion:req.body.descripcion,
+                    ingredientes:req.body.ingredientes,
+                    alergenos:req.body.alergenos,
+                    tipoAlimento:req.body.tipoAlimento,
+                    precio:req.body.precio,
+                    imagen:'http://localhost:3000/uploads/' + req.file.filename,
+                    extras:arrayExtras
+                };
+            }
             await modelAlimento.findByIdAndUpdate({_id:req.params.id},alimento).exec();
             let alimentos = await modelAlimento.find().exec();
             res.status(200).json({status:"Actualizado Correctamente",alimentos});
