@@ -1,3 +1,10 @@
 .pedido{
     background-color:  #CEA174;;
 }
+
+@media (min-width:992px) {
+    ::ng-deep .mat-horizontal-stepper-header-container{
+        margin-left: 20% !important;
+        margin-right: 20%  !important;
+    }
+}
