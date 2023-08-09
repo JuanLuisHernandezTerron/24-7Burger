@@ -14,6 +14,10 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+
 import { FooterComponent } from './layout/footer/footer.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -65,11 +69,8 @@ import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.co
     DialogPostreComponent,
     DialogActualizarProductoComponent,
     DialogActualizarBebidaComponent,
-
     ProcesoPedidoComponent,
 
-  
-    
   ],
   imports: [
     BrowserModule,
@@ -88,6 +89,8 @@ import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.co
     MatDividerModule,
     MatStepperModule,
     ToastrModule.forRoot(),
+    MatBadgeModule,
+    MatSidenavModule
   ],
   providers: [
 
