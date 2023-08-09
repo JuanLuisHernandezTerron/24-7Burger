@@ -10,6 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +37,7 @@ import { DialogBorrarAlimentoComponent } from './components/dialogsAlimentos/dia
 import { DialogPostreComponent } from './components/dialogsAlimentos/dialog-postre/dialog-postre.component';
 import { DialogActualizarProductoComponent } from './components/dialogsAlimentos/dialog-actualizar-producto/dialog-actualizar-producto.component';
 import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/dialog-actualizar-bebida/dialog-actualizar-bebida.component';
+import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 
 
 
@@ -64,6 +66,8 @@ import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/d
     DialogActualizarProductoComponent,
     DialogActualizarBebidaComponent,
 
+    ProcesoPedidoComponent,
+
   
     
   ],
@@ -82,6 +86,7 @@ import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/d
     HttpClientModule,
     MatDialogModule,
     MatDividerModule,
+    MatStepperModule,
     ToastrModule.forRoot(),
   ],
   providers: [

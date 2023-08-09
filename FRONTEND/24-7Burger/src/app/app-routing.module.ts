@@ -11,12 +11,14 @@ import { ListaPostresAdminComponent } from './pages/lista-postres-admin/lista-po
 import { PedidosComponent } from './pages/pedidos-admin/pedidos.component';
 import { CheckLoginGuard } from './guards/checkLogin/check-login.guard';
 import { CheckUserTiendaGuard } from './guards/checkUserTienda/check-user-tienda.guard';
+import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 const routes: Routes = [{
   path: '',
   component:SkeletonComponent,
   pathMatch:'prefix',
   children:[
-    {path: '', component: HomeBurgerComponent}
+    {path: '', component: HomeBurgerComponent},
+    {path: 'pedido', component: ProcesoPedidoComponent}
   ]
 },
 {
@@ -24,7 +26,7 @@ const routes: Routes = [{
   component:SkeletonComponent,
   pathMatch:'prefix',
   children:[
-    {path: '', component: LoginAdminComponent},
+    {path: '', component: LoginAdminComponent}
   ],
   canActivate : [CheckLoginGuard]
   

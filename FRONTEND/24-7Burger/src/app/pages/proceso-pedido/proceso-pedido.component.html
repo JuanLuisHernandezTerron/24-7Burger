@@ -1,0 +1,25 @@
+<div class="container-fluid pedido">
+    <div class="container">
+        <mat-stepper class="pedido" [linear]="true"  #stepper [labelPosition]="'bottom'">
+            <mat-step [completed]="step1" label="asdf"  [editable]="isEditable">
+              
+            </mat-step>
+            <mat-step  label="asdf"  [editable]="isEditable">
+              
+            </mat-step>
+            <mat-step [editable]="isEditable">
+              
+            </mat-step>
+            <mat-step>
+             
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+        
+
+    </div>
+
+</div>
