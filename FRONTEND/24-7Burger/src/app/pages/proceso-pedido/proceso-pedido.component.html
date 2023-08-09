@@ -1,25 +1,45 @@
 <div class="container-fluid pedido">
-    <div class="container">
+    
         <mat-stepper class="pedido" [linear]="true"  #stepper [labelPosition]="'bottom'">
-            <mat-step [completed]="step1" label="asdf"  [editable]="isEditable">
-              
+            <mat-step [completed]="step1"   [editable]="isEditable">
+                <ng-template matStepLabel>
+                    <span class="material-symbols-outlined">
+                        local_mall
+                    </span>
+                    <h4 class="d-inline mx-1">/</h4>
+                    <span class="material-symbols-outlined">
+                        store
+                    </span>
+                </ng-template>
+                <app-step1></app-step1>
             </mat-step>
             <mat-step  label="asdf"  [editable]="isEditable">
-              
+                <ng-template matStepLabel>
+                    <span class="material-symbols-outlined">
+                        lunch_dining
+                        </span>
+                </ng-template>
             </mat-step>
             <mat-step [editable]="isEditable">
-              
+                <ng-template matStepLabel>
+                    <span class="material-symbols-outlined">
+                        sports_bar
+                    </span>                                    
+                </ng-template>
             </mat-step>
             <mat-step>
-             
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-              </div>
+                <ng-template matStepLabel>
+                    <span class="material-symbols-outlined">
+                        icecream
+                    </span>                                     
+                </ng-template>
+                
             </mat-step>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
           </mat-stepper>
         
-
-    </div>
 
 </div>

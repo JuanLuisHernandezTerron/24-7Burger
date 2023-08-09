@@ -38,6 +38,7 @@ import { DialogPostreComponent } from './components/dialogsAlimentos/dialog-post
 import { DialogActualizarProductoComponent } from './components/dialogsAlimentos/dialog-actualizar-producto/dialog-actualizar-producto.component';
 import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/dialog-actualizar-bebida/dialog-actualizar-bebida.component';
 import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
+import { Step1Component } from './components/step1/step1.component';
 
 
 
@@ -67,6 +68,7 @@ import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.co
     DialogActualizarBebidaComponent,
 
     ProcesoPedidoComponent,
+      Step1Component,
 
   
     
