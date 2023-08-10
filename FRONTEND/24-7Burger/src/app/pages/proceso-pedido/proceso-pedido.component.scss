@@ -1,5 +1,10 @@
 .pedido{
-    background-color:  #CEA174;;
+    &-drawer{
+        &-precio{
+            font-weight: bold;
+        }
+    }
+    background-color:  #CEA174;
 }
 
 @media (min-width:992px) {
@@ -7,4 +12,12 @@
         margin-left: 20% !important;
         margin-right: 20%  !important;
     }
+}
+
+::ng-deep .mat-drawer-content{
+    margin-right: -20px !important;
+}
+
+.mat-drawer.mat-drawer-push{
+    background-color: #e8ccaf;
 }

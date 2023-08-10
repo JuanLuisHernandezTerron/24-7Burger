@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 import { FooterComponent } from './layout/footer/footer.component';
@@ -92,7 +93,8 @@ import { Step1Component } from './components/step1/step1.component';
     MatStepperModule,
     ToastrModule.forRoot(),
     MatBadgeModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatExpansionModule
   ],
   providers: [
 
