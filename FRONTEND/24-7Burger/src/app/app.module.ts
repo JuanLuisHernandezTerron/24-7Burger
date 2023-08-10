@@ -45,7 +45,8 @@ import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/d
 import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 import { Step1Component } from './components/step1/step1.component';
 import { Step2Component } from './components/step2/step2.component';
-
+import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
+import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialog-omitir-paso.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { Step2Component } from './components/step2/step2.component';
     ProcesoPedidoComponent,
       Step1Component,
       Step2Component,
+      DialogOmitirPasoComponent,
 
   ],
   imports: [
@@ -96,7 +98,8 @@ import { Step2Component } from './components/step2/step2.component';
     ToastrModule.forRoot(),
     MatBadgeModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxNumberSpinnerModule
   ],
   providers: [
 

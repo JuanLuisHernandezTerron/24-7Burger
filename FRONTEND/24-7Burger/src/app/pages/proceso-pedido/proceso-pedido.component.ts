@@ -4,6 +4,8 @@ import { Component,OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ProductoService } from 'src/app/services/productos/producto.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogOmitirPasoComponent } from 'src/app/components/dialog-omitir-paso/dialog-omitir-paso.component';
 
 @Component({
   selector: 'app-proceso-pedido',
@@ -16,7 +18,8 @@ export class ProcesoPedidoComponent implements OnInit{
   isEditable = false;
   step1=false;
   showFiller = false;
-  constructor (private productService: ProductoService) { }
+  dialogRefOmitir: MatDialogRef<DialogOmitirPasoComponent>;
+  constructor (private productService: ProductoService,private dialog: MatDialog) { }
 
   @ViewChild('drawer') miInput:MatDrawer;
   @ViewChild('stepper') stepper:MatStepper;
@@ -36,5 +39,20 @@ export class ProcesoPedidoComponent implements OnInit{
     })
   }
 
+
+  omitirPaso(enterAnimationDuration: string, exitAnimationDuration: string, tipoAlimento:string):void{
+    
+    this.dialogRefOmitir = this.dialog.open(DialogOmitirPasoComponent, {
+      width: 'auto',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data:tipoAlimento
+    })
+    this.dialogRefOmitir.afterClosed().subscribe(result => {
+      if(result){
+        this.stepper.next()
+      }
+    });
+  }
 
 }

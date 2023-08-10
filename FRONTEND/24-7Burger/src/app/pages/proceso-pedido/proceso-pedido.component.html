@@ -38,16 +38,35 @@
                     </ng-template>
                     <app-step1></app-step1>
                 </mat-step>
-                <mat-step label="asdf" [editable]="isEditable">
+                <mat-step [editable]="isEditable">
+                    <div class="d-flex container justify-content-end">
+                        <div class="d-inline-block me-5" (click)="omitirPaso('200ms', '200ms','hamburguesa')" type="button">
+                            <div class="d-flex">
+                                <h6 ><u>OMITIR PASO</u></h6>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
                     <ng-template matStepLabel>
                         <span class="material-symbols-outlined">
                             lunch_dining
                         </span>
-                        </ng-template>
-                        <app-step2></app-step2>
+                    </ng-template>
+                    <app-step2></app-step2>
                     <button mat-button matStepperNext>Next</button>
-            </mat-step>
+                </mat-step>
                 <mat-step [editable]="isEditable">
+                    <div class="d-flex justify-content-center">
+                        <div class="d-inline-block " (click)="omitirPaso('200ms', '200ms','bebida')" type="button">
+                            <h5 class="d-inline"><u>OMITIR PASO</u></h5>
+                            <span class="material-symbols-outlined m-0">
+                                arrow_forward
+                            </span>
+                        </div>
+                    </div>
                     <ng-template matStepLabel>
                         <span class="material-symbols-outlined">
                             sports_bar
@@ -55,8 +74,16 @@
                     </ng-template>
                     <button mat-button matStepperNext>Next</button>
 
-            </mat-step>
+                </mat-step>
                 <mat-step>
+                    <div class="d-flex justify-content-center">
+                        <div class="d-inline-block " (click)="omitirPaso('200ms', '200ms','postre')" type="button">
+                            <h5 class="d-inline"><u>OMITIR PASO</u></h5>
+                            <span class="material-symbols-outlined m-0">
+                                arrow_forward
+                            </span>
+                        </div>
+                    </div>
                     <ng-template matStepLabel>
                         <span class="material-symbols-outlined">
                             icecream
