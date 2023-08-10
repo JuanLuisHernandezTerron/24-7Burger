@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
 
 
 import { FooterComponent } from './layout/footer/footer.component';

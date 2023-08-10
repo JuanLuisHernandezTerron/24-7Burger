@@ -9,19 +9,49 @@
                                 alt="imagenAlimento">
                         </div>
                         <div class="col-8">
-                            <div class="row">
-                                <h5>Nombre Producto</h5>
+                            <div class="d-flex flew-row justify-content-between">
+                                <h5 class="mt-1">La 33</h5>
+                                <mat-icon class="mt-1">delete</mat-icon>
+                            </div>
+                            <div class="row align-items-center justify-content-around">
+                                <ngx-number-spinner [value]="2" [min]="1" class="w-50"> </ngx-number-spinner>
+                                <span class="w-50 pedido-drawer-precio">15 € / Unidad</span>
                             </div>
                             <div class="row">
-                                <span>Unidades 2</span>
-                            </div>
-                            <div class="row">
-                                <span class="pedido-drawer-precio">15 €</span>
+                                <p class="mb-0 col-12">Extras:</p>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <span class="ms-3">Queso</span>
+                                    </div>
+                                    <div class="col-1">
+                                        <span class="ms-2">x</span>
+                                    </div>
+                                    <div class="col-1">
+                                        <span class="ms-3">1</span>
+                                    </div>
+                                    <div class="col-1">
+                                        <span class="ms-3">-</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="ms-3 pedido-drawer-precio">0.50€</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </mat-card>
-                <mat-divider></mat-divider>
+                <mat-divider class="w-75 mb-2"></mat-divider>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row justify-content-center">
+                <div class="col-12 row mt-2 justify-content-center">
+                    <h5 class="col-6">Productos</h5>
+                    <span class="col-6 w-25 pedido-drawer-productos">1</span>
+                </div>
+                <div class="col-12 row mt-2 justify-content-center">
+                    <h4 class="ms-5 col-6 mt-1">Total (IVA Incluido)</h4>
+                    <span class="col-6 w-25 pedido-drawer-finalPrice me-5">30 €</span>
+                </div>
             </div>
         </mat-drawer>
         <div>
