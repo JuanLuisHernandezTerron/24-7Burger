@@ -13,6 +13,7 @@ export class ProductoService implements OnInit {
   private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
   @Output() diparadoActualizarProducto = new EventEmitter();
   @Output() nextStepper = new EventEmitter();
+  @Output() diparadorCarrito = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.getAllProduct();  
