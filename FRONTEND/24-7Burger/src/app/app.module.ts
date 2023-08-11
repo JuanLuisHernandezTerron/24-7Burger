@@ -46,9 +46,7 @@ import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/d
 import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 import { Step1Component } from './components/step1/step1.component';
 import { Step2Component } from './components/step2/step2.component';
-import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
 import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialog-omitir-paso.component';
-
 
 @NgModule({
   declarations: [
@@ -75,9 +73,9 @@ import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialo
     DialogActualizarProductoComponent,
     DialogActualizarBebidaComponent,
     ProcesoPedidoComponent,
-      Step1Component,
-      Step2Component,
-      DialogOmitirPasoComponent,
+    Step1Component,
+    Step2Component,
+    DialogOmitirPasoComponent,
 
   ],
   imports: [
