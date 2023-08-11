@@ -18,8 +18,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
-
-
 import { FooterComponent } from './layout/footer/footer.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -46,7 +44,6 @@ import { DialogActualizarBebidaComponent } from './components/dialogsAlimentos/d
 import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 import { Step1Component } from './components/step1/step1.component';
 import { Step2Component } from './components/step2/step2.component';
-import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
 import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialog-omitir-paso.component';
 
 

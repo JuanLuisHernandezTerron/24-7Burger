@@ -6,7 +6,13 @@
  background-color: black;
  color: #CEA174;
  max-width: 350px;
+ max-height: 420px;
+ min-height: 420px;
 }
+// .hamburguesa-precio{
+//     max-height: 44px;
+//     min-height: 44px;
+// }
 img{
     width: 100%;
     max-width: 200px;
@@ -14,7 +20,13 @@ img{
 .descripcion{
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp:3 ;
+    -webkit-line-clamp:4 ;
     overflow: hidden;
     text-align: center;
+    max-height: 96px;
+    min-height: 96px;
+}
+mat-divider{
+    background-color: #CEA174;
+    max-height: 0px;
 }
