@@ -28,7 +28,7 @@ export class ProcesoPedidoComponent implements OnInit{
     this.productService.nextStepper.subscribe(stepperAux =>{
       if(stepperAux){      
           this.stepper.selected.completed = true;
-          this.stepper.selected.editable = false;
+          this.stepper.selected.editable = true;
           this.stepper.next();
       }
     })
@@ -54,5 +54,7 @@ export class ProcesoPedidoComponent implements OnInit{
       }
     });
   }
+
+
 
 }

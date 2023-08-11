@@ -52,3 +52,6 @@
 .mat-drawer.mat-drawer-push{
     background-color: #e8ccaf;
 }
+::ng-deep .mdc-button__label{
+    display: flex !important;
+}

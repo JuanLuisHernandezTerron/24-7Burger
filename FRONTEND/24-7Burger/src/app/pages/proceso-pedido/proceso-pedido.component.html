@@ -69,10 +69,22 @@
                     <app-step1></app-step1>
                 </mat-step>
                 <mat-step [editable]="isEditable">
-                    <div class="d-flex container justify-content-end">
-                        <div class="d-inline-block me-5" (click)="omitirPaso('200ms', '200ms','hamburguesa')" type="button">
+                    <div class="d-flex container justify-content-between mt-4">
+
+                        <div class="d-inline-block ms-5" mat-button matStepperPrevious type="button">
+                            <button class="volver" mat-button matStepperPrevious>
+                                <span class="material-symbols-outlined">
+                                    arrow_back
+                                </span>
+                                <h6><u>VOLVER</u></h6>
+                            </button>
+
+                        </div>
+
+                        <div class="d-inline-block me-5" (click)="omitirPaso('200ms', '200ms','hamburguesa')"
+                            type="button">
                             <div class="d-flex">
-                                <h6 ><u>OMITIR PASO</u></h6>
+                                <h6><u>OMITIR PASO</u></h6>
                                 <span class="material-symbols-outlined">
                                     arrow_forward
                                 </span>
