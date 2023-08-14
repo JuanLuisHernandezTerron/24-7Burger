@@ -53,6 +53,7 @@ export class ListaHamburguesasAdminComponent implements OnInit{
     setTimeout(()=>{
       this.productService.diparadoActualizarProducto.emit(event);
     },200);
+
   }
 
   borrarProducto(enterAnimationDuration: string, exitAnimationDuration: string, event: Event): void {

@@ -1,0 +1,24 @@
+<div class="dialog-hamburguesa text-center">
+    <h1 mat-dialog-title align="center" class="mb-3">Pedir Producto</h1>
+    <mat-dialog-content class="dialog-hamburguesa container" *ngFor="let hamburguesa of arrAlimentos">
+        <div class="row justify-content-end">
+            <img src="./../../../../assets/imagenes/logohamburguesaBlur.png"
+                class="img-fluid col-12 col-md-6 dialog-imagenLogo" alt="logoEmpresa">
+        </div>
+        <div class="row">
+            <h1 class="col-12 ms-5 text-start">{{hamburguesa?.nombre}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <img src="{{hamburguesa?.imagen}}" class="ms-5 img-fluid" alt="producto">
+            </div>
+            <div class="col-8 d-flex mb-5 align-items-end">
+                <h3 class="mb-5 ms-5">{{hamburguesa?.precio}}.00 €</h3>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="dialog-hamburguesa" align="center">
+        <button mat-raised-button (click)="pedirProducto()"
+            color="primary" class="confirmarBurger">Añadir</button>
+    </mat-dialog-actions>
+</div>
