@@ -40,6 +40,12 @@ export class ProcesoPedidoComponent implements OnInit{
   }
 
 
+
+nextStep(){
+  this.omitirPaso('200ms', '200ms','hamburguesa')
+}
+
+
   omitirPaso(enterAnimationDuration: string, exitAnimationDuration: string, tipoAlimento:string):void{
     
     this.dialogRefOmitir = this.dialog.open(DialogOmitirPasoComponent, {
@@ -50,10 +56,17 @@ export class ProcesoPedidoComponent implements OnInit{
     })
     this.dialogRefOmitir.afterClosed().subscribe(result => {
       if(result){
+        this.stepper.selected.completed = true;
+        this.stepper.selected.editable = true;
         this.stepper.next()
       }
     });
   }
+
+  ordenarPedido(){
+    alert("Compra realizada")
+  }
+
 
 
 

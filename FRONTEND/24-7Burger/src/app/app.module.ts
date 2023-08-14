@@ -45,6 +45,8 @@ import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.co
 import { Step1Component } from './components/step1/step1.component';
 import { Step2Component } from './components/step2/step2.component';
 import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialog-omitir-paso.component';
+import { Step3Component } from './components/step3/step3.component';
+import { Step4Component } from './components/step4/step4.component';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialo
       Step1Component,
       Step2Component,
       DialogOmitirPasoComponent,
+      Step3Component,
+      Step4Component,
 
   ],
   imports: [
