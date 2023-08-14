@@ -48,7 +48,6 @@ import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialo
 import { Step3Component } from './components/step3/step3.component';
 import { Step4Component } from './components/step4/step4.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

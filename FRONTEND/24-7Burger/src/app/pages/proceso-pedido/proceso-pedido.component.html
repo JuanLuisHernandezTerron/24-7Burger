@@ -1,11 +1,11 @@
 <div class="container-fluid pedido p-0">
     <mat-drawer-container class="example-container p-0 pedido-drawer" autosize>
-        <mat-drawer #drawer position="end" class="w-25" mode="push">
+        <mat-drawer #drawer position="end" mode="push">
             <div class="row justify-content-center">
                 <mat-card class="col-10 mt-3 mb-3">
                     <div class="row">
                         <div class="col-4 d-flex justify-content-center">
-                            <img src="./../../../assets/imagenes/La33.png" class="img-fluid w-50 m-auto"
+                            <img src="./../../../assets/imagenes/La33.png" class="img-fluid pedido-imagen m-auto"
                                 alt="imagenAlimento">
                         </div>
                         <div class="col-8">
@@ -14,23 +14,23 @@
                                 <mat-icon class="mt-1">delete</mat-icon>
                             </div>
                             <div class="row align-items-center justify-content-around">
-                                <ngx-number-spinner [value]="2" [min]="1" class="w-50"> </ngx-number-spinner>
-                                <span class="w-50 pedido-drawer-precio">15 € / Unidad</span>
+                                <ngx-number-spinner [value]="2" [min]="1" class="col-12 col-xl-6"> </ngx-number-spinner>
+                                <span class=" pedido-drawer-precio col-12 col-xl-6 text-center">15 € / Unidad</span>
                             </div>
                             <div class="row">
                                 <p class="mb-0 col-12">Extras:</p>
                                 <div class="row">
                                     <div class="col-3">
-                                        <span class="ms-3">Queso</span>
+                                        <span class="ms-xl-3">Queso</span>
                                     </div>
                                     <div class="col-1">
-                                        <span class="ms-2">x</span>
+                                        <span class="ms-3 ms-lg-0">x</span>
                                     </div>
                                     <div class="col-1">
-                                        <span class="ms-3">1</span>
+                                        <span class="ms-2 ms-lg-2">1</span>
                                     </div>
                                     <div class="col-1">
-                                        <span class="ms-3">-</span>
+                                        <span class="ms-xl-3 d-none d-xl-block">-</span>
                                     </div>
                                     <div class="col-4">
                                         <span class="ms-3 pedido-drawer-precio">0.50€</span>
@@ -45,12 +45,12 @@
             <mat-divider></mat-divider>
             <div class="row justify-content-center">
                 <div class="col-12 row mt-2 justify-content-center">
-                    <h5 class="col-6">Productos</h5>
+                    <h5 class="col-6 pedido-drawer-finalPrice">Productos</h5>
                     <span class="col-6 w-25 pedido-drawer-productos">1</span>
                 </div>
                 <div class="col-12 row mt-2 justify-content-center">
-                    <h4 class="ms-5 col-6 mt-1">Total (IVA Incluido)</h4>
-                    <span class="col-6 w-25 pedido-drawer-finalPrice me-5">30 €</span>
+                    <h4 class="ms-1 ms-lg-5 col-6 mt-1 pedido-drawer-finalPrice">Total (IVA Incluido)</h4>
+                    <span class="col-6 w-25 pedido-drawer-finalPrice me-lg-5">30 €</span>
                 </div>
             </div>
         </mat-drawer>
