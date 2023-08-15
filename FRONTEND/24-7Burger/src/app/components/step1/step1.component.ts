@@ -18,7 +18,9 @@ export class Step1Component {
   })
   metodoEntrega(metodo){
     this.step1.get('metodoEntrega').setValue(metodo)
-    this.pedidoService.disparadorStep1.emit(this.step1.get("metodoEntrega").value);
+    this.pedidoService.disparadorStep1.emit(metodo);
+    
     this.productService.nextStepper.emit(true);
+    
   }
 }

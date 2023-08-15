@@ -1,6 +1,5 @@
 .dialog{
     &-hamburguesa{
-        overflow-y: hidden !important;
         overflow-x: hidden !important;
         background-color: #DFCAB4;
         
@@ -9,6 +8,9 @@
     &-imagenLogo{
         position: absolute;
         z-index: 1;
+    }
+    &-imagenProducto{
+        width: 50%;
     }
 
     &-title,&-descripcion{
