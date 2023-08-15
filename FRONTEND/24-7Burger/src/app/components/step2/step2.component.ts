@@ -14,7 +14,7 @@ export class Step2Component {
   constructor(private productService: ProductoService,private dialog: MatDialog){}
   arrHamburguesas:alimento[];
   dialogRefBorrar: MatDialogRef<DialogPedirProductoComponent>;
-
+  
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
       this.arrHamburguesas = data.filter(item => item.tipoAlimento == "Hamburguesa")

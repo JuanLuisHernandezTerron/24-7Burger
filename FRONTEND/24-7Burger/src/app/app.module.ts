@@ -18,6 +18,10 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NgxNumberSpinnerModule } from 'ngx-number-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
+
 import { FooterComponent } from './layout/footer/footer.component';
 import { SkeletonComponent } from './layout/skeleton/skeleton.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -46,6 +50,8 @@ import { Step1Component } from './components/step1/step1.component';
 import { Step2Component } from './components/step2/step2.component';
 import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialog-omitir-paso.component';
 import { DialogPedirProductoComponent } from './components/dialogsAlimentos/dialog-pedir-producto/dialog-pedir-producto.component';
+import { Step3Component } from './components/step3/step3.component';
+import { Step4Component } from './components/step4/step4.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +82,8 @@ import { DialogPedirProductoComponent } from './components/dialogsAlimentos/dial
     Step2Component,
     DialogOmitirPasoComponent,
     DialogPedirProductoComponent,
+    Step3Component,
+    Step4Component,
 
   ],
   imports: [
@@ -98,7 +106,8 @@ import { DialogPedirProductoComponent } from './components/dialogsAlimentos/dial
     MatBadgeModule,
     MatSidenavModule,
     MatExpansionModule,
-    NgxNumberSpinnerModule
+    NgxNumberSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [
 

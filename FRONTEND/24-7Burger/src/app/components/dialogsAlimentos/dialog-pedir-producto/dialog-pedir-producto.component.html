@@ -1,24 +1,40 @@
-<div class="dialog-hamburguesa text-center">
-    <h1 mat-dialog-title align="center" class="mb-3">Pedir Producto</h1>
-    <mat-dialog-content class="dialog-hamburguesa container" *ngFor="let hamburguesa of arrAlimentos">
+<div class="dialog-hamburguesa text-center dialog" *ngFor="let hamburguesa of arrAlimentos">
+    <h1 mat-dialog-title align="left" class="mb-3 pt-3">{{hamburguesa?.nombre}}</h1>
+    <mat-dialog-content class="dialog-hamburguesa container">
         <div class="row justify-content-end">
             <img src="./../../../../assets/imagenes/logohamburguesaBlur.png"
                 class="img-fluid col-12 col-md-6 dialog-imagenLogo" alt="logoEmpresa">
         </div>
         <div class="row">
-            <h1 class="col-12 ms-5 text-start">{{hamburguesa?.nombre}}</h1>
-        </div>
-        <div class="row">
             <div class="col-4">
-                <img src="{{hamburguesa?.imagen}}" class="ms-5 img-fluid" alt="producto">
+                <img src="{{hamburguesa?.imagen}}" class="ms-5 img-fluid w-75 mt-3 mb-3" alt="producto">
             </div>
             <div class="col-8 d-flex mb-5 align-items-end">
-                <h3 class="mb-5 ms-5">{{hamburguesa?.precio}}.00 €</h3>
+                <h3 class="mb-5 ms-5 dialog-title ps-3">{{hamburguesa?.precio}}.00 €</h3>
+            </div>
+            <div class="row">
+                <h6 class="col-10 dialog-descripcion">{{hamburguesa?.descripcion}}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="col-12 mt-2 mb-2">Alérgenos</h1>
+        </div>
+        <div class="row">
+            <div class="col-12" *ngFor="let extras of hamburguesa?.extras">
+                <div class="row justify-content-between mt-4">
+                    <h6 class="w-25">{{extras.nombre}}</h6>
+                    <h6 class="w-25">{{extras.precio}}0€</h6>
+                    <mat-checkbox class="w-25" color="primary" (change)="pushExtras($event,extras.nombre,extras.precio)"></mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mt-2">35.00€</h2>
             </div>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-hamburguesa" align="center">
-        <button mat-raised-button (click)="pedirProducto()"
-            color="primary" class="confirmarBurger">Añadir</button>
+        <button mat-raised-button (click)="pedirProducto()" color="primary">Añadir</button>
     </mat-dialog-actions>
 </div>

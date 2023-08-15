@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {  MatDialogRef } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
+import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
 @Component({
   selector: 'app-dialog-pedir-producto',
@@ -11,28 +9,36 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
   styleUrls: ['./dialog-pedir-producto.component.scss']
 })
 export class DialogPedirProductoComponent {
-  constructor(private fb: FormBuilder, private productService: ProductoService) {
+  constructor(private fb: FormBuilder, private productService: ProductoService, private pedidoService: PedidoService) {
   }
 
   idProducto: String;
   arrAlimentos: any[];
+  pedido={
+    id_alimento:'' || undefined,
+    cantidad:1,
+    extras:[]
+  };
   
   ngOnInit(): void {
     this.productService.diparadoActualizarProducto.subscribe(data=>{      
       this.productService.getProduct$.subscribe(products => {
         this.arrAlimentos = products.filter(p=> p._id === data.target.id)
+        this.idProducto = this.arrAlimentos[0]._id;        
       })
     })
   }
 
-  pedirProducto(){
-
+  pushExtras(event:any,nombreExtra:String,precioExtra:Number){
+    if (event.checked) {
+      this.pedido.extras.push({nombre:nombreExtra,precio:precioExtra})
+    }else{
+      this.pedido.extras = this.pedido.extras.filter(p => p.nombre !== nombreExtra);
+    }
   }
-
-  createItemFormGroup(): FormGroup {
-    return this.fb.group({
-      nombre: null,
-      precio: null
-    });
+  
+  pedirProducto(){
+    this.pedido.id_alimento = this.idProducto;
+    this.pedidoService.disparadorStep2.emit(this.pedido);
   }
 }

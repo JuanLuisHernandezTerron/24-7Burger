@@ -3,13 +3,14 @@ import { alimento } from 'src/app/models/alimento';
 import { environment } from 'src/enviroments/enviroments';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, observeOn } from 'rxjs';
+import { pedido } from 'src/app/models/pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService implements OnInit {
   private URL = environment.url;
-  arrayProducto: alimento[] = [];
+  arrayProducto: alimento[] = [];  
   private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
   @Output() diparadoActualizarProducto = new EventEmitter();
   @Output() nextStepper = new EventEmitter();

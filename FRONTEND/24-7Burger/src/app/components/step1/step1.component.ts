@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/services/productos/producto.service';
-
+import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 @Component({
   selector: 'app-step1',
   templateUrl: './step1.component.html',
@@ -9,7 +9,7 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class Step1Component {
   
-  constructor(private builder: FormBuilder, private productService: ProductoService){}
+  constructor(private builder: FormBuilder, private productService: ProductoService, private pedidoService:PedidoService){}
   ngOnInit() {
   }
   
@@ -18,8 +18,7 @@ export class Step1Component {
   })
   metodoEntrega(metodo){
     this.step1.get('metodoEntrega').setValue(metodo)
-    
+    this.pedidoService.disparadorStep1.emit(this.step1.get("metodoEntrega").value);
     this.productService.nextStepper.emit(true);
-    console.log(this.step1.get("metodoEntrega").value);
   }
 }
