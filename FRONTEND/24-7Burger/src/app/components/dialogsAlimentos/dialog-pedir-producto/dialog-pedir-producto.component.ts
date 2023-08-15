@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogOmitirPasoComponent } from '../../dialog-omitir-paso/dialog-omitir-paso.component';
 
 @Component({
   selector: 'app-dialog-pedir-producto',
@@ -9,23 +11,21 @@ import { PedidoService } from 'src/app/services/pedidos/pedido.service';
   styleUrls: ['./dialog-pedir-producto.component.scss']
 })
 export class DialogPedirProductoComponent {
-  constructor(private fb: FormBuilder, private productService: ProductoService, private pedidoService: PedidoService) {
+  constructor(private fb: FormBuilder, private productService: ProductoService, private pedidoService: PedidoService,@Inject(MAT_DIALOG_DATA) public data: any) {
   }
-
+  public dialogRef: MatDialogRef<DialogOmitirPasoComponent>;
   idProducto: String;
   arrAlimentos: any[];
   pedido={
-    id_alimento:'' || undefined,
+    id_alimento:this.data || undefined,
     cantidad:1,
     extras:[]
   };
   
   ngOnInit(): void {
-    this.productService.diparadoActualizarProducto.subscribe(data=>{      
-      this.productService.getProduct$.subscribe(products => {
-        this.arrAlimentos = products.filter(p=> p._id === data.target.id)
-        this.idProducto = this.arrAlimentos[0]._id;        
-      })
+    this.productService.getProduct$.subscribe(products => {
+      this.arrAlimentos = products.filter(p=> p._id === this.data)
+      this.idProducto = this.data;        
     })
   }
 
@@ -35,10 +35,5 @@ export class DialogPedirProductoComponent {
     }else{
       this.pedido.extras = this.pedido.extras.filter(p => p.nombre !== nombreExtra);
     }
-  }
-  
-  pedirProducto(){
-    this.pedido.id_alimento = this.idProducto;
-    this.pedidoService.disparadorStep2.emit(this.pedido);
   }
 }

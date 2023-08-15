@@ -3,6 +3,7 @@ import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { DialogPedirProductoComponent } from '../dialogsAlimentos/dialog-pedir-producto/dialog-pedir-producto.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
 
 @Component({
@@ -11,9 +12,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./step2.component.scss']
 })
 export class Step2Component {
-  constructor(private productService: ProductoService,private dialog: MatDialog){}
+  constructor(private productService: ProductoService,private pedidoService: PedidoService,private dialog: MatDialog){}
   arrHamburguesas:alimento[];
-  dialogRefBorrar: MatDialogRef<DialogPedirProductoComponent>;
+  dialogRefAnadir: MatDialogRef<DialogPedirProductoComponent>;
   
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
@@ -23,14 +24,17 @@ export class Step2Component {
   }
 
   pedirProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
-      this.dialogRefBorrar = this.dialog.open(DialogPedirProductoComponent, {
+    let evento = event.currentTarget as Element
+      this.dialogRefAnadir = this.dialog.open(DialogPedirProductoComponent, {
         width: '60%',
         enterAnimationDuration,
         exitAnimationDuration,
+        data : evento.id
       });    
-      //Envio el evento para que desde el output del service el otro componente pueda recoger el evento enviado desde este propio componente.
-      setTimeout(()=>{
-        this.productService.diparadoActualizarProducto.emit(event);
-      },200);
+
+      this.dialogRefAnadir.afterClosed().subscribe(result => {
+        this.pedidoService.disparadorStep2.emit(result);
+      });
+
     }
 }

@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-4">
-                <img src="{{hamburguesa?.imagen}}" class="ms-5 img-fluid w-75 mt-3 mb-3" alt="producto">
+                <img src="{{hamburguesa?.imagen}}" class="ms-5 img-fluid w-75 mt-3 mb-3 dialog-imagenProducto" alt="producto">
             </div>
             <div class="col-8 d-flex mb-5 align-items-end">
                 <h3 class="mb-5 ms-5 dialog-title ps-3">{{hamburguesa?.precio}}.00 €</h3>
@@ -35,6 +35,6 @@
         </div>
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-hamburguesa" align="center">
-        <button mat-raised-button (click)="pedirProducto()" color="primary">Añadir</button>
+        <button mat-raised-button [mat-dialog-close]="this.pedido" color="primary">Añadir</button>
     </mat-dialog-actions>
 </div>
