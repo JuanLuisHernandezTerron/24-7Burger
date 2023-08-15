@@ -26,7 +26,7 @@ export class PedidoService implements OnInit{
     this._productPedido$.next(this.arrayPedido);
   }
 
-  get getProduct$():Observable<pedido[]>{
+  get getPedido$():Observable<pedido[]>{
     return this._productPedido$.asObservable();
   }
 

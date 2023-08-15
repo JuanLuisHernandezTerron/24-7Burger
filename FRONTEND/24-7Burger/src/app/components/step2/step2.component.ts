@@ -19,7 +19,6 @@ export class Step2Component {
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
       this.arrHamburguesas = data.filter(item => item.tipoAlimento == "Hamburguesa")
-      console.log(this.arrHamburguesas);
     })
   }
 

@@ -51,27 +51,22 @@ export class ProcesoPedidoComponent implements OnInit {
 
       if (this.pedidoCompleto.datos_pedido?.length == 0) {
         this.pedidoCompleto.datos_pedido.push(data);
-        console.log(this.pedidoCompleto);
       }else{
         this.pedidoCompleto.datos_pedido.forEach(p => {
-          if (p.id_alimento === data.id_alimento && p.extras === data.extras) {
-            console.log( p.extras , data.extras);
-            
-            let contadorCantidad = p.cantidad
-            p.cantidad = ++contadorCantidad;
-          } else {
-            this.pedidoCompleto.datos_pedido.push(data);
-          }
-          console.log(this.pedidoCompleto);
+            const mismoExtra = p.extras.length === data.extras.length && p.extras.every((extra1) => {
+              return data.extras.some((extra2) => {
+                return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
+              });
+            });
+            console.log(mismoExtra);
         })
       }
+
     })
 
 
     this.pedidoService.disparadorStep1.subscribe(data => {
       this.pedidoCompleto.recogida_envio = data
-      console.log(this.pedidoCompleto);
-      
     })
   }
 

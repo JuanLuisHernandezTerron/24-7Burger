@@ -13,7 +13,6 @@ export class Step3Component {
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
       this.arrBebidas = data.filter(item => item.tipoAlimento == "Bebida")
-      console.log(this.arrBebidas);
     })
   }
 }
