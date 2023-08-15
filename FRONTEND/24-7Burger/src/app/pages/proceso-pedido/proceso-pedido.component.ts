@@ -49,14 +49,31 @@ export class ProcesoPedidoComponent implements OnInit{
       }
     })
     this.pedidoService.disparadorStep2.subscribe(data => {
-      this.pedidoCompleto.datos_pedido.forEach(p=>{
-        //DARLE UNA VUELTA
-        // if (p.id_alimento === data.id_alimento && p.extras === data.extras) {
-        //   p.extras = p.extras++;
-        // }
-      })
-      this.pedidoCompleto.datos_pedido.push(data);
-      // console.log(this.pedidoCompleto);
+      if (this.pedidoCompleto.datos_pedido?.length == 0) {
+        this.pedidoCompleto.datos_pedido.push(data);
+      }else{
+        var yaIncluido = false;
+        this.pedidoCompleto.datos_pedido.forEach(p=> {
+         
+   
+         const mismoExtra = p.extras.length === data.extras.length && p.extras.every((extra1) => {
+           return data.extras.some((extra2) => {
+             return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
+           });
+         });
+         if (mismoExtra && p.id_alimento == data.id_alimento) {
+           p.cantidad++
+           yaIncluido = true;
+         } 
+        })
+      }
+      if (yaIncluido == false) {
+        this.pedidoCompleto.datos_pedido.push(data);
+      } 
+    
+    
+       
+      console.log(this.pedidoCompleto);
       
     })
 

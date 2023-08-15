@@ -22,8 +22,11 @@ export class PedidoService implements OnInit{
   }
     
   agregarPedido(pedido: pedido){
-    this.arrayPedido.push(pedido);
-    this._productPedido$.next(this.arrayPedido);
+    return this.http.post<pedido[]>(this.URL + '/pedidoCliente/newPedido', pedido).subscribe(response =>{
+      this.arrayPedido.push(pedido);
+      this._productPedido$.next(this.arrayPedido);
+
+    });
   }
 
   get getProduct$():Observable<pedido[]>{
