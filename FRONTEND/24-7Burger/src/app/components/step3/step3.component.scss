@@ -19,3 +19,8 @@ mat-divider{
     background-color: #CEA174;
     max-height: 0px;
 }
+
+::ng-deep .ripple:hover{
+    background-color: rgb(120, 121, 121) !important;
+
+}
