@@ -23,6 +23,10 @@
     background-color:  #CEA174;
 }
 
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}
+
 ::ng-deep .mat-drawer-inner-container{
     overflow-y: hidden !important;
     overflow-x: hidden !important;

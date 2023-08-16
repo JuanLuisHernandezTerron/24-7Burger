@@ -69,11 +69,6 @@ export class ProcesoPedidoComponent implements OnInit {
       if (yaIncluido == false) {
         this.pedidoCompleto.datos_pedido.push(data);
       } 
-    
-    
-       
-      console.log(this.pedidoCompleto);
-      
     })
 
 
@@ -84,8 +79,12 @@ export class ProcesoPedidoComponent implements OnInit {
 
 
 
-  nextStep() {
-    this.omitirPaso('200ms', '200ms', 'hamburguesa')
+  nextStep(producto:string) {
+    if (this.pedidoCompleto.datos_pedido.length === 0) {
+      this.omitirPaso('200ms', '200ms', producto)
+    }else{
+      this.stepper.next()
+    }
   }
   omitirPaso(enterAnimationDuration: string, exitAnimationDuration: string, tipoAlimento: string): void {
 

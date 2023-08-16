@@ -6,7 +6,7 @@
 
         </div>
         <div class="col-12 col-md-9 row justify-content-center">
-            <div type="button" class="justify-content-evenly mx-4 postre-card mb-3 text-center row" *ngFor="let postre of arrPostres">
+            <div type="button" class="justify-content-evenly mx-4 postre-card mb-3 text-center row" (click)="pedirProducto('200ms', '200ms',$event)" *ngFor="let postre of arrPostres">
                 <div class="col-8 mt-3 mx-auto ">
                   <h5>{{postre.nombre}}</h5>
                 </div>   

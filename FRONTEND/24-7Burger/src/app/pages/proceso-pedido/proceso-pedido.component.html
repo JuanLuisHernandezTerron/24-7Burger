@@ -55,7 +55,7 @@
             </div>
         </mat-drawer>
         <div>
-            <mat-stepper class="pedido" [linear]="true" #stepper [labelPosition]="'bottom'" >
+            <mat-stepper class="pedido" [linear]="false" #stepper [labelPosition]="'bottom'" >
                 <mat-step [completed]="step1" [editable]="isEditable">
                     <ng-template matStepLabel>
                         <span class="material-symbols-outlined">
@@ -81,7 +81,7 @@
 
                         </div>
 
-                        <div class="d-inline-block me-5" (click)="nextStep()"
+                        <div class="d-inline-block me-5" (click)="nextStep('Hamburguesa')"
                             type="button">
                             <div class="d-flex">
                                 <h6><u>Siguiente paso</u></h6>
@@ -112,7 +112,7 @@
 
                         </div>
 
-                        <div class="d-inline-block me-5" (click)="nextStep()"
+                        <div class="d-inline-block me-5" (click)="nextStep('Bebida')"
                             type="button">
                             <div class="d-flex">
                                 <h6><u>Siguiente paso</u></h6>
@@ -142,7 +142,6 @@
                                 </span>
                                 <h6><u>Volver</u></h6>
                             </button>
-
                         </div>
 
                         <div class="d-inline-block me-5" (click)="ordenarPedido()"
