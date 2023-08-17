@@ -42,47 +42,76 @@ export class ProcesoPedidoComponent implements OnInit {
         this.stepper.next();
       }
     })
+
     this.productService.diparadorCarrito.subscribe(data => {
       if (data) {
         this.miInput.toggle()
       }
     })
+
     this.pedidoService.disparadorStep2.subscribe(data => {
       if (this.pedidoCompleto.datos_pedido?.length == 0) {
         this.pedidoCompleto.datos_pedido.push(data);
-      }else{
+      } else {
         var yaIncluido = false;
-        this.pedidoCompleto.datos_pedido.forEach(p=> {
-         
-   
-         const mismoExtra = p.extras.length === data.extras.length && p.extras.every((extra1) => {
-           return data.extras.some((extra2) => {
-             return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
-           });
-         });
-         if (mismoExtra && p.id_alimento == data.id_alimento) {
-           p.cantidad++
-           yaIncluido = true;
-         } 
+        this.pedidoCompleto.datos_pedido.forEach(p => {
+
+          if (p.id_alimento === data.id_alimento) {            
+            const mismoExtra = p.extras.length === data.extras.length && p.extras.every((extra1) => {
+              return data.extras.some((extra2) => {
+                return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
+              });
+            });
+            if (mismoExtra && p.id_alimento == data.id_alimento) {
+              p.cantidad++
+              yaIncluido = true;
+            }
+          }
         })
       }
       if (yaIncluido == false) {
         this.pedidoCompleto.datos_pedido.push(data);
-      } 
+      }
+      console.log(this.pedidoCompleto);
     })
 
 
     this.pedidoService.disparadorStep1.subscribe(data => {
       this.pedidoCompleto.recogida_envio = data
     })
+
+    /**
+     * VER CUANDO NOS SALTAMOS LA INGRESA HAMBURGUESA, INGRESAS UNA BEBIDA Y LUEGO UNA HAMBURGUESA SALTA ERROR 
+     */
+
+    this.pedidoService.disparadorStep3.subscribe(data => {
+      if (this.pedidoCompleto.datos_pedido?.length == 0) {
+        this.pedidoCompleto.datos_pedido.push(data);
+      } else {
+        var yaIncluido = false;
+        this.pedidoCompleto.datos_pedido.forEach(p => {
+          if (p.id_alimento === data.id_alimento) {
+            p = data
+            yaIncluido = true;
+          }
+          if (p.cantidad === 0) {
+            this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(p=> p.id_alimento !== data.id_alimento);
+          }
+        })
+      }
+
+      if (yaIncluido == false) {
+        this.pedidoCompleto.datos_pedido.push(data);
+      }
+    }
+    )
   }
 
 
-
-  nextStep(producto:string) {
+  nextStep(producto: string) {
     if (this.pedidoCompleto.datos_pedido.length === 0) {
       this.omitirPaso('200ms', '200ms', producto)
-    }else{
+    } else {
       this.stepper.next()
     }
   }
