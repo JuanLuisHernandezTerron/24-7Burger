@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -12,24 +12,29 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class DialogActualizarProductoComponent {
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private productService: ProductoService) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private productService: ProductoService, @Inject('ALERGENOS') public arrAlergenos: any[]) {
     this.reactiveForm();
   }
 
   idProducto: String;
   productoForm: FormGroup;
   extras: FormArray;
+  alergenosAux = [...this.arrAlergenos];
   selectedFile: any = null;
   imageneProducto: string;
   arrAlimentos: any[];
-  tipoProducto:String;
-  imagenCambiada: boolean=false
+  alergenos: FormArray;
+  tipoProducto: String;
+  imagenCambiada: boolean = false
   ngOnInit(): void {
     this.productoForm.addControl('extras', this.extras);
+
+    this.productoForm.addControl('alergenos', this.alergenos);
     this.productService.diparadoActualizarProducto.subscribe(data => {
       this.idProducto = data.target.id;
       this.recogerInformacion(this.idProducto)
-    });    
+
+    });
   }
 
   reactiveForm() {
@@ -37,9 +42,9 @@ export class DialogActualizarProductoComponent {
       nombre: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
-      alergenos: new FormControl(''),
       imagen: new FormControl('', [Validators.required]),
     });
+    this.alergenos = this.fb.array([]);
     this.extras = this.fb.array([]);
   }
 
@@ -71,25 +76,27 @@ export class DialogActualizarProductoComponent {
   }
 
   modificarProducto() {
+    let arrayAlergenosAux = this.alergenosAux.filter(a => a.estado === true)
+    arrayAlergenosAux.forEach(a => {
+      this.alergenos.push(this.fb.group({
+        nombre: a.nombre,
+        imagen: a.imagen
+      }))
+    })
     let formDataProducto = new FormData();
     formDataProducto.append('nombre', this.productoForm.get('nombre')?.value);
     formDataProducto.append('precio', this.productoForm.get('precio')?.value);
     formDataProducto.append('descripcion', this.productoForm.get('descripcion')?.value);
-    formDataProducto.append('alergenos', this.productoForm.get('alergenos')?.value);
-  
-    console.log(this.productoForm.get('nombre')?.value);
-    console.log(this.productoForm.get('precio')?.value);
-    console.log(this.productoForm.get('descripcion')?.value);
-    console.log(this.productoForm.get('alergenos')?.value);
-    console.log(this.productoForm.get('imagen')?.value);
-    console.log(this.productoForm.get('extras')?.value);
+    formDataProducto.append('alergenos',JSON.stringify(this.productoForm.get('alergenos')?.value));
+
+
     this.productService.getProduct$.subscribe((data) => {
-      let tipoAlimento = data.filter(e=>e._id == this.idProducto);
+      let tipoAlimento = data.filter(e => e._id == this.idProducto);
       formDataProducto.append('tipoAlimento', tipoAlimento[0].tipoAlimento as any);
     })
     formDataProducto.append('imagen', this.imageneProducto);
     formDataProducto.append('extras', JSON.stringify(this.productoForm.get('extras')?.value));
-    
+
     this.productService.modificarProducto(this.idProducto, formDataProducto).subscribe(data => {
       this.productService.modificarLista(data["alimentos"])
     });
@@ -121,8 +128,7 @@ export class DialogActualizarProductoComponent {
     this.productService.getProduct$.subscribe(data => {
       this.arrAlimentos = data.filter(e => e._id == id);
       this.tipoProducto = this.arrAlimentos[0]?.tipoAlimento;
-      console.log(this.tipoProducto);
-      
+
       this.productoForm.get('nombre').patchValue(this.arrAlimentos[0]?.nombre);
       this.productoForm.get('precio').patchValue(this.arrAlimentos[0]?.precio);
       this.productoForm.get('descripcion').patchValue(this.arrAlimentos[0]?.descripcion);
@@ -138,7 +144,27 @@ export class DialogActualizarProductoComponent {
           );
         })
       }
+
+      if (this.arrAlimentos[0]?.alergenos.length > 0) {
+        this.alergenosAux.forEach(i => {
+          var existe = false;
+          this.arrAlimentos[0]?.alergenos.forEach(k => {
+            if (i.nombre == k.nombre) {
+              existe = true;
+            }
+          })
+
+          i.estado = existe
+
+        })
+
+      }
     })
+  }
+
+  cambioEstado(posicion: number) {
+    this.alergenosAux[posicion].estado == true ? this.alergenosAux[posicion].estado = false : this.alergenosAux[posicion].estado = true;
+
   }
 
 }

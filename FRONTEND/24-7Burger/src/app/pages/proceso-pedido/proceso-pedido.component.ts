@@ -1,6 +1,6 @@
 import { MatStepper } from '@angular/material/stepper';
 import { environment } from 'src/enviroments/enviroments';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ProductoService } from 'src/app/services/productos/producto.service';
@@ -27,8 +27,9 @@ export class ProcesoPedidoComponent implements OnInit {
     estado_pedido: 'En espera',
     id_tienda: environment.id_tienda
   };
+  alergenosAux = [...this.arrAlergenos];
 
-  constructor(private productService: ProductoService, private dialog: MatDialog, private pedidoService: PedidoService) { }
+  constructor(private productService: ProductoService, private dialog: MatDialog, private pedidoService: PedidoService,@Inject('ALERGENOS') public arrAlergenos: any[]) { }
 
   @ViewChild('drawer') miInput: MatDrawer;
   @ViewChild('stepper') stepper: MatStepper;
@@ -112,11 +113,12 @@ export class ProcesoPedidoComponent implements OnInit {
     if (this.pedidoCompleto.datos_pedido.length === 0) {
       this.omitirPaso('200ms', '200ms', producto)
     } else {
+      this.alergenosAux.forEach(elemento =>elemento.estado= false)
       this.stepper.next()
     }
   }
   omitirPaso(enterAnimationDuration: string, exitAnimationDuration: string, tipoAlimento: string): void {
-
+    this.alergenosAux.forEach(elemento =>elemento.estado= false)
     this.dialogRefOmitir = this.dialog.open(DialogOmitirPasoComponent, {
       width: 'auto',
       enterAnimationDuration,

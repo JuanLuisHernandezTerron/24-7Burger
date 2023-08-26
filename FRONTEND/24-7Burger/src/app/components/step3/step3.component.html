@@ -1,11 +1,8 @@
 <div class="container-fluid pedido">
     
     <div class="row mt-5  mx-auto">
-        <div class="col-2 d-none d-md-inline-block  text-center">
-            <h5>ALÉRGENOS</h5>
-
-        </div>
-        <div class="col-12 col-md-9  row justify-content-center">
+        
+        <div class="col-12  row justify-content-center">
             <div type="button" class="justify-content-center mx-4 bebida-card mb-3 text-center row" *ngFor="let bebida of arrBebidas">
                 <div class="col-8 mt-3 mx-auto ">
                    <h5>{{bebida.nombre}}</h5>

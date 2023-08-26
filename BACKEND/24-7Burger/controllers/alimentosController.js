@@ -6,12 +6,22 @@ const updateAlimento = async function (req,res){
         var alimento = {};
         const searchProduct = await modelAlimento.findById({_id: req.params.id}).exec();
         let arrayExtras = [];
+        let arrayAlergenos = [];
         if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
             const Extras= JSON.parse(req.body.extras);
                 arrayExtras = [];
+                const Alergenos= JSON.parse(req.body.alergenos);
             for (let i = 0; i < Extras.length; i++) {
                 arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
                 boolean = true;
+            }
+            for (let i = 0; i < Alergenos.length; i++) {
+                console.log(Alergenos[i].nombre);
+                arrayAlergenos.push({
+                    nombre:Alergenos[i].nombre,
+                    imagen:Alergenos[i].imagen               
+                });
+    
             }
         }
 
@@ -22,7 +32,7 @@ const updateAlimento = async function (req,res){
                     nombre:req.body.nombre,
                     descripcion:req.body.descripcion,
                     ingredientes:req.body.ingredientes,
-                    alergenos:req.body.alergenos,
+                    alergenos:arrayAlergenos,
                     tipoAlimento:req.body.tipoAlimento,
                     precio:req.body.precio,
                     extras:arrayExtras
@@ -32,7 +42,7 @@ const updateAlimento = async function (req,res){
                     nombre:req.body.nombre,
                     descripcion:req.body.descripcion,
                     ingredientes:req.body.ingredientes,
-                    alergenos:req.body.alergenos,
+                    alergenos:arrayAlergenos,
                     tipoAlimento:req.body.tipoAlimento,
                     precio:req.body.precio,
                     imagen:'http://localhost:3000/uploads/' + req.file.filename,
@@ -64,27 +74,36 @@ const getAllAlimentos = async function(req,res){
 }
 
 const newAlimento = async function (req,res){
-    let boolean = false;
-    let arrayExtras = "";
+    let arrayExtras = [];
+    let arrayAlergenos = [];
     if (req.body.tipoAlimento === "Hamburguesa" || req.body.tipoAlimento === "Postre") {
         const Extras= JSON.parse(req.body.extras);
-        arrayExtras = [];
+        const Alergenos= JSON.parse(req.body.alergenos);
         for (let i = 0; i < Extras.length; i++) {
             arrayExtras.push({nombre:Extras[i].nombre,precio:Extras[i].precio});
-            boolean = true;
+        }
+        for (let i = 0; i < Alergenos.length; i++) {
+            console.log(Alergenos[i].nombre);
+            arrayAlergenos.push({
+                nombre:Alergenos[i].nombre,
+                imagen:Alergenos[i].imagen               
+            });
+
         }
     }
+
     try{
         const alimento = {
             nombre:req.body.nombre,
             descripcion:req.body.descripcion,
             ingredientes:req.body.ingredientes,
-            alergenos:req.body.alergenos,
+            alergenos:arrayAlergenos,
             tipoAlimento:req.body.tipoAlimento,
             precio:req.body.precio,
             imagen:'http://localhost:3000/uploads/' + req.file.filename,
             extras:arrayExtras
         };
+        console.log(alimento);
         let filterAlimento = await modelAlimento.findOne({nombre:alimento.nombre}).exec();
         if (filterAlimento) {
             res.status(401).json("Alimento mal Introducido o ya existente")

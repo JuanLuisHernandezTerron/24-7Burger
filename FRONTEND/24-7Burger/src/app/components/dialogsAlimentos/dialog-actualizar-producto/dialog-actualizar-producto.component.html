@@ -21,6 +21,12 @@
                         <mat-error>Precio es <strong>REQUERIDO</strong></mat-error>
                     </mat-form-field>
                     <h3 class="col-12 text-center">Alérgenos</h3>
+                    <div class="d-flex flex-wrap">
+                        <div *ngFor="let alergeno of this.alergenosAux; let i = index" class="alergenos mx-1" matTooltip={{alergeno.nombre}}>
+                            <img src={{alergeno.imagen}}  alt={{alergeno.nombre}} (click)="cambioEstado(i)" [ngStyle]="{'opacity': alergeno.estado == true ? '' : '0.5'}" >
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-lg-6 col-xxl-5">
                     <div class="row align-items-center justify-content-center">

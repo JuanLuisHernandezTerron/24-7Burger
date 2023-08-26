@@ -52,7 +52,8 @@ import { DialogOmitirPasoComponent } from './components/dialog-omitir-paso/dialo
 import { DialogPedirProductoComponent } from './components/dialogsAlimentos/dialog-pedir-producto/dialog-pedir-producto.component';
 import { Step3Component } from './components/step3/step3.component';
 import { Step4Component } from './components/step4/step4.component';
-
+import { StepPagoComponent } from './pages/step-pago/step-pago.component';
+import { arrAlergenos } from './globalVariable/alergenos';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { Step4Component } from './components/step4/step4.component';
     DialogPedirProductoComponent,
     Step3Component,
     Step4Component,
+    StepPagoComponent,
 
   ],
   imports: [
@@ -107,10 +109,11 @@ import { Step4Component } from './components/step4/step4.component';
     MatSidenavModule,
     MatExpansionModule,
     NgxNumberSpinnerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
   ],
   providers: [
-
+    { provide: 'ALERGENOS', useValue: arrAlergenos }  
   ],
   bootstrap: [AppComponent]
 })

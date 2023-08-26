@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -11,17 +11,20 @@ import { ProductoService } from 'src/app/services/productos/producto.service';
 })
 export class DialogHamburguesaComponent implements OnInit {
   
-  constructor(private fb: FormBuilder,private toastr: ToastrService, private productService: ProductoService) {
+  constructor(private fb: FormBuilder,private toastr: ToastrService, private productService: ProductoService, @Inject('ALERGENOS') public arrAlergenos: any[]) {
     this.reactiveForm();
   }
   productoForm: FormGroup;
   extras: FormArray;
+  alergenos: FormArray;
   selectedFile: any = null;
   imageneProducto:string;
+  alergenosAux = [...this.arrAlergenos];
 
   ngOnInit(): void {
     this.productoForm.addControl('extras', this.extras);
-  
+    this.productoForm.addControl('alergenos', this.alergenos);
+    this.alergenosAux.forEach(elemento =>elemento.estado= false)
   }
   
 
@@ -30,10 +33,9 @@ export class DialogHamburguesaComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
-      alergenos: new FormControl(''),
       imagen: new FormControl('', [Validators.required]),
     });
-
+    this.alergenos = this.fb.array([]),
     this.extras = this.fb.array([]);
   }
 
@@ -68,12 +70,19 @@ export class DialogHamburguesaComponent implements OnInit {
     }
   }
 
-  ingresarHamburguesa(){    
+  ingresarHamburguesa(){   
+    let arrayAlergenosAux = this.alergenosAux.filter(a => a.estado === true)
+    arrayAlergenosAux.forEach(a =>{      
+      this.alergenos.push(this.fb.group({
+        nombre: a.nombre,
+        imagen: a.imagen
+      }))
+    })
     let formDataProducto = new FormData();
     formDataProducto.append('nombre',this.productoForm.get('nombre')?.value);
     formDataProducto.append('precio',this.productoForm.get('precio')?.value);
     formDataProducto.append('descripcion',this.productoForm.get('descripcion')?.value);
-    formDataProducto.append('alergenos',this.productoForm.get('alergenos')?.value);
+    formDataProducto.append('alergenos',JSON.stringify(this.productoForm.get('alergenos')?.value));
     formDataProducto.append('tipoAlimento','Hamburguesa');
     formDataProducto.append('imagen',this.imageneProducto);
     formDataProducto.append('extras',JSON.stringify(this.productoForm.get('extras')?.value)); 
@@ -100,6 +109,11 @@ export class DialogHamburguesaComponent implements OnInit {
       nombre: null,
       precio: null
     });
+  }
+
+
+  cambioEstado(posicion: number){
+    this.alergenosAux[posicion].estado == true ? this.alergenosAux[posicion].estado = false : this.alergenosAux[posicion].estado = true;
   }
 }
 

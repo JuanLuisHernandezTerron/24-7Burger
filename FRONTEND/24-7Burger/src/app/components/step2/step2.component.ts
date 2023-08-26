@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { DialogPedirProductoComponent } from '../dialogsAlimentos/dialog-pedir-producto/dialog-pedir-producto.component';
@@ -12,14 +12,18 @@ import { PedidoService } from 'src/app/services/pedidos/pedido.service';
   styleUrls: ['./step2.component.scss']
 })
 export class Step2Component {
-  constructor(private productService: ProductoService,private pedidoService: PedidoService,private dialog: MatDialog){}
+  constructor(private productService: ProductoService,private pedidoService: PedidoService,private dialog: MatDialog,@Inject('ALERGENOS') public arrAlergenos: any[]){}
   arrHamburguesas:alimento[];
   dialogRefAnadir: MatDialogRef<DialogPedirProductoComponent>;
-  
+  alergenosAux = [...this.arrAlergenos];
+  hamburguesasFiltradas:alimento[]
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
       this.arrHamburguesas = data.filter(item => item.tipoAlimento == "Hamburguesa")
+      this.hamburguesasFiltradas =data.filter(item => item.tipoAlimento == "Hamburguesa")
+      console.log(JSON.stringify(this.arrHamburguesas));
     })
+    console.log(this.alergenosAux);
   }
 
   pedirProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
@@ -35,4 +39,27 @@ export class Step2Component {
         this.pedidoService.disparadorStep2.emit(result);
       });
     }
+
+    cambioEstado(posicion: number) {
+      this.alergenosAux[posicion].estado == true ? this.alergenosAux[posicion].estado = false : this.alergenosAux[posicion].estado = true;
+      console.log(JSON.stringify(this.alergenosAux));
+      this.filtrarHamburguesas();
+    }
+
+    filtrarHamburguesas(){
+      let alergenosFiltro = this.alergenosAux.filter(alergeno => alergeno.estado).map(alergeno => alergeno.nombre);
+      console.log(alergenosFiltro);
+      let arrauAuxHamburguesas = [...this.arrHamburguesas];
+
+      this.hamburguesasFiltradas = arrauAuxHamburguesas.filter(hamburguesa => {
+        // Buscamos si la hamburguesa tiene algún alergeno que esté en el arreglo alergenosFiltro
+        let tieneAlergenos = hamburguesa.alergenos.some(alergeno => alergenosFiltro.includes(alergeno.nombre));
+        // Devolvemos el valor contrario, es decir, si la hamburguesa NO tiene esos alergenos
+        return !tieneAlergenos;
+      });
+      console.log(this.hamburguesasFiltradas);
+
+    }
 }
+
+
