@@ -3,20 +3,26 @@ import { ActivatedRoute } from '@angular/router';
 import Parallax from 'parallax-js'
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProductoService } from 'src/app/services/productos/producto.service';
+import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  constructor(private route: ActivatedRoute, private authService: AuthService, private serviceProduct:ProductoService){
+  constructor(private route: ActivatedRoute, private authService: AuthService, private serviceProduct:ProductoService, private pedidoService: PedidoService){
 
   }
   isLoggedIn = false;
+  cantidadCarrito = 0;
 
   ngOnInit() {
     this.authService.isLogged.subscribe(res=>{
       this.isLoggedIn = res;      
+    })
+
+    this.pedidoService.cantidadProducto.subscribe((cantidad)=>{
+      this.cantidadCarrito = cantidad;
     })
   }
 

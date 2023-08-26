@@ -15,6 +15,8 @@ export class PedidoService implements OnInit{
   @Output() disparadorStep1 = new EventEmitter();
   @Output() disparadorStep2 = new EventEmitter();
   @Output() disparadorStep3 = new EventEmitter();
+  @Output() cantidadProducto = new EventEmitter();
+  @Output() cantidadBebida = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 

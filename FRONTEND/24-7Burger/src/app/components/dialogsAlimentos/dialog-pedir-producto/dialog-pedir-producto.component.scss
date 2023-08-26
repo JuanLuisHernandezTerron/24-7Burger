@@ -5,6 +5,25 @@
         
     }
 
+    &-titulo{
+        @media(max-width:992px){
+            text-align: center !important;   
+        }
+    }
+
+    &-title{
+        @media(max-width:992px){
+            text-align: center !important;   
+        } 
+    }
+
+    &-precio{
+        @media(min-width:992px){
+            display: flex;
+            align-items: end;
+        } 
+    }
+
     &-imagenLogo{
         position: absolute;
     }
@@ -13,6 +32,19 @@
         font-weight: bold !important;
         color: black;
         text-align: justify;
+    }
+
+    &-descripcion{
+        @media(max-width:992px){
+            text-align: justify;
+        }
+    }
+
+    &-imagenProducto{
+        @media(max-width:992px){
+            text-align: center;
+            width: 50% !important;    
+        }
     }
 }
 .alergenos img{

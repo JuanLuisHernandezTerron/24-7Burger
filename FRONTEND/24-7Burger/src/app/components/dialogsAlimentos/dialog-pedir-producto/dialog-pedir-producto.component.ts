@@ -25,8 +25,7 @@ export class DialogPedirProductoComponent {
   ngOnInit(): void {
     this.productService.getProduct$.subscribe(products => {
       this.arrAlimentos = products.filter(p=> p._id === this.data)
-      this.idProducto = this.data;    
-      console.log(this.arrAlimentos[0]);    
+      this.idProducto = this.data;     
     })
   }
 
