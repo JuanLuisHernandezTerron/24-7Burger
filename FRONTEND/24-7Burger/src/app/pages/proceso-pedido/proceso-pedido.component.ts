@@ -1,18 +1,24 @@
+/**
+ * !IMPORTANTE! OPTIMIZAR PROXIMAMENTE EL CODIGO
+ */
+
 import { MatStepper } from '@angular/material/stepper';
 import { environment } from 'src/enviroments/enviroments';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogOmitirPasoComponent } from 'src/app/components/dialog-omitir-paso/dialog-omitir-paso.component';
 import { pedido } from 'src/app/models/pedido';
+import { alimento } from 'src/app/models/alimento';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 @Component({
   selector: 'app-proceso-pedido',
   templateUrl: './proceso-pedido.component.html',
   styleUrls: ['./proceso-pedido.component.scss'],
   viewProviders: [MatExpansionPanel]
+
 
 })
 export class ProcesoPedidoComponent implements OnInit {
@@ -21,12 +27,16 @@ export class ProcesoPedidoComponent implements OnInit {
   showFiller = false;
   dialogRefOmitir: MatDialogRef<DialogOmitirPasoComponent>;
   arrPedidos: Array<pedido>;
+  arrAlimento: Array<alimento>;
+  productos = 0;
+  precio = 0;
   pedidoCompleto = {
     datos_pedido: [],
     recogida_envio: '',
     estado_pedido: 'En espera',
     id_tienda: environment.id_tienda
   };
+  CarritoAUX = [];
 
   constructor(private productService: ProductoService, private dialog: MatDialog, private pedidoService: PedidoService) { }
 
@@ -34,6 +44,11 @@ export class ProcesoPedidoComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
 
   ngOnInit() {
+
+    this.productService.getProduct$.subscribe((data) => {
+      this.arrAlimento = data;
+    })
+
     this.productService.getAllProduct();
     this.productService.nextStepper.subscribe(stepperAux => {
       if (stepperAux) {
@@ -50,13 +65,37 @@ export class ProcesoPedidoComponent implements OnInit {
     })
 
     this.pedidoService.disparadorStep2.subscribe(data => {
+      let informacionProducto = this.arrAlimento.filter((producto) => producto?._id === data?.id_alimento);
       if (this.pedidoCompleto.datos_pedido?.length == 0) {
-        this.pedidoCompleto.datos_pedido.push(data);
+        if (data !== undefined) {
+          this.pedidoCompleto.datos_pedido.push(data);
+          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0]?.imagen, precio: informacionProducto[0]?.precio, nombre: informacionProducto[0]?.nombre } })
+          this.actualizarPrecio()
+        }
       } else {
         var yaIncluido = false;
-        this.pedidoCompleto.datos_pedido.forEach(p => {
+        var yaIncluidoAUX = false;
 
-          if (p.id_alimento === data.id_alimento) {            
+        this.CarritoAUX.forEach(d => {
+          if (d?.datosPedido.id_alimento === data?.id_alimento) {
+            const mismoExtra = d.datosPedido.extras.length === data.extras.length && d.datosPedido.extras.every((extra1) => {
+              return data.extras.some((extra2) => {
+                return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
+              });
+            });
+
+            if (mismoExtra && d?.datosPedido.id_alimento == data.id_alimento) {
+              yaIncluidoAUX = true;
+            }
+          }
+        })
+
+        if (yaIncluidoAUX == false) {
+          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } })
+        }
+
+        this.pedidoCompleto.datos_pedido.forEach(p => {
+          if (p?.id_alimento === data?.id_alimento) {
             const mismoExtra = p.extras.length === data.extras.length && p.extras.every((extra1) => {
               return data.extras.some((extra2) => {
                 return extra1.nombre === extra2.nombre && extra1.precio === extra2.precio;
@@ -65,15 +104,19 @@ export class ProcesoPedidoComponent implements OnInit {
             if (mismoExtra && p.id_alimento == data.id_alimento) {
               p.cantidad++
               yaIncluido = true;
+              this.actualizarPrecio()
             }
           }
         })
       }
       if (yaIncluido == false) {
         this.pedidoCompleto.datos_pedido.push(data);
+        this.actualizarPrecio()
       }
-      console.log(this.pedidoCompleto);
-    })
+      this.contadorCarrito();
+      this.pedidoService.cantidadProducto.emit(this.productos);
+    }
+    )
 
 
     this.pedidoService.disparadorStep1.subscribe(data => {
@@ -82,29 +125,80 @@ export class ProcesoPedidoComponent implements OnInit {
 
     /**
      * VER CUANDO NOS SALTAMOS LA INGRESA HAMBURGUESA, INGRESAS UNA BEBIDA Y LUEGO UNA HAMBURGUESA SALTA ERROR 
-     */
+    */
 
     this.pedidoService.disparadorStep3.subscribe(data => {
-      if (this.pedidoCompleto.datos_pedido?.length == 0) {
-        this.pedidoCompleto.datos_pedido.push(data);
-      } else {
-        var yaIncluido = false;
-        this.pedidoCompleto.datos_pedido.forEach(p => {
-          if (p.id_alimento === data.id_alimento) {
-            p = data
-            yaIncluido = true;
-          }
-          if (p.cantidad === 0) {
-            this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(p=> p.id_alimento !== data.id_alimento);
-          }
-        })
-      }
+      this.auxiliar(data);
+    })
+  
+  }
 
-      if (yaIncluido == false) {
-        this.pedidoCompleto.datos_pedido.push(data);
+  actualizarPrecio(){
+    this.precio = 0;
+    this.pedidoCompleto.datos_pedido.forEach(producto => {
+      this.arrAlimento.forEach(alimento =>{
+        if (producto.id_alimento === alimento._id) {
+          this.precio += alimento.precio as number * producto.cantidad as number; 
+          if (producto?.extras) {
+            producto.extras.forEach(e => {
+              this.precio += e.precio as number;
+            });
+          }
+        }
+
+      })
+    })
+  }
+
+  auxiliar(data: any) {
+    let informacionProducto = this.arrAlimento.filter((producto) => producto._id === data.id_alimento);        
+    if (this.pedidoCompleto.datos_pedido?.length == 0) {            
+      this.pedidoCompleto.datos_pedido.push(data);
+      this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } })
+      this.productos += data.cantidad;
+      this.precio = informacionProducto[0].precio as number * data.cantidad;
+    } else {
+      var yaIncluido = false;
+      var yaIncluidoAUX = false;
+      this.CarritoAUX.forEach(producto => {
+        if (producto?.datosPedido.id_alimento === data?.id_alimento) {
+          producto.datosPedido = data;
+          yaIncluidoAUX = true;
+        }
+        if (producto?.datosPedido.cantidad === 0) {
+          this.CarritoAUX = this.CarritoAUX.filter(e => e.datosPedido.id_alimento !== data.id_alimento);
+        }
+      })
+      
+      if (yaIncluidoAUX == false) {
+        this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } }) 
       }
+      
+      this.pedidoCompleto.datos_pedido.forEach(p => {
+        if (p.id_alimento === data.id_alimento) {
+          p = data
+          yaIncluido = true;
+          this.actualizarPrecio()
+        }
+        if (p.cantidad === 0) {
+          this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(p => p.id_alimento !== data.id_alimento);
+        }
+      })
     }
-    )
+    if (yaIncluido == false) {
+      this.pedidoCompleto.datos_pedido.push(data);
+      this.actualizarPrecio()
+    }
+    this.contadorCarrito();
+    this.pedidoService.cantidadProducto.emit(this.productos);  
+  }
+
+  contadorCarrito(){
+    let cantidades = 0;
+    this.CarritoAUX.forEach(producto=>{
+      cantidades += producto.datosPedido.cantidad;
+    })
+    this.productos = cantidades;
   }
 
 
@@ -135,4 +229,63 @@ export class ProcesoPedidoComponent implements OnInit {
   ordenarPedido() {
     alert("Compra realizada")
   }
+
+  modificarValorProducto(objeto: any, valorNuevo: number) {
+    let informacionProducto = this.arrAlimento.filter((producto) => producto._id === objeto.id_alimento);
+
+    this.CarritoAUX.forEach((producto) => {
+      if (producto.datosPedido === objeto) {
+        if (valorNuevo > producto.datosPedido.cantidad) {
+          this.productos++;
+          this.pedidoService.cantidadProducto.emit(this.productos);
+          this.precio += informacionProducto[0].precio as number;
+          if (objeto.extras.length > 0) {
+            objeto.extras.forEach(e => {
+              this.precio += e.precio as number;
+            });
+          }
+        } else {
+          this.precio -= informacionProducto[0].precio as number;
+          if (objeto.extras?.length > 0) {
+            objeto.extras.forEach(e => {
+              this.precio -= e.precio as number;
+            });
+          }
+          this.productos--;
+          this.pedidoService.cantidadProducto.emit(this.productos);
+        }
+        producto.datosPedido.cantidad = valorNuevo;
+      }
+    })
+
+    this.pedidoCompleto.datos_pedido.forEach((producto) => {
+      if (producto === objeto) {
+        producto.cantidad = valorNuevo;
+      }
+    })
+  }
+
+  eliminarProductoCarrito(objeto: any) {  
+    this.CarritoAUX.forEach((producto) => {
+      if (producto.datosPedido === objeto.datosPedido) {
+        this.productos = this.productos - objeto.datosPedido.cantidad;
+        this.precio -=  objeto.datosPedido.cantidad * objeto.datosProducto.precio;
+        if (objeto.datosPedido?.extras?.length > 0) {
+          objeto.datosPedido.extras.forEach(x => {
+            this.precio -=  x.precio;
+          });
+        }
+      }
+    })
+    this.CarritoAUX = this.CarritoAUX.filter(producto => producto.datosPedido !== objeto.datosPedido);
+    this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(producto => producto !== objeto.datosPedido);
+    if (this.CarritoAUX.length == 0) {
+      this.precio = 0;
+      this.productos = 0;
+    }
+    this.pedidoService.cantidadBebida.emit(objeto.datosPedido.id_alimento);
+    this.pedidoService.cantidadProducto.emit(this.productos);
+  }
 }
+
+
