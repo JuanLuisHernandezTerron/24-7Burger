@@ -4,4 +4,5 @@ export interface pedido{
     recogida_envio?: String,
     estado_pedido?: String,
     id_tienda: String,
+    datos_cliente: Object
 }

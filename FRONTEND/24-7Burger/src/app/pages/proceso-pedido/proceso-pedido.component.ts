@@ -38,7 +38,13 @@ export class ProcesoPedidoComponent implements OnInit {
     datos_pedido: [],
     recogida_envio: '',
     estado_pedido: 'En espera',
-    id_tienda: environment.id_tienda
+    id_tienda: environment.id_tienda,
+    datos_cliente:{
+      nombre: null,
+      telefono: null,
+      direccion:null,
+      dni:null,
+    },
   };
   alergenosAux = [...this.arrAlergenos];
   CarritoAUX = [];
@@ -237,6 +243,7 @@ export class ProcesoPedidoComponent implements OnInit {
 
   ordenarPedido() {
     this.pedidoService.setPedido(this.CarritoAUX)
+    this.pedidoService.pedidoPendiente(this.pedidoCompleto)
   }
 
   modificarValorProducto(objeto: any, valorNuevo: number) {

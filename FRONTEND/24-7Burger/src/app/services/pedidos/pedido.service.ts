@@ -7,7 +7,7 @@ import { pedido } from 'src/app/models/pedido';;
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService implements OnInit{
+export class PedidoService{
   private URL = environment.url;
   arrayPedido: pedido[] = [];  
   private _productPedido$: BehaviorSubject<pedido[]> = new BehaviorSubject([]);
@@ -21,9 +21,7 @@ export class PedidoService implements OnInit{
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-    this.getAllPedido();
-  }
+
     
   setPedido(pedido:any){
     this._pedidoCarrito$.next(pedido);
@@ -33,21 +31,19 @@ export class PedidoService implements OnInit{
   get getPedidoCarrito$():Observable<any[]>{
     return this._pedidoCarrito$.asObservable();
   }
-  
+  pedidoPendiente(pedido){   
+    this._productPedido$.next(pedido);
+  }
 
-  agregarPedido(pedido: pedido){
-    return this.http.post<pedido[]>(this.URL + '/pedidoCliente/newPedido', pedido).subscribe(response =>{
-      this.arrayPedido.push(pedido);
-      this._productPedido$.next(this.arrayPedido);
+  agregarPedido(pedido: pedido[]){
+    return this.http.post<pedido[]>(this.URL + '/pedidoCliente/newPedido', pedido)
 
-    });
+
   }
 
   get getPedido$():Observable<pedido[]>{
     return this._productPedido$.asObservable();
   }
 
-  getAllPedido(){
 
-  }
 }

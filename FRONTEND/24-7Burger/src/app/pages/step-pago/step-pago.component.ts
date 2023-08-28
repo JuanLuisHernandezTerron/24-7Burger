@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { pedido } from 'src/app/models/pedido';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
 
@@ -14,6 +15,7 @@ export class StepPagoComponent {
   datosCliente: FormGroup;
   direccionForm: FormGroup;
   pedido: any;
+  pedidoFinal:pedido[];
   precioFinal: number = 0;
   constructor(private fb: FormBuilder, private pedidoService: PedidoService) { }
 
@@ -32,6 +34,12 @@ export class StepPagoComponent {
     })
     console.log(this.pedido);
     this.actualizarPrecio()
+    this.pedidoService.getPedido$.subscribe(data => {
+      this.pedidoFinal = data
+    })
+    console.log(this.pedidoFinal);
+
+
   }
 
   setStep(index: number) {
@@ -50,7 +58,13 @@ export class StepPagoComponent {
     this.step--;
   }
   finalizarPedido() {
-
+    console.log(this.pedidoFinal[0].datos_pedido);
+    // this.pedidoFinal[0].datos_cliente.nombre = this.datosCliente.get('nombre')?.value
+    // this.pedidoFinal[0].datos_cliente.telefono = this.datosCliente.get('phone')?.value
+    // this.pedidoFinal[0].datos_cliente.dni = this.datosCliente.get('dni')?.value
+    // this.pedidoFinal[0].datos_cliente.direccion = this.direccionForm.get('direccion')?.value
+    this.pedidoService.agregarPedido(this.pedidoFinal)
+    
   }
 
   actualizarPrecio() {
