@@ -62,4 +62,8 @@ export class Step4Component {
       console.log(this.postresFiltrados);
 
     }
+    rellenarPostres(){
+      this.postresFiltrados = this.arrPostres
+    }
+
 }

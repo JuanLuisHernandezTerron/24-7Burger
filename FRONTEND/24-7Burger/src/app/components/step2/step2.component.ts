@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { alimento } from 'src/app/models/alimento';
 import { ProductoService } from 'src/app/services/productos/producto.service';
 import { DialogPedirProductoComponent } from '../dialogsAlimentos/dialog-pedir-producto/dialog-pedir-producto.component';
@@ -13,6 +13,8 @@ import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 })
 export class Step2Component {
   constructor(private productService: ProductoService,private pedidoService: PedidoService,private dialog: MatDialog,@Inject('ALERGENOS') public arrAlergenos: any[]){}
+
+  // @Output() rellenarHamburguesas = new EventEmitter();
   arrHamburguesas:alimento[];
   dialogRefAnadir: MatDialogRef<DialogPedirProductoComponent>;
   alergenosAux = [...this.arrAlergenos];
@@ -20,6 +22,7 @@ export class Step2Component {
   ngOnInit() {
     this.productService.getProduct$.subscribe(data =>{
       this.arrHamburguesas = data.filter(item => item.tipoAlimento == "Hamburguesa")
+      
       this.hamburguesasFiltradas =data.filter(item => item.tipoAlimento == "Hamburguesa")
       console.log(JSON.stringify(this.arrHamburguesas));
     })
@@ -59,6 +62,10 @@ export class Step2Component {
       });
       console.log(this.hamburguesasFiltradas);
 
+    }
+
+    rellenarHamburguesas(){
+      this.hamburguesasFiltradas = this.arrHamburguesas
     }
 }
 

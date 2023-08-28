@@ -11,7 +11,9 @@ import { pedido } from 'src/app/models/pedido';
 export class ProductoService implements OnInit {
   private URL = environment.url;
   arrayProducto: alimento[] = [];  
+
   private _productHamburguesa$: BehaviorSubject<alimento[]> = new BehaviorSubject([]);
+  private _pedido$: BehaviorSubject<any[]> = new BehaviorSubject([]);
   @Output() diparadoActualizarProducto = new EventEmitter();
   @Output() nextStepper = new EventEmitter();
   @Output() diparadorCarrito = new EventEmitter();
@@ -24,9 +26,16 @@ export class ProductoService implements OnInit {
     this.arrayProducto.push(alimento);
     this._productHamburguesa$.next(this.arrayProducto);
   }
+  setPedido(pedido:any){
+    this._pedido$.next(pedido);
+
+  }
   
   get getProduct$():Observable<alimento[]>{
     return this._productHamburguesa$.asObservable();
+  }
+  get getPedido$():Observable<any[]>{
+    return this._pedido$.asObservable();
   }
   
   ngOnInit(): void {

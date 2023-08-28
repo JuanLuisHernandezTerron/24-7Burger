@@ -13,6 +13,8 @@ import { DialogOmitirPasoComponent } from 'src/app/components/dialog-omitir-paso
 import { pedido } from 'src/app/models/pedido';
 import { alimento } from 'src/app/models/alimento';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
+import { Step2Component } from 'src/app/components/step2/step2.component';
+import { Step4Component } from 'src/app/components/step4/step4.component';
 @Component({
   selector: 'app-proceso-pedido',
   templateUrl: './proceso-pedido.component.html',
@@ -22,6 +24,8 @@ import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
 })
 export class ProcesoPedidoComponent implements OnInit {
+  @ViewChild(Step2Component) step2!: Step2Component;
+  @ViewChild(Step4Component) step4!: Step4Component;
   isEditable = false;
   step1 = false;
   showFiller = false;
@@ -208,11 +212,12 @@ export class ProcesoPedidoComponent implements OnInit {
       this.omitirPaso('200ms', '200ms', producto)
     } else {
       this.alergenosAux.forEach(elemento =>elemento.estado= false)
+      console.log(this.alergenosAux);
       this.stepper.next()
     }
   }
   omitirPaso(enterAnimationDuration: string, exitAnimationDuration: string, tipoAlimento: string): void {
-    this.alergenosAux.forEach(elemento =>elemento.estado= false)
+    
     this.dialogRefOmitir = this.dialog.open(DialogOmitirPasoComponent, {
       width: 'auto',
       enterAnimationDuration,
@@ -223,13 +228,15 @@ export class ProcesoPedidoComponent implements OnInit {
       if (result) {
         this.stepper.selected.completed = true;
         this.stepper.selected.editable = true;
+        this.alergenosAux.forEach(elemento =>elemento.estado= false)
+        console.log(this.alergenosAux);
         this.stepper.next()
       }
     });
   }
 
   ordenarPedido() {
-    alert("Compra realizada")
+    this.productService.setPedido(this.CarritoAUX)
   }
 
   modificarValorProducto(objeto: any, valorNuevo: number) {
@@ -288,6 +295,19 @@ export class ProcesoPedidoComponent implements OnInit {
     this.pedidoService.cantidadBebida.emit(objeto.datosPedido.id_alimento);
     this.pedidoService.cantidadProducto.emit(this.productos);
   }
+
+
+
+
+  onStepChanged(event) {
+    const currentIndex = event.selectedIndex;
+
+     if (currentIndex == 1) {
+      this.step2.rellenarHamburguesas()
+    }else if (currentIndex == 3){
+      this.step4.rellenarPostres()
+    }
+ }
 }
 
 
