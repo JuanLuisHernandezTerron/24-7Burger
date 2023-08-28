@@ -17,13 +17,11 @@
     <div class="row justify-content-center">
         <div class="col-xl-6 col-12">
             <h3 class="text-center col-12">Pendientes</h3>
-            <mat-card class="row mt-3 col-8 mb-3  text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayDatosAux">
+            <mat-card class="row mt-3 col-8 mb-3  text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayPedido">
                 <div class="col-xl-6 col-12 row d-flex justify-content-center mx-auto">
-                    <div>
-                        <span>Nº{{datos.Orden}} - {{datos.Nombre}}</span>
-                    </div>
-                    <div>
-                        <span class="text-center">{{datos.NPedido}}</span>
+                    <div class="row justify-content-between">
+                        <span class="d-inline-block">{{datos.datos_cliente.nombre}}</span>
+                        <span class="d-inline-block">{{datos._id}}</span>
                     </div>
                 </div>
                 <div class="col-xl-6 col-12 row pedidos-margin text-xl-end text-center mx-auto">
@@ -35,13 +33,13 @@
         </div>
         <div class="col-12 col-xl-6">
             <h3 class="text-center">En proceso</h3>
-            <mat-card class="row mt-3 col-8 mb-3 text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayDatosAux">
+            <mat-card class="row mt-3 col-8 mb-3 text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayPedidoEnProceso">
                 <div class="col-12 col-xl-5 row d-flex justify-content-center mx-auto">
                     <div>
-                        <span>Nº{{datos.Orden}} - {{datos.Nombre}}</span>
+                        <span>{{datos.datos_cliente.nombre}}</span>
                     </div>
                     <div>
-                        <span class="text-center">{{datos.NPedido}}</span>
+                        <span class="text-center">{{datos.datos_cliente.NPedido}}</span>
                     </div>
                 </div>
                 <div class="col-1 mx-auto">

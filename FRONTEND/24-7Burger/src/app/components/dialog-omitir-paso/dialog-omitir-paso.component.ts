@@ -12,7 +12,6 @@ export class DialogOmitirPasoComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
     ngOnInit() {
-      console.log(this.data);
     }
   omitirPaso(){
     this.dialogRef.close(true);
