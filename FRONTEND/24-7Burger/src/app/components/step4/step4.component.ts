@@ -21,7 +21,6 @@ export class Step4Component {
     this.productService.getProduct$.subscribe(data =>{
       this.arrPostres = data.filter(item => item.tipoAlimento == "Postre")
       this.postresFiltrados =data.filter(item => item.tipoAlimento == "Postre")
-      console.log(this.alergenosAux);
     })
   }
 
@@ -43,23 +42,19 @@ export class Step4Component {
 
     cambioEstado(posicion: number) {
       this.alergenosAux[posicion].estado == true ? this.alergenosAux[posicion].estado = false : this.alergenosAux[posicion].estado = true;
-      console.log(JSON.stringify(this.alergenosAux));
       this.filtrarPostres();
     }
 
     filtrarPostres(){
       let alergenosFiltro = this.alergenosAux.filter(alergeno => alergeno.estado).map(alergeno => alergeno.nombre);
-      console.log(alergenosFiltro);
       let arrAuxPostres = [...this.arrPostres];
 
       this.postresFiltrados = arrAuxPostres.filter(postre => {
         // Buscamos si la hamburguesa tiene algún alergeno que esté en el arreglo alergenosFiltro
         let tieneAlergenos = postre.alergenos.some(alergeno => alergenosFiltro.includes(alergeno.nombre));
         // Devolvemos el valor contrario, es decir, si la hamburguesa NO tiene esos alergenos
-        console.log(tieneAlergenos);
         return !tieneAlergenos;
       });
-      console.log(this.postresFiltrados);
 
     }
     rellenarPostres(){

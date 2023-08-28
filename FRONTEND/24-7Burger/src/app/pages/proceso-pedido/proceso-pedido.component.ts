@@ -13,6 +13,7 @@ import { DialogOmitirPasoComponent } from 'src/app/components/dialog-omitir-paso
 import { pedido } from 'src/app/models/pedido';
 import { alimento } from 'src/app/models/alimento';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
+import { Router } from '@angular/router';
 import { Step2Component } from 'src/app/components/step2/step2.component';
 import { Step4Component } from 'src/app/components/step4/step4.component';
 @Component({
@@ -49,7 +50,7 @@ export class ProcesoPedidoComponent implements OnInit {
   alergenosAux = [...this.arrAlergenos];
   CarritoAUX = [];
 
-  constructor(private productService: ProductoService, private dialog: MatDialog, private pedidoService: PedidoService,@Inject('ALERGENOS') public arrAlergenos: any[]) { }
+  constructor(private productService: ProductoService, private dialog: MatDialog, private pedidoService: PedidoService,@Inject('ALERGENOS') public arrAlergenos: any[],private route:Router) { }
 
   @ViewChild('drawer') miInput: MatDrawer;
   @ViewChild('stepper') stepper: MatStepper;
@@ -58,7 +59,7 @@ export class ProcesoPedidoComponent implements OnInit {
 
     this.productService.getProduct$.subscribe((data) => {
       this.arrAlimento = data;
-    })
+    })    
 
     this.productService.getAllProduct();
     this.productService.nextStepper.subscribe(stepperAux => {
@@ -80,7 +81,7 @@ export class ProcesoPedidoComponent implements OnInit {
       if (this.pedidoCompleto.datos_pedido?.length == 0) {
         if (data !== undefined) {
           this.pedidoCompleto.datos_pedido.push(data);
-          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0]?.imagen, precio: informacionProducto[0]?.precio, nombre: informacionProducto[0]?.nombre } })
+          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0]?.imagen, precio: informacionProducto[0]?.precio, nombre: informacionProducto[0]?.nombre,tipoAlimento:informacionProducto[0].tipoAlimento } })
           this.actualizarPrecio()
         }
       } else {
@@ -102,7 +103,7 @@ export class ProcesoPedidoComponent implements OnInit {
         })
 
         if (yaIncluidoAUX == false) {
-          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } })
+          this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } })
         }
 
         this.pedidoCompleto.datos_pedido.forEach(p => {
@@ -165,7 +166,7 @@ export class ProcesoPedidoComponent implements OnInit {
     let informacionProducto = this.arrAlimento.filter((producto) => producto._id === data.id_alimento);        
     if (this.pedidoCompleto.datos_pedido?.length == 0) {            
       this.pedidoCompleto.datos_pedido.push(data);
-      this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } })
+      this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } })
       this.productos += data.cantidad;
       this.precio = informacionProducto[0].precio as number * data.cantidad;
     } else {
@@ -182,7 +183,7 @@ export class ProcesoPedidoComponent implements OnInit {
       })
       
       if (yaIncluidoAUX == false) {
-        this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre } }) 
+        this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } }) 
       }
       
       this.pedidoCompleto.datos_pedido.forEach(p => {
@@ -201,7 +202,8 @@ export class ProcesoPedidoComponent implements OnInit {
       this.actualizarPrecio()
     }
     this.contadorCarrito();
-    this.pedidoService.cantidadProducto.emit(this.productos);  
+    this.pedidoService.cantidadProducto.emit(this.productos);
+    console.log(this.CarritoAUX);  
   }
 
   contadorCarrito(){
@@ -243,7 +245,11 @@ export class ProcesoPedidoComponent implements OnInit {
 
   ordenarPedido() {
     this.pedidoService.setPedido(this.CarritoAUX)
+<<<<<<< HEAD
     this.pedidoService.pedidoPendiente(this.pedidoCompleto)
+=======
+    this.route.navigate(['/pago']);
+>>>>>>> 79ed083f5c93651ab614f2d79e72a1eb152c9243
   }
 
   modificarValorProducto(objeto: any, valorNuevo: number) {

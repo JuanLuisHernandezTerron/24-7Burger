@@ -24,9 +24,7 @@ export class Step2Component {
       this.arrHamburguesas = data.filter(item => item.tipoAlimento == "Hamburguesa")
       
       this.hamburguesasFiltradas =data.filter(item => item.tipoAlimento == "Hamburguesa")
-      console.log(JSON.stringify(this.arrHamburguesas));
     })
-    console.log(this.alergenosAux);
   }
 
   pedirProducto(enterAnimationDuration: string, exitAnimationDuration: string, event:Event):void{
@@ -45,13 +43,11 @@ export class Step2Component {
 
     cambioEstado(posicion: number) {
       this.alergenosAux[posicion].estado == true ? this.alergenosAux[posicion].estado = false : this.alergenosAux[posicion].estado = true;
-      console.log(JSON.stringify(this.alergenosAux));
       this.filtrarHamburguesas();
     }
 
     filtrarHamburguesas(){
       let alergenosFiltro = this.alergenosAux.filter(alergeno => alergeno.estado).map(alergeno => alergeno.nombre);
-      console.log(alergenosFiltro);
       let arrauAuxHamburguesas = [...this.arrHamburguesas];
 
       this.hamburguesasFiltradas = arrauAuxHamburguesas.filter(hamburguesa => {
@@ -60,8 +56,6 @@ export class Step2Component {
         // Devolvemos el valor contrario, es decir, si la hamburguesa NO tiene esos alergenos
         return !tieneAlergenos;
       });
-      console.log(this.hamburguesasFiltradas);
-
     }
 
     rellenarHamburguesas(){
