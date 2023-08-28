@@ -58,7 +58,7 @@
             </ng-container>
         </mat-drawer>
         <div>
-            <mat-stepper class="pedido" [linear]="false" #stepper [labelPosition]="'bottom'">
+            <mat-stepper class="pedido" [linear]="false" #stepper [labelPosition]="'bottom'" (selectionChange)="onStepChanged($event)">
                 <mat-step [completed]="step1" [editable]="isEditable">
                     <ng-template matStepLabel>
                         <span class="material-symbols-outlined">
@@ -145,7 +145,7 @@
                             </button>
                         </div>
 
-                        <div class="d-inline-block me-5" (click)="ordenarPedido()" type="button">
+                        <div class="d-inline-block me-5" routerLink="/pago" (click)="ordenarPedido()" type="button">
                             <div class="d-flex">
                                 <h6><u>Finalizar pedido</u></h6>
                                 <span class="material-symbols-outlined">
@@ -162,10 +162,7 @@
                     </ng-template>
                     <app-step4></app-step4>
                 </mat-step>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
+                
             </mat-stepper>
         </div>
     </mat-drawer-container>

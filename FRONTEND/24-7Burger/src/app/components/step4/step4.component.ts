@@ -57,4 +57,8 @@ export class Step4Component {
       });
 
     }
+    rellenarPostres(){
+      this.postresFiltrados = this.arrPostres
+    }
+
 }

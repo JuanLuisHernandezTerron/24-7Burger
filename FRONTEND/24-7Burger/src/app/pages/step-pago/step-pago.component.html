@@ -115,8 +115,29 @@
             </mat-accordion>
         </div>
         <mat-divider vertical style="width:auto"></mat-divider>
-        <div class="mb-5 col-6 gx-5">
-
+        <div class="mb-5 col-12 col-lg-6 row gx-5">
+            <div class="col-10 mx-auto pedido">
+                <h3 class="text-center m-3">Pedido</h3>
+                <mat-divider class="my-2"></mat-divider>
+                <div *ngFor="let producto of this.pedido" >
+                    <div class="d-flex justify-content-between">
+                        <p>x{{producto?.datosPedido?.cantidad}}  {{producto?.datosProducto?.nombre}}</p>
+                        <p>{{producto?.datosProducto?.precio}}€/Unidad</p>
+                    </div>
+                    <div *ngFor="let extras of producto.datosPedido.extras">
+                        <div class="d-flex justify-content-between">
+                            <p class="ms-4">-{{extras.nombre}}</p>
+                            <p>{{extras.precio}}€/Unidad</p>
+                        </div>
+                    </div>
+                </div>
+                <mat-divider class="my-4"></mat-divider>
+                <div class="d-flex justify-content-between">
+                    <h2>Total a pagar</h2>
+                    <h5>{{precioFinal}}€</h5>
+                </div>
+                
+            </div>
         </div>
     </div>
 </div>

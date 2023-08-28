@@ -10,15 +10,13 @@ export class CheckCarritoPayGuard implements CanActivate {
 
   constructor(private pedidoService: PedidoService, private route:Router) { }
   canActivate(): any {
-    let cantidadProducto = 0;
-    this.pedidoService.cantidadProducto.subscribe(data => {
-      cantidadProducto = data as number;
+    this.pedidoService.getPedido$.subscribe(data=>{
+      if (data.length > 0) {  
+        this.route.navigate(['/pago']);
+      } else {
+        this.route.navigate(['/']);
+      }
     })
 
-    if (cantidadProducto > 0) {  
-      this.route.navigate(['/pago']);
-    } else {
-      this.route.navigate(['/']);
-    }
   }
 }
