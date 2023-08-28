@@ -24,7 +24,9 @@
                                         / Unidad</span>
                                 </div>
                                 <div class="row">
+                                <ng-container *ngIf="producto?.datosProducto?.tipoAlimento != 'Bebida' && producto?.datosPedido?.extras?.length == 0 else sinExtras">
                                     <p class="mb-0 col-12">Extras:</p>
+                                </ng-container>
                                     <div class="row mt-xl-1" *ngFor="let extras of producto?.datosPedido?.extras">
                                         <div class="col-6 text-center">
                                             <span class="ms-xl-3">{{extras.nombre}}</span>
@@ -174,4 +176,7 @@
         <h1 class="text-center mt-5">¡Tu carrito está VACÍO!</h1>
         <img src="./../../../assets/imagenes/3144456.png" class="w-25 img-fluid mt-3" alt="Carrito Compra">
     </div>
+</ng-template>
+<ng-template #sinExtras>
+    <p></p>
 </ng-template>

@@ -33,24 +33,28 @@
 }
 
 ::ng-deep .mat-drawer.mat-drawer-push{
-    @media (max-width:992px){
-        width: 60% !important;
+    @media (max-width:993px){
+        width: 80% !important;
     }
 
-    @media (min-width:993px){
+    @media (min-width:769px){
+        width: 50% !important;
+    }
+
+    @media (min-width:992px){
         width: 25% !important;
     }
 }
 
 @media (min-width:992px) {
     ::ng-deep .mat-horizontal-stepper-header-container{
-        margin-left: 20% !important;
-        margin-right: 20%  !important;
+        margin-left: 30% !important;
+        margin-right: 30%  !important;
     }
 }
 
 ::ng-deep .mat-drawer-content{
-    margin-right: -20px !important;
+    margin-right: -30px !important;
 }
 
 .mat-drawer.mat-drawer-push{

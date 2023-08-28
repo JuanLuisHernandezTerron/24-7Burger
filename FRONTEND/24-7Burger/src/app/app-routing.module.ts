@@ -13,6 +13,7 @@ import { CheckLoginGuard } from './guards/checkLogin/check-login.guard';
 import { CheckUserTiendaGuard } from './guards/checkUserTienda/check-user-tienda.guard';
 import { ProcesoPedidoComponent } from './pages/proceso-pedido/proceso-pedido.component';
 import { StepPagoComponent } from './pages/step-pago/step-pago.component';
+import { CheckCarritoPayGuard } from './guards/checkCarrito/check-carrito-pay.guard';
 const routes: Routes = [{
   path: '',
   component:SkeletonComponent,
@@ -20,7 +21,7 @@ const routes: Routes = [{
   children:[
     {path: '', component: HomeBurgerComponent},
     {path: 'pedido', component: ProcesoPedidoComponent},
-    {path: 'pago', component: StepPagoComponent}
+    {path: 'pago', component: StepPagoComponent, canActivate:[CheckCarritoPayGuard]}
   ]
 },
 {

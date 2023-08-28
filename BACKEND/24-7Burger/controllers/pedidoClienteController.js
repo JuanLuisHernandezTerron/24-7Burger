@@ -4,9 +4,8 @@ const newPedido = async function (req, res) {
     try{
         const pedidoAux = req.body;
         console.log(pedidoAux);
-         await pedido.create(pedidoAux);
-         res.status(200).json('Pedido realizado con éxito');
-        
+        await pedido.create(pedidoAux);
+        res.status(200).json('Pedido realizado con éxito');   
     }catch(e){
         console.log(e);
     }
