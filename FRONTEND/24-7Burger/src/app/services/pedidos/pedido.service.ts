@@ -31,7 +31,7 @@ export class PedidoService{
 
   }
 
-  get getPedidoCarrito$():Observable<any[]>{
+  get getPedidoCarrito$():Observable<any>{
     return this._pedidoCarrito$.asObservable();
   }
   pedidoPendiente(pedido){   
@@ -39,7 +39,7 @@ export class PedidoService{
   }
 
   agregarPedido(pedido: pedido){
-    return this.http.post<pedido>(this.URL + '/pedidoCliente/newPedido', pedido)
+    return this.http.post<string>(this.URL + '/pedidoCliente/newPedido', pedido)
   }
 
   getPedido(){
