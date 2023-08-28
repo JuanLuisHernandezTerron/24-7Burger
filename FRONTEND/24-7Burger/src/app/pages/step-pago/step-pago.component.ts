@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { pedido } from 'src/app/models/pedido';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
@@ -15,9 +17,9 @@ export class StepPagoComponent {
   datosCliente: FormGroup;
   direccionForm: FormGroup;
   pedido: any;
-  pedidoFinal:pedido[];
+  pedidoFinal:pedido;
   precioFinal: number = 0;
-  constructor(private fb: FormBuilder, private pedidoService: PedidoService) { }
+  constructor(private fb: FormBuilder, private pedidoService: PedidoService, private toastr: ToastrService,private route:Router) { }
 
   ngOnInit() {
     this.datosCliente = this.fb.group({
@@ -31,11 +33,13 @@ export class StepPagoComponent {
     });
     this.pedidoService.getPedidoCarrito$.subscribe(data => {
       this.pedido = data
+      
     })
     console.log(this.pedido);
     this.actualizarPrecio()
     this.pedidoService.getPedido$.subscribe(data => {
-      this.pedidoFinal = data
+      
+      this.pedidoFinal = data 
     })
     console.log(this.pedidoFinal);
 
@@ -58,12 +62,19 @@ export class StepPagoComponent {
     this.step--;
   }
   finalizarPedido() {
-    console.log(this.pedidoFinal[0].datos_pedido);
-    // this.pedidoFinal[0].datos_cliente.nombre = this.datosCliente.get('nombre')?.value
-    // this.pedidoFinal[0].datos_cliente.telefono = this.datosCliente.get('phone')?.value
-    // this.pedidoFinal[0].datos_cliente.dni = this.datosCliente.get('dni')?.value
-    // this.pedidoFinal[0].datos_cliente.direccion = this.direccionForm.get('direccion')?.value
-    this.pedidoService.agregarPedido(this.pedidoFinal)
+    this.pedidoFinal.datos_cliente.nombre = this.datosCliente.get('nombre')?.value
+    this.pedidoFinal.datos_cliente.telefono = this.datosCliente.get('phone')?.value
+    this.pedidoFinal.datos_cliente.dni = this.datosCliente.get('dni')?.value
+    this.pedidoFinal.datos_cliente.direccion = this.direccionForm.get('direccion')?.value
+    this.pedidoService.agregarPedido(this.pedidoFinal).subscribe(
+      data => {
+        this.toastr.success(data);
+      },
+      error => {
+        this.toastr.error("Se produjo un error al agregar el pedido: " + error.message);
+      }
+    );
+    this.route.navigate(["/"]);
     
   }
 

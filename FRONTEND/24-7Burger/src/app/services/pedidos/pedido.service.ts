@@ -10,7 +10,7 @@ import { pedido } from 'src/app/models/pedido';;
 export class PedidoService{
   private URL = environment.url;
   arrayPedido: pedido[] = [];  
-  private _productPedido$: BehaviorSubject<pedido[]> = new BehaviorSubject([]);
+  private _productPedido$: BehaviorSubject<pedido> = new BehaviorSubject(null);
 
   @Output() disparadorStep1 = new EventEmitter();
   @Output() disparadorStep2 = new EventEmitter();
@@ -28,20 +28,18 @@ export class PedidoService{
 
   }
 
-  get getPedidoCarrito$():Observable<any[]>{
+  get getPedidoCarrito$():Observable<any>{
     return this._pedidoCarrito$.asObservable();
   }
   pedidoPendiente(pedido){   
     this._productPedido$.next(pedido);
   }
 
-  agregarPedido(pedido: pedido[]){
-    return this.http.post<pedido[]>(this.URL + '/pedidoCliente/newPedido', pedido)
-
-
+  agregarPedido(pedido: pedido){
+    return this.http.post<string>(this.URL + '/pedidoCliente/newPedido', pedido)
   }
 
-  get getPedido$():Observable<pedido[]>{
+  get getPedido$():Observable<pedido>{
     return this._productPedido$.asObservable();
   }
 

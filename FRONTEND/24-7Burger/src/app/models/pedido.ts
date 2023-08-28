@@ -4,5 +4,10 @@ export interface pedido{
     recogida_envio?: String,
     estado_pedido?: String,
     id_tienda: String,
-    datos_cliente: Object
+    datos_cliente: {
+        nombre: string;
+        telefono: number;
+        direccion?: string;
+        dni: string;
+      };
 }

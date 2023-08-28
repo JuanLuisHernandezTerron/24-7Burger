@@ -11,12 +11,12 @@ var pedidoSchema = new Schema({
             precio: Number
         }]
     }],
-    datos_cliente:[{
+    datos_cliente:{
         nombre: {type: String, required: true},
         telefono: {type:Number,required: true},
         direccion: {type:String,required: false},
         dni: {type:String,required:true}
-    }],
+    },
     recogida_envio: {type:String,required: true},
     estado_pedido: {type:String, default:'En espera'},
     id_tienda: {type: Schema.ObjectId, required: true, ref:'adminTienda'},
