@@ -24,7 +24,7 @@
                                         / Unidad</span>
                                 </div>
                                 <div class="row">
-                                <ng-container *ngIf="producto?.datosProducto?.tipoAlimento != 'Bebida' && producto?.datosPedido?.extras?.length == 0 else sinExtras">
+                                <ng-container *ngIf="producto?.datosProducto?.tipoAlimento != 'Bebida' || producto?.datosPedido?.extras?.length < 1  else sinExtras">
                                     <p class="mb-0 col-12">Extras:</p>
                                 </ng-container>
                                     <div class="row mt-xl-1" *ngFor="let extras of producto?.datosPedido?.extras">

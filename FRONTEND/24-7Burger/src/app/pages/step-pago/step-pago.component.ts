@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProductoService } from 'src/app/services/productos/producto.service';
+import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class StepPagoComponent {
   direccionForm: FormGroup;
   pedido: any;
   precioFinal: number = 0;
-  constructor(private fb: FormBuilder, private productService: ProductoService) { }
+  constructor(private fb: FormBuilder, private pedidoService: PedidoService) { }
 
   ngOnInit() {
     this.datosCliente = this.fb.group({
@@ -27,7 +27,7 @@ export class StepPagoComponent {
       direccion: new FormControl('', [Validators.required]),
       cp: new FormControl('', [Validators.required]),
     });
-    this.productService.getPedido$.subscribe(data => {
+    this.pedidoService.getPedidoCarrito$.subscribe(data => {
       this.pedido = data
     })
     console.log(this.pedido);
@@ -67,6 +67,9 @@ export class StepPagoComponent {
     }
     )
     console.log(this.precioFinal);
+  }
+  calcularPrecio(precio:number, cantidad:number){
+    return precio*cantidad
   }
 }
 

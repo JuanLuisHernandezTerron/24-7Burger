@@ -17,6 +17,7 @@ export class PedidoService implements OnInit{
   @Output() disparadorStep3 = new EventEmitter();
   @Output() cantidadProducto = new EventEmitter();
   @Output() cantidadBebida = new EventEmitter();
+  private _pedidoCarrito$: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,16 @@ export class PedidoService implements OnInit{
     this.getAllPedido();
   }
     
+  setPedido(pedido:any){
+    this._pedidoCarrito$.next(pedido);
+
+  }
+
+  get getPedidoCarrito$():Observable<any[]>{
+    return this._pedidoCarrito$.asObservable();
+  }
+  
+
   agregarPedido(pedido: pedido){
     return this.http.post<pedido[]>(this.URL + '/pedidoCliente/newPedido', pedido).subscribe(response =>{
       this.arrayPedido.push(pedido);

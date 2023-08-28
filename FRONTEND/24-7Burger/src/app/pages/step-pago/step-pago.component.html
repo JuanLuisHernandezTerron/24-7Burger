@@ -122,12 +122,12 @@
                 <div *ngFor="let producto of this.pedido" >
                     <div class="d-flex justify-content-between">
                         <p>x{{producto?.datosPedido?.cantidad}}  {{producto?.datosProducto?.nombre}}</p>
-                        <p>{{producto?.datosProducto?.precio}}€/Unidad</p>
+                        <p>{{calcularPrecio(producto?.datosProducto?.precio,producto?.datosPedido?.cantidad)}}€</p>
                     </div>
                     <div *ngFor="let extras of producto.datosPedido.extras">
                         <div class="d-flex justify-content-between">
                             <p class="ms-4">-{{extras.nombre}}</p>
-                            <p>{{extras.precio}}€/Unidad</p>
+                            <p>{{calcularPrecio(extras.precio,producto?.datosPedido?.cantidad)}}€/Unidad</p>
                         </div>
                     </div>
                 </div>

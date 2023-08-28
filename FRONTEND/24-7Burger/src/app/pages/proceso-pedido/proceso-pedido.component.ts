@@ -238,7 +238,7 @@ export class ProcesoPedidoComponent implements OnInit {
   }
 
   ordenarPedido() {
-    this.productService.setPedido(this.CarritoAUX)
+    this.pedidoService.setPedido(this.CarritoAUX)
     this.route.navigate(['/pago']);
   }
 

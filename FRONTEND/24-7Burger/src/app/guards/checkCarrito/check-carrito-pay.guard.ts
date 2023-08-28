@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { PedidoService } from 'src/app/services/pedidos/pedido.service';
 
@@ -7,16 +8,19 @@ import { PedidoService } from 'src/app/services/pedidos/pedido.service';
   providedIn: 'root'
 })
 export class CheckCarritoPayGuard implements CanActivate {
+  cantidadProducto: number;
 
-  constructor(private pedidoService: PedidoService, private route:Router) { }
-  canActivate(): any {
-    this.pedidoService.getPedido$.subscribe(data=>{
-      if (data.length > 0) {  
-        this.route.navigate(['/pago']);
-      } else {
-        this.route.navigate(['/']);
-      }
+  constructor(private pedidoService: PedidoService, private route:Router,private toastr: ToastrService) { 
+    this.pedidoService.getPedidoCarrito$.subscribe(data=>{
+      this.cantidadProducto = data.length;
     })
-
+  }
+  canActivate(): boolean {
+    if (this.cantidadProducto > 0) {  
+      return true;
+    } else {
+        this.toastr.error("Introduce un producto al carrito");
+      return false;
+    }
   }
 }
