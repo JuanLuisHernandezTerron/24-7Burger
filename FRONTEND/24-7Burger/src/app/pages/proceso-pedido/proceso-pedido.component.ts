@@ -203,7 +203,6 @@ export class ProcesoPedidoComponent implements OnInit {
     }
     this.contadorCarrito();
     this.pedidoService.cantidadProducto.emit(this.productos);
-    console.log(this.CarritoAUX);  
   }
 
   contadorCarrito(){
@@ -246,7 +245,6 @@ export class ProcesoPedidoComponent implements OnInit {
   ordenarPedido() {
     this.pedidoService.setPedido(this.CarritoAUX)
     this.pedidoService.pedidoPendiente(this.pedidoCompleto)
-
   }
 
   modificarValorProducto(objeto: any, valorNuevo: number) {

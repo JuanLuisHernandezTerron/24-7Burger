@@ -11,6 +11,7 @@ export class PedidoService{
   private URL = environment.url;
   arrayPedido: pedido[] = [];  
   private _productPedido$: BehaviorSubject<pedido> = new BehaviorSubject(null);
+  private _pedidoAdmin$: BehaviorSubject<pedido[]> = new BehaviorSubject([]);
 
   @Output() disparadorStep1 = new EventEmitter();
   @Output() disparadorStep2 = new EventEmitter();
@@ -19,7 +20,9 @@ export class PedidoService{
   @Output() cantidadBebida = new EventEmitter();
   private _pedidoCarrito$: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.getPedido();
+  }
 
 
     
@@ -39,9 +42,23 @@ export class PedidoService{
     return this.http.post<string>(this.URL + '/pedidoCliente/newPedido', pedido)
   }
 
+  getPedido(){
+    return this.http.get<pedido[]>(this.URL + '/pedidoCliente/getPedidos',{}).subscribe(data=>{
+      console.log(data);
+      this.introducirPedido(data);
+    });
+  }
+
+  introducirPedido(pedido){
+    this._pedidoAdmin$.next(pedido);
+  }
+
+  get getPedidoAdmin$():Observable<pedido[]>{
+    return this._pedidoAdmin$.asObservable();
+  }
+
   get getPedido$():Observable<pedido>{
     return this._productPedido$.asObservable();
   }
-
 
 }

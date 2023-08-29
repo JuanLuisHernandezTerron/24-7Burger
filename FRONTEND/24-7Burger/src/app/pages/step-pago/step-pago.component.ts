@@ -35,15 +35,11 @@ export class StepPagoComponent {
       this.pedido = data
       
     })
-    console.log(this.pedido);
     this.actualizarPrecio()
     this.pedidoService.getPedido$.subscribe(data => {
       
       this.pedidoFinal = data 
     })
-    console.log(this.pedidoFinal);
-
-
   }
 
   setStep(index: number) {
@@ -91,7 +87,6 @@ export class StepPagoComponent {
       }
     }
     )
-    console.log(this.precioFinal);
   }
   calcularPrecio(precio:number, cantidad:number){
     return precio*cantidad
