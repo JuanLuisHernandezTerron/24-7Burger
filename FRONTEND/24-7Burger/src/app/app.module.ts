@@ -54,6 +54,9 @@ import { Step3Component } from './components/step3/step3.component';
 import { Step4Component } from './components/step4/step4.component';
 import { StepPagoComponent } from './pages/step-pago/step-pago.component';
 import { arrAlergenos } from './globalVariable/alergenos';
+import { SpinnerModule } from './components/spinner/spinner.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,10 +113,12 @@ import { arrAlergenos } from './globalVariable/alergenos';
     MatExpansionModule,
     NgxNumberSpinnerModule,
     MatCheckboxModule,
+    SpinnerModule
 
   ],
   providers: [
-    { provide: 'ALERGENOS', useValue: arrAlergenos }  
+    { provide: 'ALERGENOS', useValue: arrAlergenos }  ,
+    { provide: HTTP_INTERCEPTORS, useClass :SpinnerInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
