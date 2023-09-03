@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-xl-6 col-12">
             <h3 class="text-center col-12">Pendientes</h3>
-            <mat-card class="row mt-3 col-8 mb-3  text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayPedido">
+            <mat-card class="row mt-3 col-8 mb-3  text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayPedidoEnEspera">
                 <div class="col-xl-6 col-12 row d-flex justify-content-center mx-auto">
                     <div class="row justify-content-between">
                         <span class="d-inline-block">{{datos.datos_cliente.nombre}}</span>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-xl-6 col-12 row pedidos-margin text-xl-end text-center mx-auto">
                     <div>
-                        <button class="my-2 py-4" mat-raised-button color="primary">Ver Comanda</button>
+                        <button class="my-2 py-4" mat-raised-button color="primary" (click)="pdfConverter(datos)">Ver Comanda</button>
                     </div>
                 </div>
             </mat-card>
@@ -34,22 +34,22 @@
         <div class="col-12 col-xl-6">
             <h3 class="text-center">En proceso</h3>
             <mat-card class="row mt-3 col-8 mb-3 text-center align-items-center m-auto justify-content-between" *ngFor="let datos of arrayPedidoEnProceso">
-                <div class="col-12 col-xl-5 row d-flex justify-content-center mx-auto">
-                    <div>
-                        <span>{{datos.datos_cliente.nombre}}</span>
+                <div class="col-12 col-xl-5 row d-flex ">
+                    <div class="row justify-content-center mx-auto">
+                        <span class="d-inline-block">{{datos.datos_cliente.nombre}}</span>
                     </div>
-                    <div>
-                        <span class="text-center">{{datos.datos_cliente.NPedido}}</span>
+                    <div class="row">
+                        <span class="d-inline-block"> {{datos._id}}</span>
                     </div>
                 </div>
                 <div class="col-1 mx-auto">
                     <mat-icon matTooltip="Volver a imprimir TICKET"
                         aria-label="Button that displays a tooltip when focused or hovered over"
-                        class="pedidos-volverNavigation me-5 mt-1">print</mat-icon>
+                        class="pedidos-volverNavigation me-5 mt-1" (click)="generadorPDF(datos)">print</mat-icon>
                 </div>
                 <div class="col-12 col-xl-6 row mx-auto">
                     <div class="  text-xl-end text-center">
-                        <button mat-raised-button class="my-2 py-4" color="primary">Finalizar Pedido</button>
+                        <button mat-raised-button class="my-2 py-4" color="primary" (click)="finalizarPedido(datos)">Finalizar Pedido</button>
                     </div>
                 </div>
             </mat-card>

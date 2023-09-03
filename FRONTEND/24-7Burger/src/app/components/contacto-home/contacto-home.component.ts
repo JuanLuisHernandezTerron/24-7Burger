@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { TiendaService } from 'src/app/services/tienda/tienda.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contacto-home',
@@ -8,7 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ContactoHomeComponent implements OnInit{
   formularioContacto !:FormGroup;
-  constructor ( private fb: FormBuilder) { }
+  constructor ( private fb: FormBuilder,private tiendaService:TiendaService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.validacionFormulario();
@@ -26,6 +28,22 @@ export class ContactoHomeComponent implements OnInit{
   }
 
   sendFormulario(){
-    alert('Funciao')
+    let contact = {
+      nombre: this.formularioContacto.get('nombre')?.value,
+      apellidos: this.formularioContacto.get('apellidos')?.value,
+      email: this.formularioContacto.get('email')?.value,
+      telefono: this.formularioContacto.get('telefono')?.value,
+      asunto: this.formularioContacto.get('asunto')?.value,
+      descipcion: this.formularioContacto.get('descripcion')?.value
+    }
+
+    this.tiendaService.sendConsulta(contact).subscribe((data)=>{
+      if (data.status == 'Consulta Enviada Correctamente') {
+        this.toastr.success(data.status);
+      }else{
+        this.toastr.error(data.status)
+      }
+
+    });
   }
 }

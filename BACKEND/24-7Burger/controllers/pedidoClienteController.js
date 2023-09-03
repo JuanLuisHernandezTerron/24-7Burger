@@ -1,21 +1,18 @@
 const pedido = require('./../models/pedido');
+const alimento = require('./../models/alimentos');
 
 const newPedido = async function (req, res) {
     try{
-        console.log(req.body);
         const pedidoAux = req.body;
-        console.log(pedidoAux);
         await pedido.create(pedidoAux);
         res.status(200).json('Pedido realizado con éxito');
-        
     }catch(e){
         console.log(e);
     }
 }
 const enProceso = async function (req, res) {
     try{
-        console.log(req.body.id_pedido);
-        await pedido.updateOne({id_pedido: req.body.id_pedido},{estado_pedido: "En proceso"});
+        await pedido.updateOne({_id: req.body._id},{estado_pedido: "En proceso"});
         res.status(200).json('Estado cambiado con éxito');
         
     }catch(e){
@@ -24,8 +21,7 @@ const enProceso = async function (req, res) {
 }
 const pedidoFinalizado = async function (req, res) {
     try{
-        console.log(req.body.id_pedido);
-        await pedido.updateOne({id_pedido: req.body.id_pedido},{estado_pedido: "Finalizado"});
+        await pedido.updateOne({_id: req.body._id},{estado_pedido: "Finalizado"});
         res.status(200).json('Estado cambiado con éxito');
         
     }catch(e){
@@ -35,10 +31,8 @@ const pedidoFinalizado = async function (req, res) {
 
 const getPedidos = async function (req, res) {
     try{
-        const pedidos = await pedido.find().exec();
+        const pedidos = await pedido.find().populate('datos_pedido.id_alimento').exec();
         if (pedidos) {
-            console.log('asdasdadasdas');
-            console.log(pedidos);
             res.status(200).json(pedidos);
         }else{
             res.status(401).json("Productos No encontrados correctamente");

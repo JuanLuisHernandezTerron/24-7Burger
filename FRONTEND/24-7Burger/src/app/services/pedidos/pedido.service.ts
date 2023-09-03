@@ -49,6 +49,14 @@ export class PedidoService{
     });
   }
 
+  modificarEstadoPedido(pedido:pedido){
+    return this.http.put<any>(this.URL+'/pedidoCliente/pedidoEnProceso',pedido);
+  }
+
+  FinalizarPedido(pedido:pedido){
+    return this.http.put<any>(this.URL+'/pedidoCliente/pedidoFinalizado',pedido);
+  }
+
   introducirPedido(pedido){
     this._pedidoAdmin$.next(pedido);
   }

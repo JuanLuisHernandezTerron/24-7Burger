@@ -4,7 +4,7 @@
 
 import { MatStepper } from '@angular/material/stepper';
 import { environment } from 'src/enviroments/enviroments';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ProductoService } from 'src/app/services/productos/producto.service';
@@ -20,10 +20,9 @@ import { Step4Component } from 'src/app/components/step4/step4.component';
   selector: 'app-proceso-pedido',
   templateUrl: './proceso-pedido.component.html',
   styleUrls: ['./proceso-pedido.component.scss'],
-  viewProviders: [MatExpansionPanel]
-
-
+  viewProviders: [MatExpansionPanel],
 })
+
 export class ProcesoPedidoComponent implements OnInit {
   @ViewChild(Step2Component) step2!: Step2Component;
   @ViewChild(Step4Component) step4!: Step4Component;
@@ -163,6 +162,8 @@ export class ProcesoPedidoComponent implements OnInit {
   }
 
   auxiliar(data: any) {
+    console.log(data);
+  
     let informacionProducto = this.arrAlimento.filter((producto) => producto._id === data.id_alimento);        
     if (this.pedidoCompleto.datos_pedido?.length == 0) {            
       this.pedidoCompleto.datos_pedido.push(data);
@@ -172,6 +173,7 @@ export class ProcesoPedidoComponent implements OnInit {
     } else {
       var yaIncluido = false;
       var yaIncluidoAUX = false;
+      
       this.CarritoAUX.forEach(producto => {
         if (producto?.datosPedido.id_alimento === data?.id_alimento) {
           producto.datosPedido = data;
@@ -219,7 +221,6 @@ export class ProcesoPedidoComponent implements OnInit {
       this.omitirPaso('200ms', '200ms', producto)
     } else {
       this.alergenosAux.forEach(elemento =>elemento.estado= false)
-      console.log(this.alergenosAux);
       this.stepper.next()
     }
   }
@@ -236,7 +237,6 @@ export class ProcesoPedidoComponent implements OnInit {
         this.stepper.selected.completed = true;
         this.stepper.selected.editable = true;
         this.alergenosAux.forEach(elemento =>elemento.estado= false)
-        console.log(this.alergenosAux);
         this.stepper.next()
       }
     });

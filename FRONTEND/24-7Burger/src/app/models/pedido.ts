@@ -10,4 +10,5 @@ export interface pedido{
         direccion?: string;
         dni: string;
       };
+    _id:number;
 }
