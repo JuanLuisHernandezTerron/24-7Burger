@@ -55,7 +55,6 @@ export class ProcesoPedidoComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
 
   ngOnInit() {
-
     this.productService.getProduct$.subscribe((data) => {
       this.arrAlimento = data;
     })    
@@ -161,46 +160,46 @@ export class ProcesoPedidoComponent implements OnInit {
     })
   }
 
-  auxiliar(data: any) {
-    console.log(data);
-  
-    let informacionProducto = this.arrAlimento.filter((producto) => producto._id === data.id_alimento);        
+  auxiliar(data: any) {  
+    let dato = {...data}
+    let informacionProducto = this.arrAlimento.filter((producto) => producto._id === dato.id_alimento);        
     if (this.pedidoCompleto.datos_pedido?.length == 0) {            
-      this.pedidoCompleto.datos_pedido.push(data);
-      this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } })
-      this.productos += data.cantidad;
-      this.precio = informacionProducto[0].precio as number * data.cantidad;
+      this.pedidoCompleto.datos_pedido.push(dato);
+      this.CarritoAUX.push({ datosPedido: dato, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } })
+      this.productos += dato.cantidad;
+      this.precio = informacionProducto[0].precio as number * dato.cantidad;
     } else {
       var yaIncluido = false;
       var yaIncluidoAUX = false;
       
       this.CarritoAUX.forEach(producto => {
-        if (producto?.datosPedido.id_alimento === data?.id_alimento) {
-          producto.datosPedido = data;
+        if (producto?.datosPedido.id_alimento === dato?.id_alimento) {
+          producto.datosPedido = dato;
           yaIncluidoAUX = true;
         }
         if (producto?.datosPedido.cantidad === 0) {
-          this.CarritoAUX = this.CarritoAUX.filter(e => e.datosPedido.id_alimento !== data.id_alimento);
+          this.CarritoAUX = this.CarritoAUX.filter(e => e.datosPedido.id_alimento !== dato.id_alimento);
         }
       })
       
       if (yaIncluidoAUX == false) {
-        this.CarritoAUX.push({ datosPedido: data, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } }) 
+        this.CarritoAUX.push({ datosPedido: dato, datosProducto: { imagen: informacionProducto[0].imagen, precio: informacionProducto[0].precio, nombre: informacionProducto[0].nombre,tipoAlimento:informacionProducto[0].tipoAlimento } }) 
       }
       
       this.pedidoCompleto.datos_pedido.forEach(p => {
-        if (p.id_alimento === data.id_alimento) {
-          p = data
+        if (p.id_alimento === dato.id_alimento) {
+          p.id_alimento = dato.id_alimento
+          p.cantidad = dato.cantidad
           yaIncluido = true;
-          this.actualizarPrecio()
         }
         if (p.cantidad === 0) {
-          this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(p => p.id_alimento !== data.id_alimento);
+          this.pedidoCompleto = this.pedidoCompleto.datos_pedido.filter(p => p.id_alimento !== dato.id_alimento);
         }
       })
+      this.actualizarPrecio()
     }
     if (yaIncluido == false) {
-      this.pedidoCompleto.datos_pedido.push(data);
+      this.pedidoCompleto.datos_pedido.push(dato);
       this.actualizarPrecio()
     }
     this.contadorCarrito();
@@ -295,8 +294,9 @@ export class ProcesoPedidoComponent implements OnInit {
       }
     })
     this.CarritoAUX = this.CarritoAUX.filter(producto => producto.datosPedido !== objeto.datosPedido);
-    this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(producto => producto !== objeto.datosPedido);
+    this.pedidoCompleto.datos_pedido = this.pedidoCompleto.datos_pedido.filter(producto => producto != objeto.datosPedido);
     if (this.CarritoAUX.length == 0) {
+      this.pedidoCompleto.datos_pedido = [];
       this.precio = 0;
       this.productos = 0;
     }

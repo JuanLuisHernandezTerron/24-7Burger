@@ -79,6 +79,6 @@ export class PedidosComponent implements OnInit {
     pdf.add(new Txt(`Precio Total CON IVA:  ${precio} €`).fontSize(12).margin([40, 50, 0, 0]).alignment('left').end);
     pdf.add(new Txt(`!GRACIAS POR SU COMPRA¡`).fontSize(8).margin([40, 15, 0, 0]).alignment('center').end);
     pdf.add(new Txt(`24/7 BURGER | LAS MEJORES HAMBURGUESAS DE SEVILLA`).fontSize(8).margin([40, 10, 0, 0]).alignment('center').end);
-    pdf.create().open();
+    pdf.create().download(`Pedido ${datos._id}`);
   }
 }
