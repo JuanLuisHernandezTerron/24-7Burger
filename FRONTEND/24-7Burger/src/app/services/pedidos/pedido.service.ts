@@ -44,7 +44,6 @@ export class PedidoService{
 
   getPedido(){
     return this.http.get<pedido[]>(this.URL + '/pedidoCliente/getPedidos',{}).subscribe(data=>{
-      console.log(data);
       this.introducirPedido(data);
     });
   }
