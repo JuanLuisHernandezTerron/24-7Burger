@@ -37,6 +37,7 @@ export class Step2Component {
       });    
 
       this.dialogRefAnadir.afterClosed().subscribe(result => {
+        console.log(result);
         this.pedidoService.disparadorStep2.emit(result);
       });
     }

@@ -30,6 +30,8 @@ export class Step3Component {
   insertBebida(id: string, event: any) {
     this.pedido.id_alimento = id;
     this.pedido.cantidad = event;
+    console.log(this.pedido);
+
     this.pedidoService.disparadorStep3.emit(this.pedido);
   }
 }

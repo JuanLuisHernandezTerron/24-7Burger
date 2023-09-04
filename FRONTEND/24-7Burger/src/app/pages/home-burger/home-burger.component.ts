@@ -14,4 +14,10 @@ export class HomeBurgerComponent {
     var scene2 = document.getElementById('scene2');
     var parallaxInstance2 = new Parallax(scene2 as HTMLElement);
   }
+  scrollIntoView(event){
+    console.log(event);
+  }
 }
+
+
+
