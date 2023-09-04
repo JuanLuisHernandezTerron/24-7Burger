@@ -300,7 +300,7 @@ export class ProcesoPedidoComponent implements OnInit {
           this.productos++;
           this.pedidoService.cantidadProducto.emit(this.productos);
           this.precio += informacionProducto[0].precio as number;
-          if (objeto.extras.length > 0) {
+          if (objeto?.extras.length > 0) {
             objeto.extras.forEach(e => {
               this.precio += e.precio as number;
             });
