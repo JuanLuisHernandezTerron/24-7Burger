@@ -265,6 +265,8 @@ export class ProcesoPedidoComponent implements OnInit {
       this.omitirPaso('200ms', '200ms', producto)
     } else {
       this.alergenosAux.forEach(elemento =>elemento.estado= false)
+      this.stepper.selected.editable = true;
+      this.stepper.selected.completed = true;
       this.stepper.next()
     }
   }
@@ -277,9 +279,9 @@ export class ProcesoPedidoComponent implements OnInit {
       data: tipoAlimento
     })
     this.dialogRefOmitir.afterClosed().subscribe(result => {
-      this.stepper.selected.editable = true;
       if (result) {
         this.stepper.selected.completed = true;
+        this.stepper.selected.editable = true;
         this.alergenosAux.forEach(elemento =>elemento.estado= false)
         this.stepper.next()
       }
