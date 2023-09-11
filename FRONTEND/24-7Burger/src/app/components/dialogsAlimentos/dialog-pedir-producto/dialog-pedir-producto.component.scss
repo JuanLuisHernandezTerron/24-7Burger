@@ -1,10 +1,14 @@
+::ng-deep .cdk-overlay-pane{
+    @media (max-width:650px){
+        width: 110% !important;
+    }
+}
+
 .dialog{
     &-hamburguesa{
         overflow-x: hidden !important;
         background-color: #DFCAB4;
-        
     }
-
     &-titulo{
         @media(max-width:992px){
             text-align: center !important;   
